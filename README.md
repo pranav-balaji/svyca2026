@@ -74,14 +74,32 @@ Every dataset used in SolarSchools USA is **100% public, verified, and actively 
 ```bash
 python3 -m venv venv
 source venv/bin/activate
-pip install geopandas shapely requests pandas folium streamlit streamlit-folium matplotlib
+pip install -r requirements.txt
 ```
 
-### 2. Run the Interactive Web Prototype
-Run the Streamlit application located in Section 4 of [`SOLARSCHOOLS_TECHNICAL_BLUEPRINT.md`](./SOLARSCHOOLS_TECHNICAL_BLUEPRINT.md):
+### 2. Run the Automated Test Suite
+Verify that all 3 phases, the NLR PVWatts v8 API, and the IRA financial engine are operational:
+```bash
+python test_pipeline.py
+```
+
+### 3. Launch the Interactive Web Dashboard
+Run the Streamlit application:
 ```bash
 streamlit run app.py
 ```
+Then open your browser to `http://localhost:8501`.
+
+---
+
+## 🏛️ Code Architecture & Core Modules
+
+* **[`app.py`](./app.py):** Main Streamlit frontend featuring the 3-phase geographic selector, responsive sliders, satellite Folium canopy maps, Plotly 25-year cashflow pro formas, and one-click School Board Action Brief export.
+* **[`core/data_ingest.py`](./core/data_ingest.py):** School directory covering all 3 phases (Bay Area, CA Statewide, USA Nationwide) with enrollments, utilities, retail tariffs, and OSM parking footprints.
+* **[`core/solar_engine.py`](./core/solar_engine.py):** Connects to the active DOE/NLR PVWatts v8 endpoint (`developer.nlr.gov`), models monthly AC kilowatt-hours, and computes Level 2 EV charging synergies.
+* **[`core/financial_model.py`](./core/financial_model.py):** Calculates IRA Section 6417 Elective Pay cash reimbursements (30% base + 10% bonuses), net out-of-pocket costs, avoided utility costs, and full 25-year degradation and escalation schedules.
+* **[`core/report_generator.py`](./core/report_generator.py):** Generates the downloadable executive 1-page School Board Action Brief in GitHub-flavored Markdown with model resolution language and legal citations.
+* **[`test_pipeline.py`](./test_pipeline.py):** Automated validation suite testing all modules against representative campuses across California, Texas, and beyond.
 
 ---
 
