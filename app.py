@@ -217,17 +217,29 @@ with col_h2:
     st.markdown(badge_html, unsafe_allow_html=True)
     st.caption(f"Campus: **{selected_school_name}**")
 
+# High-School Student & Judge Explainer Expander
+with st.expander("💡 **How SolarSchools USA Works in 4 Simple Steps** (Click to view student explainer)", expanded=False):
+    st.markdown("""
+    1. **Measure the Asphalt:** We look up the school's parking lot using OpenStreetMap satellite data. We plan canopies over 65% of the lot so cars still have wide driving lanes and shaded parking spots.
+    2. **Calculate Solar Energy:** We plug the campus GPS coordinates into the **Department of Energy / NLR PVWatts v8 solar engine** to simulate how much sunshine the panels absorb across all 12 months.
+    3. **The Federal Direct Pay Check:** Because public schools don't pay federal income taxes, **Section 6417 of the Inflation Reduction Act** sends the school district an **actual cash reimbursement check covering 30% to 50% of the cost**.
+    4. **Classroom Dividends:** The school stops buying expensive power from the utility company, saving tens of thousands of dollars each year that go straight back into classroom supplies, field trips, and teacher salaries!
+    """)
+
 st.markdown("---")
 
-# Top KPI Metric Row (6 Cards)
+# Top KPI Metric Row (6 Cards) with relatable high-school analogies
 kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns(6)
+
+stalls_covered = int(usable_m2 / 25)
+homes_powered = int(solar_gen['annual_kwh'] / 10500) if solar_gen['annual_kwh'] > 0 else 0
 
 with kpi1:
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-label">Canopy Capacity</div>
         <div class="metric-value">{system_kw:,.0f} <span style="font-size: 1rem;">kW</span></div>
-        <div class="metric-sub">{usable_m2:,.0f} m² solar area</div>
+        <div class="metric-sub">Shades ~{stalls_covered} parking spots</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -236,7 +248,7 @@ with kpi2:
     <div class="metric-card">
         <div class="metric-label">Annual Clean Power</div>
         <div class="metric-value">{solar_gen['annual_kwh']:,.0f} <span style="font-size: 0.9rem;">kWh</span></div>
-        <div class="metric-sub">CF: {solar_gen['capacity_factor']}% (NLR v8)</div>
+        <div class="metric-sub">Powers ~{homes_powered} average homes</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -246,7 +258,7 @@ with kpi3:
     <div class="metric-card">
         <div class="metric-label">IRS Direct Pay Check</div>
         <div class="metric-value" style="color: #4ade80;">${finances['irs_direct_cash_check']:,.0f}</div>
-        <div class="metric-sub">{ira_pct}% Direct Treasury Rebate</div>
+        <div class="metric-sub">{ira_pct}% Federal Cash Grant</div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -255,7 +267,26 @@ with kpi4:
     <div class="metric-card">
         <div class="metric-label">Annual Utility Savings</div>
         <div class="metric-value" style="color: #fbbf24;">${finances['annual_utility_savings']:,.0f}</div>
-        <div class="metric-sub">@ ${tariff_override:.3f} / kWh</div>
+        <div class="metric-sub">Saved from power bills/yr</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with kpi5:
+    st.markdown(f"""
+    <div class="metric-card">
+        <div class="metric-label">Net District Cost</div>
+        <div class="metric-value">${finances['net_district_investment']:,.0f}</div>
+        <div class="metric-sub">After federal cash check</div>
+    </div>
+    """, unsafe_allow_html=True)
+
+with kpi6:
+    payback_display = f"{finances['payback_years']} yrs" if finances['payback_years'] > 0 else "N/A"
+    st.markdown(f"""
+    <div class="metric-card">
+        <div class="metric-label">Simple Payback</div>
+        <div class="metric-value" style="color: #a78bfa;">{payback_display}</div>
+        <div class="metric-sub">Zero taxpayer bonds needed</div>
     </div>
     """, unsafe_allow_html=True)
 
