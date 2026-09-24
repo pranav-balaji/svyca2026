@@ -91,21 +91,41 @@ st.sidebar.title("☀️ SolarSchools USA")
 st.sidebar.markdown("**Decision Platform for K-12 Solar Canopies & IRA Direct Pay**")
 st.sidebar.markdown("---")
 
-# Phase Filter
-phase_options = [
-    "All Phases",
-    "Phase 1: Bay Area",
-    "Phase 2: California Statewide",
-    "Phase 3: Nationwide USA"
-]
-selected_phase = st.sidebar.selectbox("🎯 Select Implementation Phase:", phase_options, index=0)
+# Phase & Grade Level Filters
+col_fil1, col_fil2 = st.sidebar.columns(2)
+with col_fil1:
+    phase_options = [
+        "All Phases",
+        "Phase 1: Bay Area",
+        "Phase 2: California Statewide",
+        "Phase 3: Nationwide USA"
+    ]
+    selected_phase = st.selectbox("🎯 Phase:", phase_options, index=0)
+
+with col_fil2:
+    level_options = [
+        "All Levels",
+        "High School",
+        "Middle School",
+        "Elementary School"
+    ]
+    selected_level = st.selectbox("🎓 Grade Level:", level_options, index=0)
 
 # Filtered Schools
-filtered_schools = get_school_directory(selected_phase)
+filtered_schools = get_school_directory(selected_phase, selected_level)
+if not filtered_schools:
+    st.sidebar.warning("No campuses match both filters. Showing all schools for this phase.")
+    filtered_schools = get_school_directory(selected_phase, "All Levels")
+
 school_names = list(filtered_schools.keys())
-selected_school_name = st.sidebar.selectbox("🏫 Select High School Campus:", school_names, index=0)
+selected_school_name = st.sidebar.selectbox("🏫 Select K-12 Campus:", school_names, index=0)
 school_info = filtered_schools[selected_school_name]
 
+# Level badge icon
+lvl = school_info.get("level", "School")
+lvl_icon = "🏫" if lvl == "High School" else ("🎒" if lvl == "Middle School" else "🖍️")
+
+st.sidebar.markdown(f"**Campus Level:** {lvl_icon} {lvl}")
 st.sidebar.markdown(f"**District:** {school_info['district']}")
 st.sidebar.markdown(f"**Location:** {school_info['county']} County, {school_info['state']}")
 st.sidebar.markdown(f"**Utility:** {school_info['utility']}")

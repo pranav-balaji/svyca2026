@@ -22,7 +22,8 @@ def test_core_pipeline():
 
     test_cases = [
         "Palo Alto High School (Palo Alto, CA)",
-        "Clovis North High School (Fresno, CA)",
+        "John F. Kennedy Middle School (Cupertino, CA)",
+        "Stevens Creek Elementary School (Cupertino, CA)",
         "Westlake High School (Austin, Texas)"
     ]
 
