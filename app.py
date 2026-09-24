@@ -91,7 +91,7 @@ st.sidebar.title("☀️ SolarSchools USA")
 st.sidebar.markdown("**Decision Platform for K-12 Solar Canopies & IRA Direct Pay**")
 st.sidebar.markdown("---")
 
-# Phase & Grade Level Filters
+# Phase, Grade Level & Solar Status Filters
 col_fil1, col_fil2 = st.sidebar.columns(2)
 with col_fil1:
     phase_options = [
@@ -111,11 +111,18 @@ with col_fil2:
     ]
     selected_level = st.selectbox("🎓 Grade Level:", level_options, index=0)
 
+status_options = [
+    "All Statuses",
+    "Implemented (Active Savings)",
+    "Unshaded (Losing Money)"
+]
+selected_status = st.sidebar.selectbox("⚡ Solar Deployment Status:", status_options, index=0)
+
 # Filtered Schools
-filtered_schools = get_school_directory(selected_phase, selected_level)
+filtered_schools = get_school_directory(selected_phase, selected_level, selected_status)
 if not filtered_schools:
-    st.sidebar.warning("No campuses match both filters. Showing all schools for this phase.")
-    filtered_schools = get_school_directory(selected_phase, "All Levels")
+    st.sidebar.warning("No campuses match all 3 filters. Showing matching phase schools.")
+    filtered_schools = get_school_directory(selected_phase, "All Levels", "All Statuses")
 
 school_names = list(filtered_schools.keys())
 selected_school_name = st.sidebar.selectbox("🏫 Select K-12 Campus:", school_names, index=0)
@@ -125,7 +132,12 @@ school_info = filtered_schools[selected_school_name]
 lvl = school_info.get("level", "School")
 lvl_icon = "🏫" if lvl == "High School" else ("🎒" if lvl == "Middle School" else "🖍️")
 
+# Solar status icon
+s_status = school_info.get("solar_status", "Unshaded (Losing Money)")
+status_icon = "⚡" if "Implemented" in s_status else "🔥"
+
 st.sidebar.markdown(f"**Campus Level:** {lvl_icon} {lvl}")
+st.sidebar.markdown(f"**Solar Status:** {status_icon} **{s_status}**")
 st.sidebar.markdown(f"**District:** {school_info['district']}")
 st.sidebar.markdown(f"**Location:** {school_info['county']} County, {school_info['state']}")
 st.sidebar.markdown(f"**Utility:** {school_info['utility']}")
@@ -245,6 +257,24 @@ with st.expander("💡 **How SolarSchools USA Works in 4 Simple Steps** (Click t
     3. **The Federal Direct Pay Check:** Because public schools don't pay federal income taxes, **Section 6417 of the Inflation Reduction Act** sends the school district an **actual cash reimbursement check covering 30% to 50% of the cost**.
     4. **Classroom Dividends:** The school stops buying expensive power from the utility company, saving tens of thousands of dollars each year that go straight back into classroom supplies, field trips, and teacher salaries!
     """)
+
+# Dynamic Solar Status & "Cost of Inaction" Banner
+if "Implemented" in s_status:
+    inst_yr = school_info.get("installed_year", 2022)
+    st.success(
+        f"✅ **VERIFIED LEADER CAMPUS (Solar Deployed in {inst_yr}):** "
+        f"{school_info.get('deployment_details', '')} "
+        f"This campus proves our engineering and financial model with real utility bill savings of **${finances['annual_utility_savings']:,.0f}/year**!"
+    )
+else:
+    inaction_5yr = finances['annual_utility_savings'] * 5
+    inaction_10yr = finances['annual_utility_savings'] * 10
+    st.error(
+        f"🔥 **CLEAN ENERGY OPPORTUNITY (Currently Losing Money to Utility):** "
+        f"{school_info.get('deployment_details', '')}\n\n"
+        f"**⏳ The Cost of Inaction:** If the School Board delays solar installation, the district will forfeit **${inaction_5yr:,.0f} over 5 years** "
+        f"(or **${inaction_10yr:,.0f} over a decade**) in avoidable electric bills, while leaving an upfront **${finances['irs_direct_cash_check']:,.0f} IRS Direct Pay cash check** unclaimed!"
+    )
 
 st.markdown("---")
 

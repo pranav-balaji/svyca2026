@@ -20,25 +20,23 @@
 > Here in Silicon Valley, wealthy districts like Cupertino and Fremont Union have already built solar carports. But for thousands of suburban and rural schools across California and the country, they don't have $10,000 to hire private solar consultants, so they leave millions of dollars on the table.  
 > In 2022, Congress passed Section 6417 of the Inflation Reduction Act—called 'Direct Pay.' For the first time in history, the IRS writes an **actual cash reimbursement check** covering 30% to 50% of clean energy projects for tax-exempt public schools. But over 90% of school boards still don't know this exists."*
 
-### [0:45 - 2:00] The Live Tool Demonstration
+### [0:45 - 2:15] The Live Tool Demonstration: The Tale of Two Districts
 *(Click on the screen and interact with the Streamlit app).*
-> *"To solve this, I built **SolarSchools USA**. Let me show you how it works.*  
-> *(Step 1 - Select Phase & Campus)*: *Let's pick a school outside of California—say, **Westlake High School in Austin, Texas**.*  
-> *(Point to the Satellite Map)*: *The app pulls the school's GPS coordinates and estimates the surface parking lot. With our slider, we cover 65% of the lot, preserving driving lanes while shading over 300 student and faculty cars.*  
-> *(Point to the Solar Generation tab)*: *Next, the app connects live to the **U.S. Department of Energy / NLR PVWatts API** to simulate real-world solar physics. For Westlake High, this canopy generates **2.2 million kilowatt-hours** of clean electricity every year—enough to power over 200 average American homes.*  
-> *(Point to the Top KPI Cards)*: *Now look at the economics:  
-> - The total turnkey cost is $3.8 million.  
-> - Because it qualifies for federal Direct Pay, the **IRS sends the school district a cash check for $1.52 million**.  
-> - That cuts the net cost down to $2.2 million, which saves **$250,000 every single year** on electric bills.  
-> - The entire system pays for itself in under 9 years without issuing a single taxpayer bond—and over 25 years, it generates **$5.3 million in net savings** that go straight into teacher salaries and classroom funding."*
+> *"To solve this, I built **SolarSchools USA**. Our app highlights a stark contrast: **districts that took action and are saving millions, versus districts leaving money on the table.**  
+>  
+> *(Step 1 - Show a Leader Campus)*: *Let's first look at an implemented leader—**Monta Vista High School** in Cupertino. They partnered with ENGIE to build 550 kW of solar canopies over their student and staff lots. You can see the green status banner: they are **actively saving $145,000 every single year** on their electric bills. Their real-world utility bills prove our physics and financial model works!*  
+>  
+> *(Step 2 - Show an Unshaded Campus Losing Money)*: *Now, look just 10 miles away at **Palo Alto High School**. Their massive 7,200 m² parking lot is 100% unshaded asphalt. You can see the red alert banner: **this campus is surrendering $140,000 every year directly to the utility company in avoidable power bills!** If the school board delays action by just 5 years, that's a **$700,000 penalty of inaction**—and an unclaimed **$750,000 IRS cash check** left behind at the U.S. Treasury.*  
+>  
+> *(Step 3 - Nationwide Scale)*: *And this isn't just a California story. Let's switch to Phase 3 and look at **Westlake High School in Austin, Texas**. Under the Texas sun, their unshaded lot is losing $145,000/year to utility bills while leaving an astonishing **$1.52 million IRS Direct Pay check** unclaimed!"*
 
-### [2:00 - 2:45] Phased Roadmap & The Civic Climax
+### [2:15 - 2:45] Phased Roadmap & The Civic Climax
 *(Click on Tab 5: School Board Action Brief).*
 > *"We built this project in three distinct phases:  
-> - **Phase 1: Bay Area**—where we ground-truthed our formulas against real solar carports at Monta Vista and Cupertino Union School District.  
+> - **Phase 1: Bay Area**—ground-truthed against real solar carports at Monta Vista, Cupertino High, and CUSD's 25 elementary and middle schools.  
 > - **Phase 2: California Statewide**—incorporating CalEnviroScreen equity overlays and Title 24 building codes.  
 > - **Phase 3: Nationwide USA**—scaling across all 50 states using federal NCES data and state utility rates.  
-> But the most important feature is right here: **Tab 5**. Any student environmental club or PTA can click **'Download School Board Action Brief'**. In one second, it generates a complete, professional proposal with exact engineering specs, IRS citations, and sample school board resolution text that students can take to their next school board meeting."*
+> But the most important feature is right here: **Tab 5**. Any student environmental club or PTA can click **'Download School Board Action Brief'**. In one second, it generates a complete, professional proposal calculating the cost of delay, exact engineering specs, IRS citations, and sample school board resolution text that students can take to their next school board meeting."*
 
 ### [2:45 - 3:00] Closing Statement
 > *"SolarSchools USA democratizes climate finance, turning idle asphalt into clean power and classroom money. Thank you, and I'd love to answer any questions!"*

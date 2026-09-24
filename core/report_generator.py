@@ -43,18 +43,43 @@ def generate_action_brief_markdown(
     co2_tons = fin_metrics.get("annual_co2_tons_avoided", 0.0)
     cars_offset = fin_metrics.get("passenger_cars_offset", 0.0)
 
+    solar_status = school_info.get("solar_status", "Unshaded (Losing Money)")
+    installed_yr = school_info.get("installed_year")
+    deployment_details = school_info.get("deployment_details", "")
+
+    if "Implemented" in solar_status:
+        status_narrative = f"""
+> **✅ BENCHMARK LEADER STATUS:** This campus deployed solar canopies in {installed_yr}. 
+> **Real-World Validation:** {deployment_details}
+> Actively validates our engineering and financial models by saving approximately **${annual_savings:,.2f} per year** in avoided utility expenses.
+"""
+    else:
+        inaction_3yr = annual_savings * 3
+        inaction_5yr = annual_savings * 5
+        status_narrative = f"""
+> **⚠️ OPPORTUNITY STATUS — THE COST OF INACTION:** This campus currently has unshaded asphalt baking in the sun.
+> **Current Fiscal Drain:** {deployment_details}
+> * **1-Year Inaction Cost:** ${annual_savings:,.2f} surrendered to the utility company.
+> * **3-Year Delay Penalty:** ${inaction_3yr:,.2f} in forfeited classroom capital.
+> * **5-Year Delay Penalty:** ${inaction_5yr:,.2f} lost forever to electricity bills.
+> * **Unclaimed Federal Cash:** An upfront **${irs_check:,.2f} IRS Direct Pay check** is waiting at the U.S. Treasury.
+"""
+
     md = f"""# 🏫 School Board Action Brief: Clean Energy & IRA Direct Pay Plan
 ### **{school_name}**
 **Governing Body:** Board of Education, {district}  
+**Campus Grade Level:** {school_info.get('level', 'School')} | **Solar Status:** {solar_status}  
 **Jurisdiction:** {county} County, {state} | **Retail Electric Provider:** {utility}  
 **Date of Assessment:** {today_str} | **Project Phase:** {phase}  
 
 ---
 
 ## 1. Executive Summary & Recommended Action
-This feasibility brief evaluates deploying solar photovoltaic carports over campus surface parking lots at **{school_name}** (Enrollment: {enrollment:,} students). 
+This feasibility brief evaluates deploying solar photovoltaic carports over campus surface parking and blacktop areas at **{school_name}** (Enrollment: {enrollment:,} students). 
 
 By capitalizing on **Section 6417 of the federal Inflation Reduction Act (IRA) of 2022 ("Elective Pay" / "Direct Pay")**, the district can claim an upfront cash reimbursement check of **${irs_check:,.2f} ({ira_pct}% of total capital expenditure)** directly from the U.S. Department of the Treasury without issuing local municipal bonds or raising property taxes.
+
+{status_narrative}
 
 * **Turnkey Project Capital Outlay:** ${total_cost:,.2f}
 * **U.S. Treasury IRA Direct Pay Cash Check:** **${irs_check:,.2f}**
