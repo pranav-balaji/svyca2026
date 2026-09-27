@@ -7,7 +7,7 @@
 
 ---
 
-## ☀️ Project Overview
+## Project Overview
 
 **SolarSchools USA** is an open-access, geospatial decision platform designed to empower public school districts across America to transform unshaded asphalt parking lots into clean energy solar photovoltaic (PV) canopies. 
 
@@ -15,7 +15,7 @@ By coupling high-resolution geospatial footprint extraction with the **U.S. Depa
 
 ---
 
-## 🗺️ The 3-Phase Geographic Architecture
+## The 3-Phase Geographic Architecture
 
 ```mermaid
 flowchart LR
@@ -45,7 +45,7 @@ flowchart LR
 
 ---
 
-## 📂 Repository Documents
+## Repository Documents
 
 * **[`ProjectProposal.md`](./ProjectProposal.md):** The project proposal with problem background, equations, phased rollout, pitch outline, and official data citations (IRA 26 U.S.C. § 6417, NREL, NCES, EIA, EPA).
 * **[`TechnicalBlueprint.md`](./TechnicalBlueprint.md):** The technical specifications, GIS algorithms, data dictionary, formulas, and code structure.
@@ -53,7 +53,7 @@ flowchart LR
 
 ---
 
-## 📊 Reliable & Verified Public Datasets
+## Public Datasets & Data Sources
 
 Every dataset used in SolarSchools USA is **100% public, verified, and actively maintained by U.S. Federal and California state agencies**:
 
@@ -69,7 +69,7 @@ Every dataset used in SolarSchools USA is **100% public, verified, and actively 
 
 ---
 
-## 🛠️ Quick-Start Instructions
+## Quick-Start Instructions
 
 ### 1. Set Up the Python Virtual Environment
 ```bash
@@ -79,7 +79,7 @@ pip install -r requirements.txt
 ```
 
 ### 2. Run the Automated Test Suite
-Verify that all 3 phases, the NLR PVWatts v8 API, and the IRA financial engine are operational:
+Verify that all modules, the NLR PVWatts v8 API, and the IRA financial engine are operational:
 ```bash
 python test_pipeline.py
 ```
@@ -93,7 +93,7 @@ Then open your browser to `http://localhost:8501`.
 
 ---
 
-## 🏛️ Code Architecture & Core Modules
+## Code Architecture & Core Modules
 
 * **[`app.py`](./app.py):** Main Streamlit frontend featuring the 3-phase geographic selector, responsive sliders, satellite Folium canopy maps, Plotly 25-year cashflow pro formas, and one-click School Board Action Brief export.
 * **[`core/data_ingest.py`](./core/data_ingest.py):** School directory covering all 3 phases (Bay Area, CA Statewide, USA Nationwide) with enrollments, utilities, retail tariffs, and OSM parking footprints.
@@ -102,11 +102,11 @@ Then open your browser to `http://localhost:8501`.
 * **[`core/report_generator.py`](./core/report_generator.py):** Generates the downloadable executive 1-page School Board Action Brief in GitHub-flavored Markdown with model resolution language and legal citations.
 * **[`test_pipeline.py`](./test_pipeline.py):** Automated validation suite testing all modules against representative campuses across California, Texas, and beyond.
 
----
+## Tentative Presentation Plan (Stanford Climate Week)
 
-## 🏆 Stanford Climate Week Pitch Strategy (October 25, 2026)
+This is a working draft outline for the 3-minute hackathon presentation:
 
-* **Minute 0:00 – 0:45: The Problem & The Federal Catalyst** — America's schools spend $8B on power. Cupertino already built solar carports, but 100,000 schools across America have no budget for consultants. The IRA now pays 30%–50% in direct cash checks from the IRS.
-* **Minute 0:45 – 2:15: Live Interactive Tool Demo** — Select a school anywhere in the country (Texas, Arizona, Florida, Ohio). The app auto-extracts the lot, calls NREL solar physics, and reveals the $600k+ IRS check and $90k/yr in electricity savings.
-* **Minute 2:15 – 3:00: Phase Progression & Action Brief Generator** — Highlight the 3 phases (Bay Area $\rightarrow$ California Statewide $\rightarrow$ Nationwide USA) and generate a 1-page School Board Action Brief.
-* **Minute 3:00 – 3:30: Closing & Q&A Transition** — Democratizing clean energy finance for the next generation.
+* **Minute 0:00 – 0:45: Background & Problem Context** — Briefly introduce the problem: public schools spend over $8B annually on electricity while unshaded asphalt parking lots sit idle in the sun. Mention the Inflation Reduction Act Section 6417 Direct Pay provision, which allows tax-exempt public schools to receive direct reimbursement checks from the federal government for clean energy installations.
+* **Minute 0:45 – 2:00: Interactive Tool Walkthrough** — Walk through the interactive interface using representative school campuses. Demonstrate how parking lot area is measured, connect to solar irradiance calculations, and show estimated annual electricity savings, payback timelines, and the contrast between schools saving money and schools losing money.
+* **Minute 2:00 – 2:40: Phased Architecture & Action Brief** — Discuss the project's phased progression, starting from Bay Area school districts (calibrated against local installations in Cupertino and Fremont Union) toward broader state and national modeling. Show the downloadable 1-page Action Brief designed for school board presentations.
+* **Minute 2:40 – 3:00: Summary & Discussion** — Wrap up with key takeaways on making clean energy finance accessible to student climate advocates, and open the floor for judge Q&A.
