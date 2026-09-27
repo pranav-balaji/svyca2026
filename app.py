@@ -95,10 +95,10 @@ st.sidebar.markdown("---")
 col_fil1, col_fil2 = st.sidebar.columns(2)
 with col_fil1:
     phase_options = [
-        "All Phases",
         "Phase 1: Bay Area",
-        "Phase 2: California Statewide",
-        "Phase 3: Nationwide USA"
+        # "All Phases",
+        # "Phase 2: California Statewide",
+        # "Phase 3: Nationwide USA"
     ]
     selected_phase = st.selectbox("🎯 Phase:", phase_options, index=0)
 
