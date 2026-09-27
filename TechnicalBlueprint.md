@@ -238,7 +238,7 @@ from streamlit_folium import st_folium
 
 st.set_page_config(page_title="SolarSchools USA: Nationwide Canopy Estimator", layout="wide")
 
-st.title("🇺🇸 SolarSchools USA: Nationwide K-12 Parking Solar & IRA Direct Pay Portal")
+st.title(" SolarSchools USA: Nationwide K-12 Parking Solar & IRA Direct Pay Portal")
 st.markdown("**SVYCA Youth For Earth Hackathon @ Stanford Climate Week**")
 
 # Nationwide Preset High Schools across diverse regions
@@ -260,7 +260,7 @@ school_directory = {
     }
 }
 
-st.sidebar.header("🔍 Nationwide School Selector")
+st.sidebar.header(" Nationwide School Selector")
 selected_name = st.sidebar.selectbox("Select a High School Campus:", list(school_directory.keys()))
 school = school_directory[selected_name]
 
@@ -275,7 +275,7 @@ pv = query_national_pvwatts(school["lat"], school["lon"], system_kw)
 fin = calculate_ira_financials(system_kw, pv["annual_kwh"], school["tariff"], override_title1)
 
 # Top Metrics Row
-st.markdown(f"### 🏫 Feasibility Assessment: **{selected_name}**")
+st.markdown(f"### Feasibility Assessment: **{selected_name}**")
 col1, col2, col3, col4 = st.columns(4)
 col1.metric("Proposed Solar Capacity", f"{system_kw:,.0f} kW DC")
 col2.metric("Annual Generation", f"{pv['annual_kwh']:,.0f} kWh/yr")
@@ -311,7 +311,7 @@ st_folium(m, width=950, height=450)
 # Action Brief Generator
 st.markdown("---")
 st.download_button(
-    label="📄 Download 1-Page School Board Action Brief (Markdown)",
+    label=" Download 1-Page School Board Action Brief (Markdown)",
     data=f"""# Clean Energy Action Brief: {selected_name}
 ## Prepared for School Board of Education
 - **Proposed PV Canopy Size:** {system_kw} kW DC

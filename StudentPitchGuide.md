@@ -1,17 +1,17 @@
-# 🎓 Student Pitch & Judge Defense Guide: SolarSchools USA
+# Student Pitch & Judge Defense Guide: SolarSchools USA
 **Prepared for Pranav Balaji (Solo High School Competitor)**  
 *SVYCA Youth For Earth Hackathon @ Stanford Climate Week (October 25, 2026)*
 
 ---
 
-## 🎯 1. The 30-Second Elevator Pitch
+## 1. The 30-Second Elevator Pitch
 > *"Public schools in America spend $8 billion every single year on electricity—it's their highest expense after teacher salaries. Meanwhile, schools have massive asphalt parking lots that bake in the hot sun. In the past, schools couldn't afford solar consultants, and because schools don't pay taxes, they couldn't use federal solar tax credits.*  
 > *Under the 2022 Inflation Reduction Act, the rules changed: the IRS now writes a **direct cash reimbursement check for 30% to 50% of the cost** to public school districts.*  
 > *I built **SolarSchools USA**, a free geospatial web app that lets any student or school board in all 50 states click on their high school, calculate their solar canopy size using Department of Energy physics, and see the exact dollar amount of the IRS cash check and power bill savings in under 3 seconds."*
 
 ---
 
-## ⏱️ 2. The 3-Minute Live Hackathon Pitch Script (Word-for-Word)
+## 2. The 3-Minute Live Hackathon Pitch Script (Word-for-Word)
 
 ### [0:00 - 0:45] The Hook & The Problem
 *(Standing at the podium with the laptop plugged into the projector. Show the title screen).*
@@ -43,7 +43,7 @@
 
 ---
 
-## 🧠 3. Core Concepts Explained Simply (Like You're Talking to a Friend)
+## 3. Core Concepts Explained Simply (Like You're Talking to a Friend)
 
 If a judge asks you to explain any concept, use these simple mental models:
 
@@ -60,7 +60,7 @@ If a judge asks you to explain any concept, use these simple mental models:
 
 ---
 
-## ❓ 4. Top 12 Tough Judge Questions & Winning Answers
+## 4. Top 12 Tough Judge Questions & Winning Answers
 
 ### Q1: "Did you write this code yourself, and how does it work?"
 > **Answer:** *"Yes! I built the application in Python using Streamlit for the user interface, GeoPandas and Folium for the geospatial mapping, and Plotly for the interactive charts. The core computational logic is split into four clean modules: `data_ingest` for school coordinates, `solar_engine` for calling the federal PVWatts API, `financial_model` for IRA Direct Pay and 25-year cashflows, and `report_generator` for compiling the downloadable markdown action brief."*
@@ -103,7 +103,7 @@ If a judge asks you to explain any concept, use these simple mental models:
 
 ---
 
-## 📋 5. Five-Minute Pre-Pitch Checklist
+## 5. Five-Minute Pre-Pitch Checklist
 
 Before you walk up to present to the judges:
 - [ ] Connect your laptop to Wi-Fi.
