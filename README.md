@@ -47,8 +47,9 @@ flowchart LR
 
 ## 📂 Repository Documents
 
-* **[`PROJECT_PROPOSAL_SOLARSCHOOLS.md`](./PROJECT_PROPOSAL_SOLARSCHOOLS.md):** The complete, publication-ready project proposal with executive summary, mathematical formulas, 4-week execution roadmap, minute-by-minute pitch script, and formal statutory and academic citations (26 U.S.C. § 6417, NREL, NCES, EIA, EPA, CPUC).
-* **[`SOLARSCHOOLS_TECHNICAL_BLUEPRINT.md`](./SOLARSCHOOLS_TECHNICAL_BLUEPRINT.md):** The comprehensive technical specification, spatial algorithms, data dictionary, error matrices, and production Python code snippets.
+* **[`ProjectProposal.md`](./ProjectProposal.md):** The project proposal with problem background, equations, phased rollout, pitch outline, and official data citations (IRA 26 U.S.C. § 6417, NREL, NCES, EIA, EPA).
+* **[`TechnicalBlueprint.md`](./TechnicalBlueprint.md):** The technical specifications, GIS algorithms, data dictionary, formulas, and code structure.
+* **[`StudentPitchGuide.md`](./StudentPitchGuide.md):** High-school presenter guide with 30-second elevator pitch, 3-minute hackathon pitch script, plain-English analogies, and top 12 judge Q&A defense answers.
 
 ---
 

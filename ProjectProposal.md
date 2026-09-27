@@ -1,10 +1,9 @@
-# Project Proposal: SolarSchools USA — A Phased Geospatial Decision Platform for K-12 Parking Photovoltaics & IRA Elective Pay Financing
+# SolarSchools USA: Project Proposal
 
-**Project Title:** SolarSchools USA: Automated Solar Canopy Feasibility & Federal IRA Direct Pay Modeling  
-**Competition:** SVYCA Youth For Earth (Y4E) Hackathon @ Stanford Climate Week (October 25, 2026)  
-**Author:** Solo Competitor (High School GIS Developer)  
-**Target Domain:** Clean Energy Transition, Civic Infrastructure Decarbonization, Federal Climate Finance  
-
+**Project Title:** SolarSchools USA — K-12 Solar Canopy Feasibility & IRA Direct Pay Decision Platform  
+**Competition:** SVYCA Youth For Earth Hackathon @ Stanford Climate Week (October 25, 2026)  
+**Author:** Pranav Balaji  
+**Focus:** Clean Energy Transition, Civic Infrastructure Decarbonization, Federal Climate Finance  
 ---
 
 ## 1. Executive Summary & Core Hypothesis

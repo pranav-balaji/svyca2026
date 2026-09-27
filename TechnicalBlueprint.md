@@ -1,4 +1,6 @@
-# Project 5: SolarSchools USA — Nationwide K-12 Parking Lot Photovoltaic & IRA Elective Pay Estimator
+# SolarSchools USA: Technical Blueprint
+### Geospatial Modeling & Federal IRA Direct Pay Architecture
+**Author:** Pranav Balaji | **Competition:** SVYCA Youth For Earth Hackathon @ Stanford Climate Week
 
 ---
 

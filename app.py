@@ -617,8 +617,10 @@ with tab_brief:
         num_ev_chargers=num_ev_chargers
     )
 
-    # Download Button
-    clean_filename = f"{selected_school_name.split('(')[0].strip().replace(' ', '_')}_Solar_Action_Brief.md"
+    # Download Button with clean CamelCase filename
+    school_base = selected_school_name.split('(')[0].strip()
+    clean_camel = ''.join(word.capitalize() for word in school_base.split() if word.isalnum())
+    clean_filename = f"{clean_camel}ActionBrief.md"
     st.download_button(
         label="📥 Download Executive Action Brief (Markdown)",
         data=action_brief_md,
