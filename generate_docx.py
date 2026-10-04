@@ -145,50 +145,9 @@ def build_word_document():
     add_callout(doc, meta_text, title="PROJECT METADATA", border_color="0284C7", bg_color="F0F9FF")
     
     # ---------------------------------------------------------------------------
-    # Section 1
+    # Section 1: Table of Abbreviations & Core Terminology
     # ---------------------------------------------------------------------------
-    h1 = doc.add_heading("1. Executive Summary & Design Rationale", level=1)
-    h1.paragraph_format.space_before = Pt(14)
-    h1.paragraph_format.space_after = Pt(6)
-    for run in h1.runs:
-        run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
-        
-    doc.add_heading("1.1 Problem & Opportunity", level=2)
-    p1 = doc.add_paragraph(style='List Bullet')
-    p1.add_run("Energy Burden: ").bold = True
-    p1.add_run("Public K-12 school districts spend over $8 billion annually on electricity, often their second-largest budget expense after personnel.")
-    
-    p2 = doc.add_paragraph(style='List Bullet')
-    p2.add_run("Underutilized Asset: ").bold = True
-    p2.add_run("Schools maintain extensive unshaded asphalt parking lots that intensify the urban heat island effect and increase cooling loads.")
-    
-    p3 = doc.add_paragraph(style='List Bullet')
-    p3.add_run("Federal Catalyst: ").bold = True
-    p3.add_run("Section 6417 of the Inflation Reduction Act (IRA) allows non-taxable entities—including public school districts—to receive elective cash payments ('Direct Pay') from the IRS covering 30% to 50% of clean energy project costs.")
-    
-    p4 = doc.add_paragraph(style='List Bullet')
-    p4.add_run("Access Barrier: ").bold = True
-    p4.add_run("Commercial feasibility studies cost $15,000 to $50,000. SolarSchools USA provides a free, instant screening tool for student advocates and school boards.")
-    
-    doc.add_heading("1.2 Parking Canopies vs. Rooftop Solar", level=2)
-    doc.add_paragraph("Commercial solar developers often suggest rooftop panels, but facilities directors face significant obstacles that parking lot canopies eliminate:")
-    
-    tbl_comp = doc.add_table(rows=1, cols=3)
-    comp_headers = ["Evaluation Metric", "Rooftop Solar", "Parking Lot Canopy (SolarSchools USA)"]
-    comp_rows = [
-        ["Roof Warranty", "Risk of voiding 20-year membrane warranty", "Zero roof penetrations; independent structural steel"],
-        ["Structural Capacity", "Limited by HVAC weight and seismic ratings", "Engineered independent pier foundations"],
-        ["Microclimate Impact", "Minor roof cooling", "Drops asphalt surface temp by 30°F to 45°F"],
-        ["EV Integration", "Requires expensive trenching to ground lot", "Turnkey conduit integration for Level 2 EV chargers"],
-        ["Campus Visibility", "Hidden from student and community view", "Highly visible showcase of civic climate leadership"]
-    ]
-    format_table(tbl_comp, [1.5, 2.3, 2.7], comp_headers, comp_rows)
-    doc.add_paragraph().paragraph_format.space_after = Pt(8)
-    
-    # ---------------------------------------------------------------------------
-    # Section 2: Table of Abbreviations & Core Terminology
-    # ---------------------------------------------------------------------------
-    h_abbr = doc.add_heading("2. Table of Abbreviations & Core Terminology", level=1)
+    h_abbr = doc.add_heading("1. Table of Abbreviations & Core Terminology", level=1)
     h_abbr.paragraph_format.space_before = Pt(14)
     h_abbr.paragraph_format.space_after = Pt(6)
     for run in h_abbr.runs:
@@ -202,8 +161,10 @@ def build_word_document():
         ["CDE", "California Department of Education", "State agency publishing California public school directories and enrollment records."],
         ["CRS / EPSG:4326", "Coordinate Reference System", "Global WGS 84 spherical coordinate reference system in decimal degrees."],
         ["EPA eGRID", "Emissions & Generation Resource Database", "Federal EPA database tracking subregion greenhouse gas emission factors per kWh."],
+        ["EV", "Electric Vehicle", "Level 2 smart vehicle charging stations integrated into canopy steel columns."],
         ["IRA Direct Pay", "Inflation Reduction Act Section 6417", "Statutory mechanism providing 30% to 50% IRS cash refunds to tax-exempt entities."],
-        ["IRS Form 990-T", "Tax-Exempt Return", "Federal tax form filed by public school districts to claim clean energy Direct Pay."],
+        ["IRS / Form 990-T", "Internal Revenue Service", "Federal tax agency; Form 990-T is filed by public school districts to claim Direct Pay."],
+        ["K-12", "Kindergarten through 12th Grade", "The United States public primary and secondary education school system."],
         ["NCES", "National Center for Education Statistics", "Federal agency maintaining locations and demographic data for ~100k U.S. schools."],
         ["NLR / NSRDB", "National Laboratory of the Rockies", "U.S. DOE lab (formerly NREL) and the 4km National Solar Radiation Database."],
         ["POA", "Plane of Array", "Solar irradiance striking tilted photovoltaic collector surfaces."],
@@ -211,6 +172,47 @@ def build_word_document():
         ["UTM", "Universal Transverse Mercator", "Conformal metric projection dividing the globe into 60 zones for accurate surface area (m2)."]
     ]
     format_table(tbl_gloss, [1.4, 2.2, 2.9], gloss_headers, gloss_rows)
+    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    # ---------------------------------------------------------------------------
+    # Section 2: Executive Summary & Design Rationale
+    # ---------------------------------------------------------------------------
+    h1 = doc.add_heading("2. Executive Summary & Design Rationale", level=1)
+    h1.paragraph_format.space_before = Pt(14)
+    h1.paragraph_format.space_after = Pt(6)
+    for run in h1.runs:
+        run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
+        
+    doc.add_heading("2.1 Problem & Opportunity", level=2)
+    p1 = doc.add_paragraph(style='List Bullet')
+    p1.add_run("Energy Burden: ").bold = True
+    p1.add_run("Public Kindergarten through 12th Grade (K-12) school districts spend over $8 billion annually on electricity, often their second-largest budget expense after personnel.")
+    
+    p2 = doc.add_paragraph(style='List Bullet')
+    p2.add_run("Underutilized Asset: ").bold = True
+    p2.add_run("Schools maintain extensive unshaded asphalt parking lots that intensify the urban heat island effect and increase cooling loads.")
+    
+    p3 = doc.add_paragraph(style='List Bullet')
+    p3.add_run("Federal Catalyst: ").bold = True
+    p3.add_run("Section 6417 of the federal Inflation Reduction Act (IRA) allows non-taxable entities—including public school districts—to receive elective cash payments ('Direct Pay') from the Internal Revenue Service (IRS) covering 30% to 50% of clean energy project costs.")
+    
+    p4 = doc.add_paragraph(style='List Bullet')
+    p4.add_run("Access Barrier: ").bold = True
+    p4.add_run("Commercial feasibility studies cost $15,000 to $50,000. SolarSchools USA provides a free, instant screening tool for student advocates and school boards.")
+    
+    doc.add_heading("2.2 Parking Canopies vs. Rooftop Solar", level=2)
+    doc.add_paragraph("Commercial solar developers often suggest rooftop panels, but facilities directors face significant obstacles that parking lot canopies eliminate:")
+    
+    tbl_comp = doc.add_table(rows=1, cols=3)
+    comp_headers = ["Evaluation Metric", "Rooftop Solar", "Parking Lot Canopy (SolarSchools USA)"]
+    comp_rows = [
+        ["Roof Warranty", "Risk of voiding 20-year membrane warranty", "Zero roof penetrations; independent structural steel"],
+        ["Structural Capacity", "Limited by HVAC weight and seismic ratings", "Engineered independent pier foundations"],
+        ["Microclimate Impact", "Minor roof cooling", "Drops asphalt surface temp by 30°F to 45°F"],
+        ["EV Integration", "Requires expensive trenching to ground lot", "Turnkey conduit integration for Level 2 EV chargers"],
+        ["Campus Visibility", "Hidden from student and community view", "Highly visible showcase of civic climate leadership"]
+    ]
+    format_table(tbl_comp, [1.5, 2.3, 2.7], comp_headers, comp_rows)
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
 
     # ---------------------------------------------------------------------------

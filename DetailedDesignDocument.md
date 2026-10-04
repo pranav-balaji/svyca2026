@@ -9,15 +9,36 @@
 
 ---
 
-## 1. Executive Summary & Design Rationale
+## 1. Table of Abbreviations & Core Terminology
 
-### 1.1 Problem & Opportunity
-* **Energy Burden:** Public K-12 school districts spend over $8 billion annually on electricity, often their second-largest budget expense after personnel.
+| Abbreviation | Full Term / Agency | Definition & Regulatory Role |
+| :--- | :--- | :--- |
+| **AC / DC** | Alternating / Direct Current | DC is raw solar cell output; AC is usable building and grid electricity. |
+| **BBox** | Geographic Bounding Box | Min/max latitude and longitude coordinates defining the spatial query boundary. |
+| **CDE** | California Department of Education | State agency publishing California public school directories and enrollment records. |
+| **CRS / EPSG:4326** | Coordinate Reference System | Global WGS 84 spherical coordinate reference system in decimal degrees. |
+| **EPA eGRID** | Emissions & Generation Resource Database | Federal EPA database tracking subregion greenhouse gas emission factors per kWh. |
+| **EV** | Electric Vehicle | Level 2 smart vehicle charging stations integrated into canopy steel columns. |
+| **IRA Direct Pay** | Inflation Reduction Act Section 6417 | Statutory mechanism providing 30% to 50% IRS cash refunds to tax-exempt entities. |
+| **IRS / Form 990-T** | Internal Revenue Service | Federal tax agency; Form 990-T is filed by public school districts to claim Direct Pay. |
+| **K-12** | Kindergarten through 12th Grade | The United States public primary and secondary education school system. |
+| **NCES** | National Center for Education Statistics | Federal agency maintaining locations and demographic data for ~100k U.S. schools. |
+| **NLR / NSRDB** | National Laboratory of the Rockies | U.S. DOE lab (formerly NREL) and the 4km National Solar Radiation Database. |
+| **POA** | Plane of Array | Solar irradiance striking tilted photovoltaic collector surfaces. |
+| **Title I** | Federal Low-Income Designation | Elementary & Secondary Education Act designation triggering +10% IRA bonus. |
+| **UTM** | Universal Transverse Mercator | Conformal metric projection dividing the globe into 60 zones for accurate surface area ($m^2$). |
+
+---
+
+## 2. Executive Summary & Design Rationale
+
+### 2.1 Problem & Opportunity
+* **Energy Burden:** Public Kindergarten through 12th Grade (K-12) school districts spend over $8 billion annually on electricity, often their second-largest budget expense after personnel.
 * **Underutilized Asset:** Schools maintain extensive unshaded asphalt parking lots that intensify the urban heat island effect and increase cooling loads.
-* **Federal Catalyst:** Section 6417 of the Inflation Reduction Act (IRA) allows non-taxable entities—including public school districts—to receive elective cash payments ("Direct Pay") from the IRS covering 30% to 50% of clean energy project costs.
+* **Federal Catalyst:** Section 6417 of the federal Inflation Reduction Act (IRA) allows non-taxable entities—including public school districts—to receive elective cash payments ("Direct Pay") from the Internal Revenue Service (IRS) covering 30% to 50% of clean energy project costs.
 * **Access Barrier:** Commercial feasibility studies cost \$15,000 to \$50,000. SolarSchools USA provides a free, instant screening tool for student advocates and school boards.
 
-### 1.2 Parking Canopies vs. Rooftop Solar
+### 2.2 Parking Canopies vs. Rooftop Solar
 Commercial solar developers often suggest rooftop panels, but facilities directors face significant obstacles that parking lot canopies eliminate:
 
 | Evaluation Metric | Rooftop Solar | Parking Lot Canopy (SolarSchools USA) |
@@ -27,25 +48,6 @@ Commercial solar developers often suggest rooftop panels, but facilities directo
 | **Microclimate Impact** | Minor roof cooling | Drops asphalt surface temp by 30°F to 45°F |
 | **EV Integration** | Requires expensive trenching to ground lot | Turnkey conduit integration for Level 2 EV chargers |
 | **Campus Visibility** | Hidden from student and community view | Highly visible showcase of civic climate leadership |
-
----
-
-## 2. Table of Abbreviations & Core Terminology
-
-| Abbreviation | Full Term / Agency | Definition & Regulatory Role |
-| :--- | :--- | :--- |
-| **AC / DC** | Alternating / Direct Current | DC is raw solar cell output; AC is usable building and grid electricity. |
-| **BBox** | Geographic Bounding Box | Min/max latitude and longitude coordinates defining the spatial query boundary. |
-| **CDE** | California Department of Education | State agency publishing California public school directories and enrollment records. |
-| **CRS / EPSG:4326** | Coordinate Reference System | Global WGS 84 spherical coordinate reference system in decimal degrees. |
-| **EPA eGRID** | Emissions & Generation Resource Database | Federal EPA database tracking subregion greenhouse gas emission factors per kWh. |
-| **IRA Direct Pay** | Inflation Reduction Act Section 6417 | Statutory mechanism providing 30% to 50% IRS cash refunds to tax-exempt entities. |
-| **IRS Form 990-T** | Tax-Exempt Return | Federal tax form filed by public school districts to claim clean energy Direct Pay. |
-| **NCES** | National Center for Education Statistics | Federal agency maintaining locations and demographic data for ~100k U.S. schools. |
-| **NLR / NSRDB** | National Laboratory of the Rockies | U.S. DOE lab (formerly NREL) and the 4km National Solar Radiation Database. |
-| **POA** | Plane of Array | Solar irradiance striking tilted photovoltaic collector surfaces. |
-| **Title I** | Federal Low-Income Designation | Elementary & Secondary Education Act designation triggering +10% IRA bonus. |
-| **UTM** | Universal Transverse Mercator | Conformal metric projection dividing the globe into 60 zones for accurate surface area ($m^2$). |
 
 ---
 
