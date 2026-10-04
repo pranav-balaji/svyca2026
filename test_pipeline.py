@@ -75,7 +75,7 @@ def test_core_pipeline():
         assert "School Board Action Brief" in brief
         print(f"  Action brief generated successfully ({len(brief):,} bytes)")
 
-    print("\n✅ All unit tests PASSED successfully!")
+    print("\nAll unit tests PASSED successfully!")
 
 
 if __name__ == "__main__":

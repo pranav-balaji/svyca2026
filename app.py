@@ -340,25 +340,6 @@ with kpi6:
     </div>
     """, unsafe_allow_html=True)
 
-with kpi5:
-    st.markdown(f"""
-    <div class="metric-card">
-        <div class="metric-label">Net District Cost</div>
-        <div class="metric-value">${finances['net_district_investment']:,.0f}</div>
-        <div class="metric-sub">Total: ${finances['total_project_cost']:,.0f}</div>
-    </div>
-    """, unsafe_allow_html=True)
-
-with kpi6:
-    payback_display = f"{finances['payback_years']} yrs" if finances['payback_years'] > 0 else "N/A"
-    st.markdown(f"""
-    <div class="metric-card">
-        <div class="metric-label">Simple Payback</div>
-        <div class="metric-value" style="color: #a78bfa;">{payback_display}</div>
-        <div class="metric-sub">Zero Taxpayer Bonds</div>
-    </div>
-    """, unsafe_allow_html=True)
-
 # -----------------------------------------------------------------------------
 # 5. TABBED INTERACTIVE SECTIONS
 # -----------------------------------------------------------------------------
@@ -381,41 +362,59 @@ with tab_map:
 
     with map_col1:
         lat, lon = school_info["lat"], school_info["lon"]
+        lot_lat = footprint.get("lot_lat", lat)
+        lot_lon = footprint.get("lot_lon", lon)
+
         m = folium.Map(
-            location=[lat, lon],
+            location=[lot_lat, lot_lon],
             zoom_start=17,
-            tiles="OpenStreetMap"
+            tiles=None
         )
         
-        # Add satellite imagery tile layer
+        # Add high-resolution satellite imagery as default basemap
         folium.TileLayer(
             tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
-            attr='Esri Satellite',
-            name='Satellite Imagery',
+            attr='Esri World Imagery',
+            name='Satellite Imagery (Default)',
+            overlay=False,
+            control=True
+        ).add_to(m)
+
+        # Add OpenStreetMap as alternative basemap
+        folium.TileLayer(
+            tiles='OpenStreetMap',
+            name='Street Map',
             overlay=False,
             control=True
         ).add_to(m)
         
-        # Add canopy footprint circle approximation
-        # Area = pi * r^2  =>  r = sqrt(Area / pi)
+        # Add canopy footprint circle centered on the surface parking lot
         radius_canopy = (usable_m2 / 3.14159) ** 0.5
 
         folium.Circle(
-            location=[lat, lon],
+            location=[lot_lat, lot_lon],
             radius=radius_canopy,
             color="#f59e0b",
             fill=True,
             fill_color="#fbbf24",
             fill_opacity=0.45,
             tooltip=f"Proposed Solar Canopy: {system_kw:,.0f} kW DC ({usable_m2:,.0f} m²)",
-            popup=f"<b>Proposed Solar Canopy</b><br>Capacity: {system_kw} kW DC<br>Area: {usable_m2:,.0f} m²<br>Stalls Covered: ~{int(usable_m2/25)}"
+            popup=f"<b>Proposed Solar Canopy Site</b><br>Capacity: {system_kw} kW DC<br>Area: {usable_m2:,.0f} m²<br>Stalls Covered: ~{int(usable_m2/25)}"
         ).add_to(m)
 
-        # Campus Centroid Marker
+        # Parking Lot Canopy Site Marker
+        folium.Marker(
+            location=[lot_lat, lot_lon],
+            popup=f"<b>Proposed Solar Canopy Site</b><br>{selected_school_name} Parking Lot<br>Capacity: {system_kw:,.0f} kW DC",
+            tooltip=f"Solar Canopy Site ({usable_m2:,.0f} m²)",
+            icon=folium.Icon(color="orange", icon="bolt", prefix="fa")
+        ).add_to(m)
+
+        # Campus Entrance Marker
         folium.Marker(
             location=[lat, lon],
             popup=f"<b>{selected_school_name}</b><br>{school_info['district']}<br>Enrollment: {school_info['enrollment']:,}",
-            tooltip=f"{selected_school_name}",
+            tooltip=f"{selected_school_name} (Campus)",
             icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa")
         ).add_to(m)
 
