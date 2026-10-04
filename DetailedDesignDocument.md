@@ -15,7 +15,7 @@
 * **Energy Burden:** Public K-12 school districts spend over $8 billion annually on electricity, often their second-largest budget expense after personnel.
 * **Underutilized Asset:** Schools maintain extensive unshaded asphalt parking lots that intensify the urban heat island effect and increase cooling loads.
 * **Federal Catalyst:** Section 6417 of the Inflation Reduction Act (IRA) allows non-taxable entities—including public school districts—to receive elective cash payments ("Direct Pay") from the IRS covering 30% to 50% of clean energy project costs.
-* **Access Barrier:** Commercial feasibility studies cost $15,000 to $50,000. SolarSchools USA provides a free, instant screening tool for student advocates and school boards.
+* **Access Barrier:** Commercial feasibility studies cost \$15,000 to \$50,000. SolarSchools USA provides a free, instant screening tool for student advocates and school boards.
 
 ### 1.2 Parking Canopies vs. Rooftop Solar
 Commercial solar developers often suggest rooftop panels, but facilities directors face significant obstacles that parking lot canopies eliminate:
@@ -165,10 +165,10 @@ Monthly production is distributed via a normalized 12-month solar insolation bel
 
 ### 4.1 System Capacity & Turnkey Cost
 $$P_{\text{DC}} = A_{\text{net}} \times 0.20\text{ kW/m}^2$$
-$$C_{\text{total}} = (P_{\text{DC}} \times 1,000 \times \$3.10/\text{W}) + (N_{\text{chargers}} \times \$6,000)$$
+$$C_{\text{total}} = (P_{\text{DC}} \times 1000 \times 3.10) + (N_{\text{chargers}} \times 6000)$$
 
-* **Canopy Benchmark ($$3.10/W):** Accounts for structural steel columns, drilled concrete foundations, and electrical trenching.
-* **Level 2 EV Chargers ($$6,000/dual port):** Covers smart commercial charging pedestals and power connections.
+* **Canopy Benchmark ($3.10/W):** Accounts for structural steel columns, drilled concrete foundations, and electrical trenching ($3.10 per Watt DC).
+* **Level 2 EV Chargers ($6,000/dual port):** Covers smart commercial charging pedestals and electrical connections ($6,000 per dual-port station).
 
 ### 4.2 Federal IRA Section 6417 Direct Pay
 $$R_{\text{IRA}} = \min(0.30 + \beta_{\text{domestic}} + \beta_{\text{energy}} + \beta_{\text{title1}}, 0.60)$$
@@ -181,14 +181,17 @@ $$C_{\text{net}} = C_{\text{total}} - C_{\text{IRS}}$$
 * **Title I Low-Income Adder ($\beta_{\text{title1}} = +10\%$):** Schools serving $\ge 40\%$ low-income student populations.
 
 ### 4.3 Savings, Payback, and 25-Year Lifecycle Cashflow
-* **Year 1 Avoided Utility Cost:** $S_1 = E_{\text{AC, annual}} \times T_{\text{commercial}}$
-* **Simple Payback Period:** $Y_{\text{payback}} = \frac{C_{\text{net}}}{S_1}$
+* **Year 1 Avoided Utility Cost:**
+  $$S_1 = E_{\text{AC, annual}} \times T_{\text{commercial}}$$
+* **Simple Payback Period:**
+  $$Y_{\text{payback}} = \frac{C_{\text{net}}}{S_1}$$
 * **Annual Dynamics for Year $y \in [1, 25]$:**
   * PV Degradation: $E_{\text{AC}}(y) = E_{\text{AC, annual}} \times (1 - 0.005)^{y-1}$
   * Tariff Escalation: $T(y) = T_{\text{commercial}} \times (1 + 0.025)^{y-1}$
-  * O&M Budget: $\text{O\&M}(y) = (P_{\text{DC}} \times \$15.00) \times (1 + 0.020)^{y-1}$
-  * Net Cashflow: $\text{Cashflow}(y) = [E_{\text{AC}}(y) \times T(y)] - \text{O\&M}(y)$
-* **25-Year Net Fiscal Dividend:** $D_{25} = \sum_{y=1}^{25} \text{Cashflow}(y) - C_{\text{net}}$
+  * Operations & Maintenance Budget: $\text{OM}(y) = (P_{\text{DC}} \times 15.00) \times (1 + 0.020)^{y-1}$
+  * Net Annual Cashflow: $\text{Cashflow}(y) = [E_{\text{AC}}(y) \times T(y)] - \text{OM}(y)$
+* **25-Year Cumulative Net Fiscal Dividend:**
+  $$D_{25} = \sum_{y=1}^{25} \text{Cashflow}(y) - C_{\text{net}}$$
 
 ### 4.4 Scope 2 GHG Avoidance
 $$\text{Metric Tons Avoided / Year} = \frac{E_{\text{AC, annual}} \times EF_{\text{subregion}}}{2,204.62\text{ lbs/metric ton}}$$
@@ -235,7 +238,7 @@ svyca2026/
 ### Q4: Why use a 65% packing factor for parking lots?
 **Answer:** Parking lots require 24-foot two-way driving aisles, emergency fire access lanes under California Fire Code Title 24, and curb turning aprons. A 65% ratio represents empirical canopy coverage, calibrated against real installations in Cupertino and Fremont.
 
-### Q5: Canopies cost $3.10/W while rooftops cost $2.20/W. Why choose canopies?
+### Q5: Canopies cost \$3.10/W while rooftops cost \$2.20/W. Why choose canopies?
 **Answer:** Rooftops carry hidden structural costs: voided roof warranties, HVAC obstructions, and strict seismic load limits. Canopies avoid roof penetrations entirely, lower parking pavement temperatures by 30°F to 45°F, and provide turnkey infrastructure for EV chargers.
 
 ### Q6: How do non-taxable public schools receive cash from the IRS?
@@ -248,7 +251,7 @@ svyca2026/
 **Answer:** Campus administrative addresses typically point to main office entrances. We ground-truth exact parking lot asphalt centroids (`lot_lat`, `lot_lon`), center the Folium map directly over the lot, and project an amber solar canopy footprint against high-resolution Esri satellite imagery.
 
 ### Q9: Why is capital payback faster in California (2.6 yrs) than in Texas (8 yrs)?
-**Answer:** Electricity retail tariffs in California exceed $0.34/kWh under PG&E commercial schedules, so every avoided kilowatt-hour produces substantial savings. In Texas, retail electricity averages $0.115/kWh, requiring more years to amortize net capital outlay despite higher solar irradiance.
+**Answer:** Electricity retail tariffs in California exceed \$0.34/kWh under PG&E commercial schedules, so every avoided kilowatt-hour produces substantial savings. In Texas, retail electricity averages \$0.115/kWh, requiring more years to amortize net capital outlay despite higher solar irradiance.
 
 ### Q10: What is the next step for this project?
 **Answer:** We plan to distribute this tool to student climate clubs across the Silicon Valley Youth Climate Action network. Students can generate customized Action Briefs and present vetted capital models directly to their local school boards.
