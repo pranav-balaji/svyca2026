@@ -30,7 +30,26 @@ Commercial solar developers often suggest rooftop panels, but facilities directo
 
 ---
 
-## 2. End-to-End System Architecture
+## 2. Table of Abbreviations & Core Terminology
+
+| Abbreviation | Full Term / Agency | Definition & Regulatory Role |
+| :--- | :--- | :--- |
+| **AC / DC** | Alternating / Direct Current | DC is raw solar cell output; AC is usable building and grid electricity. |
+| **BBox** | Geographic Bounding Box | Min/max latitude and longitude coordinates defining the spatial query boundary. |
+| **CDE** | California Department of Education | State agency publishing California public school directories and enrollment records. |
+| **CRS / EPSG:4326** | Coordinate Reference System | Global WGS 84 spherical coordinate reference system in decimal degrees. |
+| **EPA eGRID** | Emissions & Generation Resource Database | Federal EPA database tracking subregion greenhouse gas emission factors per kWh. |
+| **IRA Direct Pay** | Inflation Reduction Act Section 6417 | Statutory mechanism providing 30% to 50% IRS cash refunds to tax-exempt entities. |
+| **IRS Form 990-T** | Tax-Exempt Return | Federal tax form filed by public school districts to claim clean energy Direct Pay. |
+| **NCES** | National Center for Education Statistics | Federal agency maintaining locations and demographic data for ~100k U.S. schools. |
+| **NLR / NSRDB** | National Laboratory of the Rockies | U.S. DOE lab (formerly NREL) and the 4km National Solar Radiation Database. |
+| **POA** | Plane of Array | Solar irradiance striking tilted photovoltaic collector surfaces. |
+| **Title I** | Federal Low-Income Designation | Elementary & Secondary Education Act designation triggering +10% IRA bonus. |
+| **UTM** | Universal Transverse Mercator | Conformal metric projection dividing the globe into 60 zones for accurate surface area ($m^2$). |
+
+---
+
+## 3. End-to-End System Architecture
 
 The following diagram details the dataflow across user inputs, geospatial lookups, physical simulation APIs, financial models, and export layers.
 
@@ -91,7 +110,7 @@ flowchart TD
 
 ---
 
-## 3. External API Workflows & Specifications
+## 4. External API Workflows & Specifications
 
 SolarSchools USA communicates with three web services:
 
@@ -182,16 +201,16 @@ Monthly production is distributed via a normalized 12-month solar insolation bel
 
 ---
 
-## 4. Mathematical Modeling & Financial Formulations
+## 5. Mathematical Modeling & Financial Formulations
 
-### 4.1 System Capacity & Turnkey Cost
+### 5.1 System Capacity & Turnkey Cost
 $$P_{\text{DC}} = A_{\text{net}} \times 0.20\text{ kW/m}^2$$
 $$C_{\text{total}} = (P_{\text{DC}} \times 1000 \times 3.10) + (N_{\text{chargers}} \times 6000)$$
 
 * **Canopy Benchmark ($3.10/W):** Accounts for structural steel columns, drilled concrete foundations, and electrical trenching ($3.10 per Watt DC).
 * **Level 2 EV Chargers ($6,000/dual port):** Covers smart commercial charging pedestals and electrical connections ($6,000 per dual-port station).
 
-### 4.2 Federal IRA Section 6417 Direct Pay
+### 5.2 Federal IRA Section 6417 Direct Pay
 $$R_{\text{IRA}} = \min(0.30 + \beta_{\text{domestic}} + \beta_{\text{energy}} + \beta_{\text{title1}}, 0.60)$$
 $$C_{\text{IRS}} = C_{\text{total}} \times R_{\text{IRA}}$$
 $$C_{\text{net}} = C_{\text{total}} - C_{\text{IRS}}$$
@@ -201,7 +220,7 @@ $$C_{\text{net}} = C_{\text{total}} - C_{\text{IRS}}$$
 * **Energy Community Adder ($\beta_{\text{energy}} = +10\%$):** Campuses in brownfields or coal closure regions.
 * **Title I Low-Income Adder ($\beta_{\text{title1}} = +10\%$):** Schools serving $\ge 40\%$ low-income student populations.
 
-### 4.3 Savings, Payback, and 25-Year Lifecycle Cashflow
+### 5.3 Savings, Payback, and 25-Year Lifecycle Cashflow
 * **Year 1 Avoided Utility Cost:**
   $$S_1 = E_{\text{AC, annual}} \times T_{\text{commercial}}$$
 * **Simple Payback Period:**
@@ -214,7 +233,7 @@ $$C_{\text{net}} = C_{\text{total}} - C_{\text{IRS}}$$
 * **25-Year Cumulative Net Fiscal Dividend:**
   $$D_{25} = \sum_{y=1}^{25} \text{Cashflow}(y) - C_{\text{net}}$$
 
-### 4.4 Scope 2 GHG Avoidance
+### 5.4 Scope 2 GHG Avoidance
 $$\text{Metric Tons Avoided / Year} = \frac{E_{\text{AC, annual}} \times EF_{\text{subregion}}}{2,204.62\text{ lbs/metric ton}}$$
 * **CAMX (California):** $0.45\text{ lbs CO}_2/\text{kWh}$
 * **ERCT (Texas):** $0.85\text{ lbs CO}_2/\text{kWh}$
@@ -222,7 +241,7 @@ $$\text{Metric Tons Avoided / Year} = \frac{E_{\text{AC, annual}} \times EF_{\te
 
 ---
 
-## 5. Software Architecture & File Layout
+## 6. Software Architecture & File Layout
 
 ```text
 svyca2026/
@@ -245,7 +264,7 @@ svyca2026/
 
 ---
 
-## 6. Student Defense Guide: Ten Technical Questions & Answers
+## 7. Student Defense Guide: Ten Technical Questions & Answers
 
 ### Q1: What happens under the hood when a school is selected?
 **Answer:** `data_ingest.py` extracts the school's ground-truthed parking lot coordinates and area. The system calculates canopy DC capacity and calls the federal PVWatts v8 API at `developer.nlr.gov` for AC generation. Simultaneously, `financial_model.py` computes the IRA Direct Pay check, utility bill savings, and 25-year cashflow, rendering results in Streamlit and Folium.
@@ -276,21 +295,3 @@ svyca2026/
 
 ### Q10: What is the next step for this project?
 **Answer:** We plan to distribute this tool to student climate clubs across the Silicon Valley Youth Climate Action network. Students can generate customized Action Briefs and present vetted capital models directly to their local school boards.
-
----
-
-## 7. Technical Glossary
-
-| Term | Definition |
-| :--- | :--- |
-| **AC / DC** | Alternating Current (grid power) / Direct Current (raw solar cell generation). |
-| **BBox** | Bounding Box: minimum and maximum latitude/longitude coordinates enclosing a geographic area. |
-| **CDE / NCES** | California Department of Education / National Center for Education Statistics. |
-| **CRS / EPSG:4326** | Coordinate Reference System / Standard GPS spherical coordinates in degrees (WGS 84). |
-| **EPA eGRID** | Emissions & Generation Resource Integrated Database; federal grid carbon intensity factors. |
-| **IRA Direct Pay** | Section 6417 of the Inflation Reduction Act enabling cash grants to non-taxable public entities. |
-| **IRS Form 990-T** | Federal tax form through which tax-exempt public districts claim clean energy Direct Pay. |
-| **NLR / NSRDB** | National Laboratory of the Rockies / National Solar Radiation Database (4km grid). |
-| **POA** | Plane of Array: solar irradiance striking tilted photovoltaic module surfaces. |
-| **Title I** | Federal designation for schools where at least 40% of students come from low-income families. |
-| **UTM** | Universal Transverse Mercator: metric map projection dividing the globe into 60 flat zones. |

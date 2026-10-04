@@ -186,9 +186,37 @@ def build_word_document():
     doc.add_paragraph().paragraph_format.space_after = Pt(8)
     
     # ---------------------------------------------------------------------------
-    # Section 2
+    # Section 2: Table of Abbreviations & Core Terminology
     # ---------------------------------------------------------------------------
-    h2 = doc.add_heading("2. End-to-End System Architecture", level=1)
+    h_abbr = doc.add_heading("2. Table of Abbreviations & Core Terminology", level=1)
+    h_abbr.paragraph_format.space_before = Pt(14)
+    h_abbr.paragraph_format.space_after = Pt(6)
+    for run in h_abbr.runs:
+        run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
+        
+    tbl_gloss = doc.add_table(rows=1, cols=3)
+    gloss_headers = ["Abbreviation", "Full Term / Agency", "Definition & Regulatory Role"]
+    gloss_rows = [
+        ["AC / DC", "Alternating / Direct Current", "DC is raw solar cell output; AC is usable building and grid electricity."],
+        ["BBox", "Geographic Bounding Box", "Min/max latitude and longitude coordinates defining the spatial query boundary."],
+        ["CDE", "California Department of Education", "State agency publishing California public school directories and enrollment records."],
+        ["CRS / EPSG:4326", "Coordinate Reference System", "Global WGS 84 spherical coordinate reference system in decimal degrees."],
+        ["EPA eGRID", "Emissions & Generation Resource Database", "Federal EPA database tracking subregion greenhouse gas emission factors per kWh."],
+        ["IRA Direct Pay", "Inflation Reduction Act Section 6417", "Statutory mechanism providing 30% to 50% IRS cash refunds to tax-exempt entities."],
+        ["IRS Form 990-T", "Tax-Exempt Return", "Federal tax form filed by public school districts to claim clean energy Direct Pay."],
+        ["NCES", "National Center for Education Statistics", "Federal agency maintaining locations and demographic data for ~100k U.S. schools."],
+        ["NLR / NSRDB", "National Laboratory of the Rockies", "U.S. DOE lab (formerly NREL) and the 4km National Solar Radiation Database."],
+        ["POA", "Plane of Array", "Solar irradiance striking tilted photovoltaic collector surfaces."],
+        ["Title I", "Federal Low-Income Designation", "Elementary & Secondary Education Act designation triggering +10% IRA bonus."],
+        ["UTM", "Universal Transverse Mercator", "Conformal metric projection dividing the globe into 60 zones for accurate surface area (m2)."]
+    ]
+    format_table(tbl_gloss, [1.4, 2.2, 2.9], gloss_headers, gloss_rows)
+    doc.add_paragraph().paragraph_format.space_after = Pt(8)
+
+    # ---------------------------------------------------------------------------
+    # Section 3
+    # ---------------------------------------------------------------------------
+    h2 = doc.add_heading("3. End-to-End System Architecture", level=1)
     h2.paragraph_format.space_before = Pt(14)
     for run in h2.runs:
         run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
@@ -213,9 +241,9 @@ def build_word_document():
         run_cap.font.color.rgb = RGBColor(0x64, 0x74, 0x8B)
         
     # ---------------------------------------------------------------------------
-    # Section 3
+    # Section 4
     # ---------------------------------------------------------------------------
-    h3 = doc.add_heading("3. External API Workflows & Specifications", level=1)
+    h3 = doc.add_heading("4. External API Workflows & Specifications", level=1)
     h3.paragraph_format.space_before = Pt(14)
     for run in h3.runs:
         run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
@@ -297,14 +325,14 @@ def build_word_document():
     doc.add_paragraph("High-resolution aerial satellite imagery tiles (256x256 px, Zoom 17, ~1.19 m/pixel) are streamed from Esri's ArcGIS CDN directly beneath the Folium amber canopy overlay, allowing users to see actual asphalt parking stalls and vehicles.")
     
     # ---------------------------------------------------------------------------
-    # Section 4
+    # Section 5
     # ---------------------------------------------------------------------------
-    h4 = doc.add_heading("4. Mathematical Modeling & Financial Formulations", level=1)
+    h4 = doc.add_heading("5. Mathematical Modeling & Financial Formulations", level=1)
     h4.paragraph_format.space_before = Pt(14)
     for run in h4.runs:
         run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
         
-    doc.add_heading("4.1 System Capacity & Turnkey Cost", level=2)
+    doc.add_heading("5.1 System Capacity & Turnkey Cost", level=2)
     add_callout(doc, 
         "P_DC = A_net * 0.20 kW/m2\n"
         "C_total = (P_DC * 1000 * $3.10/W) + (N_chargers * $6,000)",
@@ -313,7 +341,7 @@ def build_word_document():
     )
     doc.add_paragraph("Where P_DC is nameplate capacity in kW DC, A_net is active canopy area in m2, $3.10/W reflects commercial carport steel foundations and trenching, and $6,000 covers dual-port Level 2 smart EV charging stations.")
     
-    doc.add_heading("4.2 Federal IRA Section 6417 Direct Pay", level=2)
+    doc.add_heading("5.2 Federal IRA Section 6417 Direct Pay", level=2)
     add_callout(doc, 
         "R_IRA = min(0.30 + beta_domestic + beta_energy + beta_title1, 0.60)\n"
         "C_IRS = C_total * R_IRA\n"
@@ -323,7 +351,7 @@ def build_word_document():
     )
     doc.add_paragraph("Under Section 6417, tax-exempt public school districts receive direct cash reimbursement checks from the IRS via Form 990-T: 30% base credit, +10% domestic steel bonus, +10% energy community bonus, and +10% Title I low-income bonus (capped at 60%).")
     
-    doc.add_heading("4.3 Savings, Payback, and 25-Year Lifecycle Cashflow", level=2)
+    doc.add_heading("5.3 Savings, Payback, and 25-Year Lifecycle Cashflow", level=2)
     add_callout(doc, 
         "S_1 = E_AC,annual * Tariff_commercial\n"
         "Payback_years = C_net / S_1\n"
@@ -336,13 +364,13 @@ def build_word_document():
         border_color="F59E0B", bg_color="FFFBEB"
     )
     
-    doc.add_heading("4.4 Scope 2 GHG Avoidance", level=2)
+    doc.add_heading("5.4 Scope 2 GHG Avoidance", level=2)
     doc.add_paragraph("Annual CO2 reduction = (E_AC,annual * EF_subregion) / 2,204.62 lbs per metric ton. Regional emission factors from EPA eGRID 2024: California CAMX (0.45 lbs CO2/kWh), Texas ERCT (0.85 lbs CO2/kWh), and Midwest RFCW (1.10 lbs CO2/kWh).")
     
     # ---------------------------------------------------------------------------
-    # Section 5
+    # Section 6
     # ---------------------------------------------------------------------------
-    h5 = doc.add_heading("5. Software Architecture & File Layout", level=1)
+    h5 = doc.add_heading("6. Software Architecture & File Layout", level=1)
     h5.paragraph_format.space_before = Pt(14)
     for run in h5.runs:
         run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
@@ -363,9 +391,9 @@ def build_word_document():
     add_callout(doc, tree_text, title="REPOSITORY STRUCTURE", border_color="64748B", bg_color="F8FAFC")
     
     # ---------------------------------------------------------------------------
-    # Section 6
+    # Section 7
     # ---------------------------------------------------------------------------
-    h6 = doc.add_heading("6. Student Defense Guide: Ten Technical Questions & Answers", level=1)
+    h6 = doc.add_heading("7. Student Defense Guide: Ten Technical Questions & Answers", level=1)
     h6.paragraph_format.space_before = Pt(14)
     for run in h6.runs:
         run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
@@ -405,31 +433,6 @@ def build_word_document():
         
         add_callout(doc, a, border_color="3B82F6", bg_color="EFF6FF")
         
-    # ---------------------------------------------------------------------------
-    # Section 7
-    # ---------------------------------------------------------------------------
-    h7 = doc.add_heading("7. Technical Glossary", level=1)
-    h7.paragraph_format.space_before = Pt(14)
-    for run in h7.runs:
-        run.font.color.rgb = RGBColor(0x1E, 0x3A, 0x8A)
-        
-    tbl_gloss = doc.add_table(rows=1, cols=2)
-    gloss_headers = ["Technical Term", "Definition"]
-    gloss_rows = [
-        ["AC / DC", "Alternating Current (grid power) / Direct Current (raw solar cell generation)."],
-        ["BBox", "Bounding Box: minimum and maximum latitude/longitude coordinates enclosing a geographic area."],
-        ["CDE / NCES", "California Department of Education / National Center for Education Statistics."],
-        ["CRS / EPSG:4326", "Coordinate Reference System / Standard GPS spherical coordinates in degrees (WGS 84)."],
-        ["EPA eGRID", "Emissions & Generation Resource Integrated Database; federal grid carbon intensity factors."],
-        ["IRA Direct Pay", "Section 6417 of the Inflation Reduction Act enabling cash grants to non-taxable public entities."],
-        ["IRS Form 990-T", "Federal tax form through which tax-exempt public districts claim clean energy Direct Pay."],
-        ["NLR / NSRDB", "National Laboratory of the Rockies / National Solar Radiation Database (4km grid)."],
-        ["POA", "Plane of Array: solar irradiance striking tilted photovoltaic module surfaces."],
-        ["Title I", "Federal designation for schools where at least 40% of students come from low-income families."],
-        ["UTM", "Universal Transverse Mercator: metric map projection dividing the globe into 60 flat zones."]
-    ]
-    format_table(tbl_gloss, [2.0, 4.5], gloss_headers, gloss_rows)
-    
     # Save document
     output_path = "DetailedDesignDocument.docx"
     doc.save(output_path)
