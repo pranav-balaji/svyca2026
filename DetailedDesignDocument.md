@@ -53,7 +53,7 @@ flowchart TD
     end
 
     subgraph Geospatial ["Geospatial Pipeline (core/data_ingest.py)"]
-        FilterSelector --> DirectoryLookup["School Lookup (NCES EDGE & CDE Database)"]:::geoNode
+        FilterSelector --> DirectoryLookup["School Lookup (NCES & CDE Database)"]:::geoNode
         DirectoryLookup --> GPSCoord["Extract School Centroid & Lot Centroid"]:::geoNode
         GPSCoord --> FootprintCalc["Compute Parking Footprint (65% Packing Factor)"]:::geoNode
     end

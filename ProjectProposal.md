@@ -30,7 +30,7 @@ To ensure technical depth, computational feasibility, and rigorous ground-truthi
 ```mermaid
 flowchart LR
     P1["Phase 1: Bay Area (Weeks 1-2)<br/>Ground-Truthing & PG&E Tariffs"] --> P2["Phase 2: California Statewide (Week 3)<br/>CDE Directory, Title 24, IOU Feasibility"]
-    P2 --> P3["Phase 3: Nationwide USA (Week 4)<br/>NCES EDGE 100k Schools & IRA Direct Pay"]
+    P2 --> P3["Phase 3: Nationwide USA (Week 4)<br/>NCES 100k Schools & IRA Direct Pay"]
 ```
 
 ---
@@ -144,7 +144,7 @@ The application is structured into four distinct Python modules:
 solarschools/
 │
 ├── core/
-│   ├── data_ingest.py        # Queries NCES EDGE, CDE, and Overpass APIs
+│   ├── data_ingest.py        # Queries NCES, CDE, and Overpass APIs
 │   ├── solar_engine.py       # Calls NLR PVWatts v8 API with local fallbacks
 │   └── financial_model.py    # Computes IRA Section 6417 Direct Pay and utility ROI
 │
@@ -307,7 +307,7 @@ def compute_ira_direct_pay(capacity_kw: float, annual_kwh: float, tariff_per_kwh
 | :--- | :--- | :--- | :--- |
 | **Week 1 (Sept 20–27)** | **Phase 1: Bay Area MVP & Validation** | Ingest Santa Clara & San Mateo school districts; calibrate canopy parking factor against CUSD and FUHSD installations; integrate PG&E Schedule B-19 rate engine. | Prototype runs locally; produces valid outputs for Palo Alto High and Monta Vista High. |
 | **Week 2 (Sept 28–Oct 4)**| **Phase 2: California Statewide Expansion** | Ingest CDE database (`pubschls.txt`); integrate SCE, SDG&E, SMUD, and LADWP tariffs; join CalEnviroScreen 4.0 equity percentiles. | User can select any public high school across all 58 California counties. |
-| **Week 3 (Oct 5–11)** | **Phase 3: Nationwide USA & IRA Engine** | Ingest NCES EDGE national dataset; integrate EIA commercial rates for all 50 states; build IRA Section 6417 Direct Pay calculator. | User can evaluate schools in Texas, Arizona, Florida, Ohio, and California seamlessly. |
+| **Week 3 (Oct 5–11)** | **Phase 3: Nationwide USA & IRA Engine** | Ingest NCES national dataset; integrate EIA commercial rates for all 50 states; build IRA Section 6417 Direct Pay calculator. | User can evaluate schools in Texas, Arizona, Florida, Ohio, and California seamlessly. |
 | **Week 4 (Oct 12–18)** | **UI Polish, Export & Rehearsal** | Build one-click "School Board Action Brief" markdown/PDF generator; record 90-sec video demo backup; finalize slide deck. | Rehearse 4-minute pitch to ensure crisp delivery under competition time limits. |
 | **Oct 25, 2026** | **Showcase @ Stanford University** | In-person demonstration to judges during Stanford Climate Week. | Deliver live pitch, engage judges with interactive sliders, field Q&A. |
 

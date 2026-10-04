@@ -20,7 +20,7 @@ By coupling high-resolution geospatial footprint extraction with the **U.S. Depa
 ```mermaid
 flowchart LR
     P1["Phase 1: Bay Area (Weeks 1-2)<br/>Ground-Truthing & PG&E B-19 Tariffs"] --> P2["Phase 2: California Statewide (Week 3)<br/>CDE Directory, Title 24, IOU Tariffs"]
-    P2 --> P3["Phase 3: Nationwide USA (Week 4)<br/>NCES EDGE 100k Schools & IRA Direct Pay"]
+    P2 --> P3["Phase 3: Nationwide USA (Week 4)<br/>NCES 100k Schools & IRA Direct Pay"]
 ```
 
 ### Phase 1: San Francisco Bay Area (Proof-of-Concept & Local Validation)
@@ -37,7 +37,7 @@ flowchart LR
 
 ### Phase 3: Nationwide United States Expansion (National Scale & Federal Finance)
 * **Scope:** All 50 U.S. states (~13,000 public school districts, ~100,000 public schools).
-* **Federal Data:** Connects the **NCES EDGE database (~100,000 schools)** directly to OpenStreetMap parking footprints.
+* **Federal Data:** Connects the **NCES National Public School Directory (~100,000 schools)** directly to OpenStreetMap parking footprints.
 * **National Solar Irradiance:** Queries the **DOE / NLR PVWatts v8 API** (National Solar Radiation Database, NSRDB) across all U.S. climate zones.
 * **State Tariffs:** Ingests **EIA Form 861** commercial electricity rates by state ($0.11/kWh in TX to $0.32/kWh in CA).
 * **Federal IRA Direct Pay Calculator:** Models Section 6417 Elective Pay cash reimbursements:
@@ -61,7 +61,7 @@ Every dataset used in SolarSchools USA is **100% public, verified, and actively 
 
 | Dataset Name | Agency / Provider | Format | Exact Verified Download URL / Access Method |
 | :--- | :--- | :--- | :--- |
-| **NCES EDGE Public School Locations** | National Center for Education Statistics | CSV / GeoJSON (100k schools) | [NCES EDGE School Data Portal](https://nces.ed.gov/programs/edge/Geographic/SchoolLocations) or [ArcGIS Hub NCES Public Schools](https://hub.arcgis.com/datasets/nces::public-school-characteristics-current) |
+| **NCES Public School Locations** | National Center for Education Statistics | CSV / GeoJSON (100k schools) | [NCES School Data Portal](https://nces.ed.gov/programs/edge/Geographic/SchoolLocations) or [ArcGIS Hub NCES Public Schools](https://hub.arcgis.com/datasets/nces::public-school-characteristics-current) |
 | **NREL PVWatts v8 Solar Irradiance** | National Laboratory of the Rockies (U.S. DOE) | Free REST API JSON | [NLR Developer Portal](https://developer.nlr.gov/) (`https://developer.nlr.gov/api/pvwatts/v8.json?api_key=DEMO_KEY&lat=...`) |
 | **OpenStreetMap Parking Polygons** | OpenStreetMap / Overpass | REST API JSON / XML | Direct API: `https://api.openstreetmap.org/api/0.6/map?bbox=...` or [Nominatim Geocoder](https://nominatim.openstreetmap.org/) |
 | **Commercial Electricity Tariffs by State** | U.S. Energy Information Administration (EIA) | Tabular Excel / CSV | [EIA Form 861 Average Retail Price Table 5a](https://www.eia.gov/electricity/sales_revenue/xls/table5_a.xlsx) |

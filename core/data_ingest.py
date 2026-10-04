@@ -491,7 +491,7 @@ SCHOOL_DATABASE = {
 #     },
 # 
 #     # =========================================================================
-#     # PHASE 3: NATIONWIDE USA (NCES EDGE & Federal IRA Direct Pay)
+#     # PHASE 3: NATIONWIDE USA (NCES & Federal IRA Direct Pay)
 #     # =========================================================================
 #     "Westlake High School (Austin, Texas)": {
 #         "phase": "Phase 3: Nationwide USA",

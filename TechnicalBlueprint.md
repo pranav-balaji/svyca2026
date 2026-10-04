@@ -19,7 +19,7 @@ Across America's 13,000+ public school districts, unshaded asphalt parking lots 
   * **Domestic Content Bonus (+10%):** Awarded if 100% of structural steel/iron and required % of manufactured solar components are produced in the U.S.
   * **Energy Community Bonus (+10%):** Awarded if the school is located in a brownfield site, coal closure community, or high fossil-fuel employment census tract.
   * **Low-Income / Title I Community Bonus (+10% to +20%):** Targeted federal allocation for economically disadvantaged schools.
-* **NCES EDGE Database:** The National Center for Education Statistics Education Demographic and Geographic Estimates dataset, maintaining spatial coordinates, school district boundaries, student demographics, and Title I status for every K-12 school in the United States.
+* **NCES Database:** The National Center for Education Statistics dataset, maintaining spatial coordinates, school district boundaries, student demographics, and Title I status for every K-12 school in the United States.
 * **NREL PVWatts v8:** The U.S. Department of Energy's gold-standard solar photovoltaic performance modeling engine, calculating hourly and monthly AC kilowatt-hour production based on physical solar irradiance datasets (NSRDB).
 
 ---
@@ -68,7 +68,7 @@ Every dataset below is **100% public, verified, non-paywalled, and actively main
 
 | Dataset Name | Provider / Federal Agency | Format & Access Method | Exact Query URL / Data Endpoint | Coordinate Reference System |
 | :--- | :--- | :--- | :--- | :--- |
-| **NCES EDGE Public School Locations** | [National Center for Education Statistics (NCES)](https://nces.ed.gov/programs/edge/Geographic/SchoolLocations) | GeoJSON / Shapefile / CSV | Direct download: [NCES EDGE Public School Locations (Current)](https://nces.ed.gov/programs/edge/Geographic/SchoolLocations) or [ArcGIS Hub NCES Public Schools](https://hub.arcgis.com/datasets/nces::public-school-characteristics-current) | WGS 1984 (EPSG:4326) |
+| **NCES Public School Locations** | [National Center for Education Statistics (NCES)](https://nces.ed.gov/programs/edge/Geographic/SchoolLocations) | GeoJSON / Shapefile / CSV | Direct download: [NCES Public School Locations (Current)](https://nces.ed.gov/programs/edge/Geographic/SchoolLocations) or [ArcGIS Hub NCES Public Schools](https://hub.arcgis.com/datasets/nces::public-school-characteristics-current) | WGS 1984 (EPSG:4326) |
 | **OpenStreetMap Surface Parking Polygons** | [OpenStreetMap Direct Map API](https://api.openstreetmap.org/) / Overpass | REST API JSON / XML | Direct API: `https://api.openstreetmap.org/api/0.6/map?bbox={minlon},{minlat},{maxlon},{maxlat}` or Nominatim: `https://nominatim.openstreetmap.org/search?format=json&q={school_name}` | WGS 1984 $\rightarrow$ Local UTM (Meters) |
 | **NREL PVWatts v8 Solar Irradiance** | [National Laboratory of the Rockies (NLR / U.S. DOE)](https://developer.nlr.gov) | REST API JSON | `https://developer.nlr.gov/api/pvwatts/v8.json?api_key=DEMO_KEY&lat={lat}&lon={lon}&system_capacity={kw}&azimuth=180&tilt=10&array_type=2&module_type=1&losses=14` | Lat/Lon WGS 1984 |
 | **Commercial Electricity Tariffs by State** | [U.S. Energy Information Administration (EIA)](https://www.eia.gov/electricity/state/) | Tabular Excel / CSV | Direct download: [EIA Form 861 Average Retail Price Table 5a](https://www.eia.gov/electricity/sales_revenue/xls/table5_a.xlsx) (~$0.11/kWh in TX, $0.14/kWh in FL, $0.16/kWh in OH, $0.32/kWh in CA) | Tabular / State FIPS |
