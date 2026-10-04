@@ -49,6 +49,7 @@ flowchart LR
 
 * **[`ProjectProposal.md`](./ProjectProposal.md):** The project proposal with problem background, equations, phased rollout, pitch outline, and official data citations (IRA 26 U.S.C. § 6417, NREL, NCES, EIA, EPA).
 * **[`TechnicalBlueprint.md`](./TechnicalBlueprint.md):** The technical specifications, GIS algorithms, data dictionary, formulas, and code structure.
+* **[`DetailedDesignDocument.md`](./DetailedDesignDocument.md):** Complete technical architecture design document with system flowcharts, detailed API sequence diagrams, mathematical derivations, and technical defense playbook.
 * **[`StudentPitchGuide.md`](./StudentPitchGuide.md):** High-school presenter guide with 30-second elevator pitch, 3-minute hackathon pitch script, plain-English analogies, and top 12 judge Q&A defense answers.
 * **[`ApiReference.md`](./ApiReference.md):** Detailed technical guide on external APIs (NLR PVWatts v8, Esri World Imagery, OpenStreetMap), JSON request/response schemas, fault tolerance, and judge Q&A talking points.
 
