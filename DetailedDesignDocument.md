@@ -36,43 +36,57 @@ The following diagram details the dataflow across user inputs, geospatial lookup
 
 ```mermaid
 flowchart TD
-    User["User / Student Advocate"] --> UI["Streamlit User Interface (app.py)"]
+    classDef userNode fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#ffffff;
+    classDef presNode fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
+    classDef geoNode fill:#065f46,stroke:#34d399,stroke-width:2px,color:#ffffff;
+    classDef physNode fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff;
+    classDef finNode fill:#581c87,stroke:#c084fc,stroke-width:2px,color:#ffffff;
+    classDef outNode fill:#0f766e,stroke:#2dd4bf,stroke-width:2px,color:#ffffff;
+    classDef decision fill:#991b1b,stroke:#f87171,stroke-width:2px,color:#ffffff;
+
+    User["User / Student Advocate"]:::userNode --> UI["Streamlit User Interface (app.py)"]:::userNode
     
     subgraph Presentation ["Presentation Layer (Streamlit & Folium)"]
-        UI --> FilterSelector["Sidebar Filters: School, Phase, Level"]
-        UI --> ParameterSliders["Sliders: Coverage %, EV Chargers, Tariff"]
-        UI --> Tabs["5 Dashboard Tabs (Map, Physics, Financials, Equity, Action Brief)"]
+        UI --> FilterSelector["Sidebar Filters: School, Phase, Level"]:::presNode
+        UI --> ParameterSliders["Sliders: Coverage %, EV Chargers, Tariff"]:::presNode
+        UI --> Tabs["5 Dashboard Tabs (Map, Physics, Financials, Equity, Action Brief)"]:::presNode
     end
 
     subgraph Geospatial ["Geospatial Pipeline (core/data_ingest.py)"]
-        FilterSelector --> DirectoryLookup["School Lookup (NCES EDGE & CDE Database)"]
-        DirectoryLookup --> GPSCoord["Extract School Centroid (lat, lon) & Lot Centroid (lot_lat, lot_lon)"]
-        GPSCoord --> FootprintCalc["Compute Parking Footprint (65% Usable Canopy Packing Factor)"]
+        FilterSelector --> DirectoryLookup["School Lookup (NCES EDGE & CDE Database)"]:::geoNode
+        DirectoryLookup --> GPSCoord["Extract School Centroid & Lot Centroid"]:::geoNode
+        GPSCoord --> FootprintCalc["Compute Parking Footprint (65% Packing Factor)"]:::geoNode
     end
 
     subgraph PhysicsEngine ["Physics Simulation (core/solar_engine.py)"]
-        FootprintCalc --> CapacityCalc["System DC Capacity (kW = Area x 0.20 kW/m2)"]
-        CapacityCalc --> NLRAPI["DOE / NLR PVWatts v8 REST API (developer.nlr.gov)"]
-        NLRAPI --> ResponseCheck{"HTTP 200 within 8s?"}
-        ResponseCheck -- "Yes" --> ParseJSON["Extract Annual AC kWh, Capacity Factor, 12-Month Curve"]
-        ResponseCheck -- "No / Timeout" --> NSRDBFallback["Apply Regional NSRDB Irradiance Benchmark Curve"]
-        ParseJSON --> EVSynergy["Compute EV Charging Demand & Bus Offsets"]
+        FootprintCalc --> CapacityCalc["System DC Capacity (kW = Area x 0.20 kW/m2)"]:::physNode
+        CapacityCalc --> NLRAPI["DOE / NLR PVWatts v8 REST API"]:::physNode
+        NLRAPI --> ResponseCheck{"HTTP 200 within 8s?"}:::decision
+        ResponseCheck -- "Yes" --> ParseJSON["Extract Annual AC kWh & 12-Mo Curve"]:::physNode
+        ResponseCheck -- "No / Timeout" --> NSRDBFallback["Apply Regional NSRDB Irradiance Benchmark"]:::physNode
+        ParseJSON --> EVSynergy["Compute EV Charging Demand & Bus Offsets"]:::physNode
         NSRDBFallback --> EVSynergy
     end
 
     subgraph FinancialEngine ["Financial & IRA Model (core/financial_model.py)"]
-        EVSynergy --> TurnkeyCapex["Turnkey Project Capex ($3.10/W DC + EV Stations)"]
-        TurnkeyCapex --> IRADirectPay["IRA Section 6417 Direct Pay (30% Base + 10% Adders)"]
-        IRADirectPay --> Cashflow25Yr["25-Year Lifecycle Cashflow (Degradation, Rate Escalation, O&M)"]
-        Cashflow25Yr --> CarbonAvoidance["Scope 2 Avoided CO2 (EPA eGRID 2024 Factors)"]
+        EVSynergy --> TurnkeyCapex["Turnkey Project Capex ($3.10/W DC + EV Stations)"]:::finNode
+        TurnkeyCapex --> IRADirectPay["IRA Section 6417 Direct Pay (30% Base + 10% Adders)"]:::finNode
+        IRADirectPay --> Cashflow25Yr["25-Year Lifecycle Cashflow (Degradation, Rate Escalation, OM)"]:::finNode
+        Cashflow25Yr --> CarbonAvoidance["Scope 2 Avoided CO2 (EPA eGRID 2024 Factors)"]:::finNode
     end
 
     subgraph OutputLayer ["Visualization & Export (core/report_generator.py)"]
-        CarbonAvoidance --> KPICards["Top 6 Executive KPI Metric Cards"]
-        CarbonAvoidance --> PlotlyCharts["Interactive Plotly Figures (Monthly Gen, Cashflow)"]
-        CarbonAvoidance --> LeafletMap["Esri Satellite Map with Exact Parking Lot Circle Overlay"]
-        CarbonAvoidance --> ActionBrief["School Board Action Brief (1-Page Resolution)"]
+        CarbonAvoidance --> KPICards["Top 6 Executive KPI Metric Cards"]:::outNode
+        CarbonAvoidance --> PlotlyCharts["Interactive Plotly Figures (Monthly Gen, Cashflow)"]:::outNode
+        CarbonAvoidance --> LeafletMap["Esri Satellite Map with Exact Parking Circle"]:::outNode
+        CarbonAvoidance --> ActionBrief["School Board Action Brief (1-Page Resolution)"]:::outNode
     end
+
+    style Presentation fill:#eff6ff,stroke:#3b82f6,stroke-width:2px,stroke-dasharray: 4 2
+    style Geospatial fill:#ecfdf5,stroke:#10b981,stroke-width:2px,stroke-dasharray: 4 2
+    style PhysicsEngine fill:#fffbeb,stroke:#f59e0b,stroke-width:2px,stroke-dasharray: 4 2
+    style FinancialEngine fill:#faf5ff,stroke:#a855f7,stroke-width:2px,stroke-dasharray: 4 2
+    style OutputLayer fill:#f0fdfa,stroke:#14b8a6,stroke-width:2px,stroke-dasharray: 4 2
 ```
 
 ---
@@ -83,9 +97,14 @@ SolarSchools USA communicates with three web services:
 
 ```mermaid
 flowchart LR
-    Engine["SolarSchools USA Engine"] --> API1["NLR / DOE PVWatts v8 API<br/>(Physical Solar Simulation)"]
-    Engine --> API2["OpenStreetMap Vector API<br/>(Spatial Parking Polygons)"]
-    Engine --> API3["Esri ArcGIS REST Service<br/>(Satellite Basemap Imagery)"]
+    classDef coreApp fill:#0f172a,stroke:#38bdf8,stroke-width:2px,color:#ffffff;
+    classDef nlrStyle fill:#b45309,stroke:#fbbf24,stroke-width:2px,color:#ffffff;
+    classDef osmStyle fill:#065f46,stroke:#34d399,stroke-width:2px,color:#ffffff;
+    classDef esriStyle fill:#1e40af,stroke:#60a5fa,stroke-width:2px,color:#ffffff;
+
+    Engine["SolarSchools USA Engine"]:::coreApp --> API1["NLR / DOE PVWatts v8 API<br/>Physical Solar Simulation"]:::nlrStyle
+    Engine --> API2["OpenStreetMap Vector API<br/>Spatial Parking Polygons"]:::osmStyle
+    Engine --> API3["Esri ArcGIS REST Service<br/>Satellite Basemap Imagery"]:::esriStyle
 ```
 
 ---
@@ -99,15 +118,17 @@ flowchart LR
 ```mermaid
 sequenceDiagram
     autonumber
-    participant App as Streamlit App (core/solar_engine.py)
-    participant NLR as DOE / NLR Server (developer.nlr.gov)
-    participant NSRDB as National Solar Radiation Database (4km)
+    actor App as Streamlit App (core/solar_engine.py)
+    participant NLR as DOE / NLR PVWatts (developer.nlr.gov)
+    participant NSRDB as NSRDB Solar Database (4km Grid)
 
-    App->>NLR: GET /api/pvwatts/v8.json?lat=37.32&lon=-122.06&system_capacity=718.2&tilt=10&azimuth=180...
-    NLR->>NSRDB: Fetch satellite solar irradiance & meteorological data for (lat, lon)
-    NSRDB-->>NLR: Return GHI, DNI, ambient temp, wind velocity
+    App->>NLR: GET /api/pvwatts/v8.json?lat=37.32&lon=-122.06&system_capacity=718.2&tilt=10...
+    Note over NLR,NSRDB: Fetch satellite irradiance & temperature profile
+    NLR->>NSRDB: Query GHI, DNI, ambient temp, wind velocity
+    NSRDB-->>NLR: Return multi-year meteorological vectors
+    Note over NLR: Run physical PV conversion & derate loss models
     NLR-->>App: HTTP 200 JSON (ac_annual, capacity_factor, ac_monthly)
-    Note over App: If response exceeds 8.0s timeout or fails, trigger NSRDB regional fallback
+    Note over App: Fallback triggers automatically if response exceeds 8.0s timeout
 ```
 
 #### Query Parameters
