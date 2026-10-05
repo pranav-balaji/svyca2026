@@ -7,3 +7,4 @@ requests>=2.31.0
 pandas>=2.0.0
 matplotlib>=3.8.0
 plotly>=5.18.0
+pyogrio>=0.7.0
