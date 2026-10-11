@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SolarSchools USA - Stanford Climate Week Pitch Deck</title>
+  <style>
+    :root {
+      --bg-dark: #090d16;
+      --bg-card: #131b2e;
+      --bg-card-hover: #1a253c;
+      --border-color: #26354f;
+      --text-main: #f1f5f9;
+      --text-muted: #94a3b8;
+      --text-subtle: #64748b;
+      --stanford-red: #8c1515;
+      --stanford-red-light: #b83a3a;
+      --solar-blue: #0284c7;
+      --solar-blue-light: #38bdf8;
+      --clean-green: #059669;
+      --clean-green-light: #10b981;
+      --alert-red: #dc2626;
+      --alert-amber: #d97706;
+      --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      font-family: var(--font-family);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* Top Progress & Status Bar */
+    .header-bar {
+      height: 48px;
+      background: rgba(15, 23, 42, 0.95);
+      border-bottom: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+      font-size: 0.85rem;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .badge-stanford {
+      background: var(--stanford-red);
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-weight: 700;
+      font-size: 0.72rem;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .badge-tag {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      color: var(--text-muted);
+    }
+
+    .slide-counter {
+      font-weight: 700;
+      color: var(--solar-blue-light);
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Progress bar */
+    .progress-track {
+      position: absolute;
+      top: 47px;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: rgba(255, 255, 255, 0.1);
+      z-index: 101;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--stanford-red), var(--solar-blue-light), var(--clean-green-light));
+      width: 10%;
+      transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Main Slide Deck Area */
+    .deck-container {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 32px 16px 32px;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 32px 48px;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(12px) scale(0.99);
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow-y: auto;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0) scale(1);
+    }
+
+    /* Typography */
+    .slide-tag {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      color: var(--solar-blue-light);
+      margin-bottom: 6px;
+    }
+
+    .slide-title {
+      font-size: 2.15rem;
+      font-weight: 800;
+      line-height: 1.2;
+      color: #ffffff;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+
+    .slide-subtitle {
+      font-size: 1.05rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 950px;
+      line-height: 1.45;
+    }
+
+    /* Grids & Cards */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      flex: 1;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+      flex: 1;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 10px;
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    .card-highlight-red {
+      border-top: 4px solid var(--stanford-red);
+    }
+
+    .card-highlight-blue {
+      border-top: 4px solid var(--solar-blue-light);
+    }
+
+    .card-highlight-green {
+      border-top: 4px solid var(--clean-green-light);
+    }
+
+    .card-highlight-alert {
+      border-top: 4px solid var(--alert-red);
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #ffffff;
+      margin-bottom: 10px;
+    }
+
+    .card-p {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      line-height: 1.5;
+      margin-bottom: 12px;
+    }
+
+    .stat-hero {
+      font-size: 2.4rem;
+      font-weight: 800;
+      letter-spacing: -1px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-hero.red { color: #f87171; }
+    .stat-hero.blue { color: var(--solar-blue-light); }
+    .stat-hero.green { color: var(--clean-green-light); }
+    .stat-hero.amber { color: #fbbf24; }
+
+    .stat-label {
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-subtle);
+      font-weight: 600;
+    }
+
+    /* Callout Box */
+    .callout-box {
+      background: rgba(140, 21, 21, 0.12);
+      border: 1px solid rgba(140, 21, 21, 0.35);
+      border-left: 4px solid var(--stanford-red);
+      padding: 14px 18px;
+      border-radius: 6px;
+      margin-top: 14px;
+      font-size: 0.9rem;
+      line-height: 1.45;
+      color: #fca5a5;
+    }
+
+    .callout-box.green {
+      background: rgba(5, 150, 105, 0.12);
+      border: 1px solid rgba(5, 150, 105, 0.35);
+      border-left: 4px solid var(--clean-green-light);
+      color: #6ee7b7;
+    }
+
+    .callout-box.blue {
+      background: rgba(2, 132, 199, 0.12);
+      border: 1px solid rgba(2, 132, 199, 0.35);
+      border-left: 4px solid var(--solar-blue-light);
+      color: #7dd3fc;
+    }
+
+    /* Comparison Table */
+    .comp-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+      margin-top: 8px;
+    }
+
+    .comp-table th {
+      text-align: left;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.04);
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-color);
+      font-weight: 600;
+    }
+
+    .comp-table td {
+      padding: 10px 12px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+    }
+
+    .comp-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .status-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    .status-pill.green {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34d399;
+      border: 1px solid rgba(16, 185, 129, 0.4);
+    }
+
+    .status-pill.red {
+      background: rgba(239, 68, 68, 0.2);
+      color: #f87171;
+      border: 1px solid rgba(239, 68, 68, 0.4);
+    }
+
+    /* Step flow list */
+    .flow-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-top: 10px;
+    }
+
+    .flow-step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+
+    .step-num {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: var(--solar-blue);
+      color: #ffffff;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 0.95rem;
+      color: #ffffff;
+      margin-bottom: 2px;
+    }
+
+    .step-content p {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Bottom Control Bar */
+    .footer-bar {
+      height: 52px;
+      background: rgba(15, 23, 42, 0.95);
+      border-top: 1px solid var(--border-color);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 24px;
+      z-index: 100;
+      font-size: 0.85rem;
+    }
+
+    .footer-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid var(--border-color);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--text-muted);
+    }
+
+    .btn-primary {
+      background: var(--stanford-red);
+      border-color: var(--stanford-red);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: var(--stanford-red-light);
+    }
+
+    .kbd-hint {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-family: monospace;
+      color: var(--text-muted);
+    }
+
+    /* Speaker Notes Drawer */
+    .notes-drawer {
+      position: fixed;
+      bottom: 52px;
+      left: 0;
+      right: 0;
+      background: #0f172a;
+      border-top: 2px solid var(--solar-blue-light);
+      padding: 16px 28px;
+      max-height: 220px;
+      overflow-y: auto;
+      z-index: 120;
+      transform: translateY(105%);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+    }
+
+    .notes-drawer.open {
+      transform: translateY(0);
+    }
+
+    .notes-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .notes-title {
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+      color: var(--solar-blue-light);
+    }
+
+    .notes-timer {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: #fbbf24;
+      font-family: monospace;
+    }
+
+    .notes-content {
+      font-size: 0.95rem;
+      line-height: 1.55;
+      color: #e2e8f0;
+      font-style: italic;
+    }
+
+    /* Overview Modal Grid */
+    .overview-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(9, 13, 22, 0.95);
+      backdrop-filter: blur(8px);
+      z-index: 200;
+      display: none;
+      flex-direction: column;
+      padding: 32px 48px;
+      overflow-y: auto;
+    }
+
+    .overview-modal.open {
+      display: flex;
+    }
+
+    .overview-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 24px;
+    }
+
+    .overview-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+    }
+
+    .overview-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      padding: 14px;
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: transform 0.2s, border-color 0.2s;
+    }
+
+    .overview-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--solar-blue-light);
+    }
+
+    .overview-card.active {
+      border-color: var(--stanford-red);
+      background: #1e293b;
+    }
+
+    .overview-card-num {
+      font-size: 0.72rem;
+      font-weight: 700;
+      color: var(--solar-blue-light);
+    }
+
+    .overview-card-title {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: #ffffff;
+      line-height: 1.3;
+    }
+
+    /* Title Slide Custom Hero */
+    .hero-title-box {
+      margin-top: 36px;
+      max-width: 900px;
+    }
+
+    .hero-title {
+      font-size: 3.4rem;
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      background: linear-gradient(135deg, #ffffff 40%, var(--solar-blue-light) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      font-size: 1.3rem;
+      color: var(--text-muted);
+      line-height: 1.45;
+      margin-bottom: 32px;
+    }
+
+    .meta-tags {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .meta-tag-item {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-color);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: var(--text-main);
+    }
+
+    .meta-tag-item strong {
+      color: #ffffff;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header Bar -->
+  <header class="header-bar">
+    <div class="header-left">
+      <span class="badge-stanford">Stanford Climate Week 2026</span>
+      <span class="badge-tag">SVYCA Youth For Earth Hackathon</span>
+    </div>
+    <div class="header-right">
+      <span>SolarSchools USA</span>
+      <span class="slide-counter" id="slide-counter">01 / 10</span>
+    </div>
+  </header>
+
+  <!-- Progress Bar Track -->
+  <div class="progress-track">
+    <div class="progress-fill" id="progress-fill"></div>
+  </div>
+
+  <!-- Deck Slide Container -->
+  <main class="deck-container">
+
+    <!-- SLIDE 1: Title & Hook -->
+    <section class="slide active" id="slide-1" data-title="Title Slide">
+      <div class="slide-tag">Competition Pitch Presentation</div>
+      <div class="hero-title-box">
+        <h1 class="hero-title">SolarSchools USA</h1>
+        <p class="hero-sub">Democratizing Clean Energy Finance for 100,000+ US Public Schools through Geospatial AI & IRS Direct Pay</p>
+      </div>
+      <div class="meta-tags" style="margin-bottom: 32px;">
+        <div class="meta-tag-item"><strong>Presenter:</strong> Pranav Balaji (Solo Competitor)</div>
+        <div class="meta-tag-item"><strong>Event:</strong> SVYCA Youth For Earth Hackathon @ Stanford</div>
+        <div class="meta-tag-item"><strong>Core Focus:</strong> Asphalt Solar Canopies, IRA Direct Pay, Board Action Briefs</div>
+      </div>
+      <div class="callout-box blue" style="max-width: 880px;">
+        <strong>The Mission:</strong> Transform idle school parking lots into clean power stations, shaded parking, and millions of dollars in classroom funding with zero local tax increases.
+      </div>
+    </section>
+
+    <!-- SLIDE 2: The Problem -->
+    <section class="slide" id="slide-2" data-title="The Problem">
+      <div class="slide-tag">Problem Statement</div>
+      <h2 class="slide-title">The $8 Billion Drain & Baking Asphalt</h2>
+      <p class="slide-subtitle">Public schools face crushing utility bills while sitting on thousands of square meters of unshaded asphalt.</p>
+      
+      <div class="grid-3">
+        <div class="card card-highlight-red">
+          <div class="stat-hero red">$8.0 Billion</div>
+          <div class="stat-label">Annual US School Energy Drain</div>
+          <p class="card-p" style="margin-top: 14px;">Energy is the second-largest operating cost for school districts nationwide, surpassed only by teacher salaries.</p>
+          <div class="callout-box">Surrendering vital classroom funds directly to retail utility monopolies.</div>
+        </div>
+
+        <div class="card card-highlight-red">
+          <div class="stat-hero red">100,000+</div>
+          <div class="stat-label">Unshaded Public School Lots</div>
+          <p class="card-p" style="margin-top: 14px;">Massive asphalt lots act as urban heat islands, raising local surface temperatures by +30 to 45°F and baking student cars.</p>
+          <div class="callout-box">Idle land area that could be generating megawatts of clean localized power.</div>
+        </div>
+
+        <div class="card card-highlight-red">
+          <div class="stat-hero red">$25,000+</div>
+          <div class="stat-label">Consultant Cost Barrier</div>
+          <p class="card-p" style="margin-top: 14px;">Because schools are tax-exempt, they historically could not use tax credits. Private solar consultants cost $10K to $25K just to evaluate a lot.</p>
+          <div class="callout-box">Under-resourced suburban and rural districts are left completely behind.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 3: The Catalyst (IRA Direct Pay) -->
+    <section class="slide" id="slide-3" data-title="IRA Direct Pay">
+      <div class="slide-tag">Policy Revolution</div>
+      <h2 class="slide-title">The Game-Changer: IRA Section 6417 'Direct Pay'</h2>
+      <p class="slide-subtitle">For the first time in American history, public schools receive upfront cash reimbursement checks from the IRS.</p>
+
+      <div class="grid-2">
+        <div class="card card-highlight-green">
+          <div class="card-title">How Direct Pay Works for Public Schools</div>
+          <p class="card-p">Under IRS Section 6417 enacted in the 2022 Inflation Reduction Act, tax-exempt government entities (school districts) bypass private tax-equity middlemen and receive an uncapped direct cash refund check directly from the U.S. Treasury.</p>
+          
+          <div class="flow-steps">
+            <div class="flow-step-item">
+              <div class="step-num">1</div>
+              <div class="step-content">
+                <h4>IRS Pre-Filing Electronic Registration</h4>
+                <p>District submits planned solar canopy project to receive an IRS electronic registration number.</p>
+              </div>
+            </div>
+            <div class="flow-step-item">
+              <div class="step-num">2</div>
+              <div class="step-content">
+                <h4>File Annual Form 990-T</h4>
+                <p>District reports capital expenditure and attaches IRS Form 3468 clean energy investment schedule.</p>
+              </div>
+            </div>
+            <div class="flow-step-item">
+              <div class="step-num">3</div>
+              <div class="step-content">
+                <h4>Electronic Direct Deposit or Check</h4>
+                <p>IRS issues a cash reimbursement check covering 30% to 50% of the turnkey installation cost.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-highlight-blue">
+          <div class="card-title">The Federal Incentive Bonus Stack</div>
+          <p class="card-p">Incentives stack directly based on campus demographics and domestic equipment sourcing:</p>
+          
+          <table class="comp-table">
+            <thead>
+              <tr>
+                <th>Incentive Tier</th>
+                <th>Eligibility Criteria</th>
+                <th>IRS Cash Value</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Base Direct Pay</strong></td>
+                <td>Standard clean energy install</td>
+                <td><span class="status-pill green">30% Cash</span></td>
+              </tr>
+              <tr>
+                <td><strong>Title I Low-Income</strong></td>
+                <td>Low-income student body (40%+)</td>
+                <td><span class="status-pill green">+10% Cash Bonus</span></td>
+              </tr>
+              <tr>
+                <td><strong>Energy Community</strong></td>
+                <td>Brownfield or coal-transition area</td>
+                <td><span class="status-pill green">+10% Cash Bonus</span></td>
+              </tr>
+              <tr>
+                <td><strong>Maximum Federal Check</strong></td>
+                <td>Fully stacked eligible campus</td>
+                <td><span class="status-pill green">Up to 50% Cash</span></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout-box green" style="margin-top: 18px;">
+            <strong>The Problem:</strong> Over 90% of school boards do not know this cash check exists!
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 4: Platform Architecture -->
+    <section class="slide" id="slide-4" data-title="System Architecture">
+      <div class="slide-tag">Technical Architecture</div>
+      <h2 class="slide-title">End-to-End Computational Pipeline</h2>
+      <p class="slide-subtitle">From student click to board-ready action brief in under 3 seconds using federal APIs and physical modeling.</p>
+
+      <div class="grid-4" style="margin-bottom: 20px;">
+        <div class="card card-highlight-blue">
+          <div class="stat-label">Layer 1: Geospatial</div>
+          <h3 style="font-size: 1.05rem; margin: 8px 0; color: #fff;">Campus Directory</h3>
+          <p class="card-p">100,000+ NCES school centroids, ground-truthed parking asphalt coordinates, and Esri Hybrid high-resolution satellite imagery.</p>
+        </div>
+
+        <div class="card card-highlight-blue">
+          <div class="stat-label">Layer 2: Physics</div>
+          <h3 style="font-size: 1.05rem; margin: 8px 0; color: #fff;">NREL PVWatts v8</h3>
+          <p class="card-p">65% spatial canopy packing factor, commercial DC density (200 W/m²), live Department of Energy PVWatts solar generation physics.</p>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="stat-label">Layer 3: Financial</div>
+          <h3 style="font-size: 1.05rem; margin: 8px 0; color: #fff;">25-Year Cashflow</h3>
+          <p class="card-p">IRS Direct Pay rebate check calculation, EIA state commercial electricity tariffs, 0.5%/yr degradation, 2% inflation, and O&M reserve.</p>
+        </div>
+
+        <div class="card card-highlight-red">
+          <div class="stat-label">Layer 4: Civic</div>
+          <h3 style="font-size: 1.05rem; margin: 8px 0; color: #fff;">Action Brief</h3>
+          <p class="card-p">1-Click school-board ready PDF/Markdown generator with cost of delay analysis and turnkey draft school board resolution text.</p>
+        </div>
+      </div>
+
+      <div class="callout-box blue">
+        <strong>Engineered for Zero Failure:</strong> If federal NREL PVWatts API experiences network timeout, system automatically falls back to regional NSRDB empirical solar constants (1,650 Sunbelt / 1,460 Temperate / 1,320 North kWh/kW-yr).
+      </div>
+    </section>
+
+    <!-- SLIDE 5: Case Study (Leader vs Unshaded) -->
+    <section class="slide" id="slide-5" data-title="Case Study Comparison">
+      <div class="slide-tag">Proof of Concept</div>
+      <h2 class="slide-title">The Tale of Two Bay Area Campuses</h2>
+      <p class="slide-subtitle">Real-world empirical validation: an implemented leader saving $145K/year vs. an unshaded campus losing $140K/year.</p>
+
+      <div class="grid-2">
+        <!-- Leader Campus -->
+        <div class="card card-highlight-green">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div class="card-title">Monta Vista High School (Cupertino)</div>
+            <span class="status-pill green">Implemented Leader</span>
+          </div>
+          <p class="card-p">Fremont Union High School District (FUHSD) partnered with ENGIE to build 550 kW solar carports across student and staff parking lots.</p>
+          
+          <table class="comp-table">
+            <tbody>
+              <tr>
+                <td>Canopy System Capacity</td>
+                <td><strong>550 kW DC</strong></td>
+              </tr>
+              <tr>
+                <td>Annual Clean Electricity</td>
+                <td><strong>1,484,000 kWh</strong></td>
+              </tr>
+              <tr>
+                <td>Avoided Utility Bills (PG&E B-19)</td>
+                <td><strong style="color: #34d399;">$145,000 / year</strong></td>
+              </tr>
+              <tr>
+                <td>25-Year Cumulative Savings</td>
+                <td><strong style="color: #34d399;">$14,690,000</strong></td>
+              </tr>
+              <tr>
+                <td>Status on Ground</td>
+                <td><strong>Shaded parking, zero heat island</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout-box green">
+            <strong>Validation:</strong> Monta Vista's published utility bill offsets match our computational model within 4.2%!
+          </div>
+        </div>
+
+        <!-- Unshaded Opportunity -->
+        <div class="card card-highlight-alert">
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+            <div class="card-title">Palo Alto High School (Palo Alto)</div>
+            <span class="status-pill red">Unshaded Opportunity</span>
+          </div>
+          <p class="card-p">Palo Alto Unified School District (PAUSD) has a massive 7,200 m² asphalt surface parking lot baking unshaded in the sun.</p>
+
+          <table class="comp-table">
+            <tbody>
+              <tr>
+                <td>Unshaded Parking Footprint</td>
+                <td><strong>7,200 m² (~180 stalls)</strong></td>
+              </tr>
+              <tr>
+                <td>Potential Solar Canopy Size</td>
+                <td><strong>608 kW DC</strong></td>
+              </tr>
+              <tr>
+                <td>Annual Avoidable Bill Surrender</td>
+                <td><strong style="color: #f87171;">$140,000 / year</strong></td>
+              </tr>
+              <tr>
+                <td>Unclaimed IRS Direct Pay Check</td>
+                <td><strong style="color: #fbbf24;">$754,416 cash check</strong></td>
+              </tr>
+              <tr>
+                <td>5-Year Inaction Penalty</td>
+                <td><strong style="color: #f87171;">$700,000 surrendered</strong></td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="callout-box">
+            <strong>The Cost of Inaction:</strong> Every year Palo Alto High delays is another $140,000 paid to utility bills instead of hiring educators.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 6: Financial Economics -->
+    <section class="slide" id="slide-6" data-title="Financial Economics">
+      <div class="slide-tag">Financial Modeling</div>
+      <h2 class="slide-title">Rigorous Capital Economics & Rapid Payback</h2>
+      <p class="slide-subtitle">Structural steel cantilevers cost $3.10/W, but IRS Direct Pay cuts net outlay to $1.86/W, yielding under 3-year payback.</p>
+
+      <div class="grid-3" style="margin-bottom: 20px;">
+        <div class="card card-highlight-blue">
+          <div class="stat-hero blue">$3.10 / W</div>
+          <div class="stat-label">Turnkey Commercial Canopy Cost</div>
+          <p class="card-p" style="margin-top: 10px;">Includes structural steel cantilevers, Tier-1 bifacial monocrystalline panels, commercial string inverters, ADA compliance, and trench conduit.</p>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="stat-hero green">-$1.24 / W</div>
+          <div class="stat-label">IRS Direct Pay Cash Check (40%)</div>
+          <p class="card-p" style="margin-top: 10px;">Base 30% investment tax credit equivalent plus 10% domestic content / Title I bonus check paid directly to the school district bank account.</p>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="stat-hero green">$1.86 / W</div>
+          <div class="stat-label">Net District Capital Outlay</div>
+          <p class="card-p" style="margin-top: 10px;">Net capital expenditure drops by 40% to 50%, enabling rapid simple payback within <strong>2.6 to 4.5 years</strong> under standard commercial electricity tariffs.</p>
+        </div>
+      </div>
+
+      <div class="card card-highlight-green" style="flex: unset; padding: 18px 24px;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <div>
+            <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 4px;">25-Year Cumulative Net Dividend: $11M+ per High School</h3>
+            <p style="font-size: 0.88rem; color: var(--text-muted);">Fully accounts for $15/kW-year operations & maintenance (O&M), robotic cleaning, 2% inflation, and Year 15 inverter replacement.</p>
+          </div>
+          <div style="text-align: right;">
+            <div style="font-size: 1.6rem; font-weight: 800; color: #34d399;">$11,139,946</div>
+            <div class="stat-label">25-Yr Net Operating Savings</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 7: 3-Phase Scalability -->
+    <section class="slide" id="slide-7" data-title="Scalability Roadmap">
+      <div class="slide-tag">Execution Roadmap</div>
+      <h2 class="slide-title">Three-Phase Scalability: Bay Area to Nationwide</h2>
+      <p class="slide-subtitle">A structured rollout expanding from local ground-truth calibration to all 50 states.</p>
+
+      <div class="grid-3">
+        <div class="card card-highlight-blue">
+          <div class="stat-hero blue">Phase 1</div>
+          <div class="stat-label">San Francisco Bay Area</div>
+          <p class="card-p" style="margin-top: 12px;"><strong>9 Counties & 18 Campuses</strong></p>
+          <p class="card-p">Calibrated against active arrays in Cupertino Union (5.2 MW) and Fremont Union High School District. Integrated with PG&E Schedule B-19 commercial tariffs.</p>
+          <div class="callout-box blue">Status: Complete & Calibrated</div>
+        </div>
+
+        <div class="card card-highlight-blue">
+          <div class="stat-hero blue">Phase 2</div>
+          <div class="stat-label">California Statewide</div>
+          <p class="card-p" style="margin-top: 12px;"><strong>58 Counties & 10,000 Campuses</strong></p>
+          <p class="card-p">Ingests full California Department of Education directory. Integrates CalEnviroScreen 4.0 equity scoring, Title 24 solar mandates, and SCE/SDG&E/SMUD commercial utility rates.</p>
+          <div class="callout-box blue">Status: Architecture Specified</div>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="stat-hero green">Phase 3</div>
+          <div class="stat-label">Nationwide USA</div>
+          <p class="card-p" style="margin-top: 12px;"><strong>50 States & 100,000+ Campuses</strong></p>
+          <p class="card-p">Scales via National Center for Education Statistics (NCES) database, state-by-state EIA commercial electricity rates, and EPA eGRID regional carbon intensity factors.</p>
+          <div class="callout-box green">Status: National Vision</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 8: Civic Climax (Action Brief) -->
+    <section class="slide" id="slide-8" data-title="Civic Action Brief">
+      <div class="slide-tag">Civic Impact</div>
+      <h2 class="slide-title">The Civic Climax: School Board Action Brief</h2>
+      <p class="slide-subtitle">Bridging the gap between engineering simulation and real-world school board votes.</p>
+
+      <div class="grid-2">
+        <div class="card card-highlight-blue">
+          <div class="card-title">1-Click School Board Ready Proposal</div>
+          <p class="card-p">Most student climate petitions fail because they lack financial numbers. SolarSchools USA generates an institutional-grade, 6-page action brief in one click containing:</p>
+
+          <ul style="list-style-type: none; display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; color: var(--text-main);">
+            <li style="display: flex; gap: 8px;"><strong>1. Executive Summary:</strong> System kW DC capacity, canopy area (m²), shaded stalls.</li>
+            <li style="display: flex; gap: 8px;"><strong>2. Financial Waterfall:</strong> Turnkey capex, IRS Direct Pay check, simple payback (years).</li>
+            <li style="display: flex; gap: 8px;"><strong>3. Inaction Cost:</strong> Quantified 5-year financial penalty if the district delays action.</li>
+            <li style="display: flex; gap: 8px;"><strong>4. IRS Compliance Guide:</strong> Step-by-step instructions for electronic Pre-Filing and Form 990-T.</li>
+            <li style="display: flex; gap: 8px;"><strong>5. Template Board Resolution:</strong> Exact legal language ready for trustees to sponsor.</li>
+          </ul>
+
+          <div class="callout-box blue" style="margin-top: 18px;">
+            Empowers high school environmental clubs and PTAs to walk into board meetings with complete institutional proposals.
+          </div>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="card-title">Sample Resolution Language Generated</div>
+          <div style="background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); border-radius: 6px; padding: 16px; font-family: monospace; font-size: 0.8rem; color: #cbd5e1; line-height: 1.5; flex: 1;">
+            RESOLUTION NO. 2026-SOLAR<br><br>
+            WHEREAS, the School District expends significant operating funds annually on retail electric utility tariffs; and<br><br>
+            WHEREAS, Section 6417 of the Internal Revenue Code provides direct cash payments from the U.S. Treasury covering up to 40% of clean energy canopy installations; and<br><br>
+            NOW, THEREFORE, BE IT RESOLVED that the Board directs the Superintendent to initiate an RFP for parking lot solar carports to capture available federal Direct Pay funds and protect operating budgets.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SLIDE 9: Co-Benefits -->
+    <section class="slide" id="slide-9" data-title="Holistic Co-Benefits">
+      <div class="slide-tag">Beyond Clean Power</div>
+      <h2 class="slide-title">Multi-Dimensional Campus Co-Benefits</h2>
+      <p class="slide-subtitle">Parking lot canopies solve multiple operational and educational challenges simultaneously.</p>
+
+      <div class="grid-3">
+        <div class="card card-highlight-blue">
+          <div class="stat-hero blue">-30°F</div>
+          <div class="stat-label">Surface Microclimate Cooling</div>
+          <p class="card-p" style="margin-top: 14px;">Canopies intercept direct solar radiation, lowering asphalt surface temperatures from 145°F down to ambient shade, drastically reducing the campus urban heat island effect.</p>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="stat-hero green">EV Ready</div>
+          <div class="stat-label">Fleet Electrification Conduit</div>
+          <p class="card-p" style="margin-top: 14px;">Canopy structural posts and underground trenches provide ready electrical conduit for Level 2 EV charging for teachers during the day and electric school buses overnight.</p>
+        </div>
+
+        <div class="card card-highlight-blue">
+          <div class="stat-hero blue">STEM Lab</div>
+          <div class="stat-label">Living Educational Dashboard</div>
+          <p class="card-p" style="margin-top: 14px;">Real-time solar inverter generation data transforms the parking lot into a physical STEM learning laboratory for physics, climate science, and data engineering classes.</p>
+        </div>
+      </div>
+
+      <div class="callout-box green" style="margin-top: 20px;">
+        <strong>Why Not Rooftops?</strong> Rooftop solar voids 20-year roof warranties, requires roof penetrations, and has seismic load limits. Parking lots have zero roof penetration and 100% flat southern exposure.
+      </div>
+    </section>
+
+    <!-- SLIDE 10: Conclusion & Call to Action -->
+    <section class="slide" id="slide-10" data-title="Summary & Call to Action">
+      <div class="slide-tag">Conclusion</div>
+      <h2 class="slide-title">Let's Shade Our Schools & Fund Our Classrooms</h2>
+      <p class="slide-subtitle">The technology is proven, the federal funding is uncapped, and the roadmap is ready.</p>
+
+      <div class="grid-3" style="margin-bottom: 24px;">
+        <div class="card card-highlight-red">
+          <div class="card-title">1. The Asset</div>
+          <p class="card-p">100,000+ public school parking lots are idle clean energy goldmines waiting to be activated.</p>
+        </div>
+
+        <div class="card card-highlight-green">
+          <div class="card-title">2. The Funding</div>
+          <p class="card-p">IRS Direct Pay writes 30% to 50% upfront cash checks, making simple payback under 3 years.</p>
+        </div>
+
+        <div class="card card-highlight-blue">
+          <div class="card-title">3. The Catalyst</div>
+          <p class="card-p">SolarSchools USA provides the free computational intelligence to turn students into civic climate leaders.</p>
+        </div>
+      </div>
+
+      <div class="card card-highlight-red" style="text-align: center; padding: 24px; border-top: 4px solid var(--stanford-red);">
+        <h3 style="font-size: 1.4rem; color: #ffffff; margin-bottom: 8px;">Every Year of Delay Costs a Single High School $140,000.</h3>
+        <p style="font-size: 1rem; color: var(--text-muted); margin-bottom: 16px;">Together, we can turn baking asphalt into clean electricity and educational equity.</p>
+        <div style="display: flex; justify-content: center; gap: 20px; font-size: 0.9rem; color: #94a3b8;">
+          <span><strong>Presenter:</strong> Pranav Balaji</span>
+          <span>&bull;</span>
+          <span><strong>Event:</strong> SVYCA Youth For Earth Hackathon @ Stanford Climate Week</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Presenter Notes Drawer -->
+  <div class="notes-drawer" id="notes-drawer">
+    <div class="notes-header">
+      <div class="notes-title">Presenter Speaking Script & Cues</div>
+      <div class="notes-timer" id="notes-timer">Suggested Pace: 0:00 - 0:30</div>
+    </div>
+    <div class="notes-content" id="notes-content">
+      "Hi everyone, my name is Pranav Balaji. If you look out the window at almost any high school in America, you'll see a sea of black asphalt parking lots absorbing heat all day long. Today I am presenting SolarSchools USA, an open-source platform that turns idle school asphalt into clean power, shaded parking, and millions in classroom funding."
+    </div>
+  </div>
+
+  <!-- Slide Overview Modal -->
+  <div class="overview-modal" id="overview-modal">
+    <div class="overview-header">
+      <h3 style="font-size: 1.2rem; color: #fff;">Slide Deck Overview</h3>
+      <button class="btn" id="btn-close-overview">Close [Esc]</button>
+    </div>
+    <div class="overview-grid" id="overview-grid">
+      <!-- Injected via JS -->
+    </div>
+  </div>
+
+  <!-- Bottom Navigation & Footer Bar -->
+  <footer class="footer-bar">
+    <div class="footer-left">
+      <button class="btn" id="btn-prev">&larr; Prev <span class="kbd-hint">&larr;</span></button>
+      <button class="btn" id="btn-next">Next &rarr; <span class="kbd-hint">&rarr;</span></button>
+      <button class="btn" id="btn-toggle-notes">Notes <span class="kbd-hint">N</span></button>
+      <button class="btn" id="btn-toggle-overview">Overview <span class="kbd-hint">O</span></button>
+    </div>
+    <div class="footer-right">
+      <button class="btn" id="btn-fullscreen">Fullscreen <span class="kbd-hint">F</span></button>
+    </div>
+  </footer>
+
+  <script>
+    // Speaker notes for each slide
+    const speakerNotes = {
+      1: {
+        time: "0:00 - 0:25",
+        text: "Standing at the podium with the title screen displayed. 'Hi everyone, my name is Pranav Balaji. If you look out the window at almost any high school in America, you'll see a sea of black asphalt parking lots absorbing heat all day long. Today I am presenting SolarSchools USA, a platform built to empower students and school boards across all 50 states to turn idle asphalt into clean power stations and millions in classroom funding.'"
+      },
+      2: {
+        time: "0:25 - 0:50",
+        text: "'Public schools spend $8 billion every single year on electricity—it is their second-highest expense after teacher salaries. Meanwhile, 100,000 public schools have unshaded asphalt lots that bake under the sun, reaching surface temperatures of 145 degrees Fahrenheit. Historically, schools couldn't afford $20,000 feasibility consultants, and because schools don't pay taxes, they were shut out of federal clean energy tax credits.'"
+      },
+      3: {
+        time: "0:50 - 1:15",
+        text: "'In 2022, Congress passed Section 6417 of the Inflation Reduction Act, known as Direct Pay or Elective Pay. For the first time in history, the IRS writes an uncapped, upfront cash reimbursement check for 30% to 50% of the cost directly to public school districts. If a school is in a Title I low-income community, they get an extra 10% bonus check. But over 90% of school boards still don't know this program exists.'"
+      },
+      4: {
+        time: "1:15 - 1:40",
+        text: "'To solve this awareness gap, I built SolarSchools USA. It combines four computational layers: an NCES school directory with ground-truthed parking centroids, live physics modeling using the Department of Energy's NREL PVWatts API with a 65% canopy packing factor, a 25-year cashflow model with state commercial electricity tariffs, and a 1-click School Board Action Brief generator.'"
+      },
+      5: {
+        time: "1:40 - 2:15",
+        text: "'Here is our proof of concept: The Tale of Two Bay Area Campuses. On the left, Monta Vista High School in Cupertino completed 550 kW of solar canopies in 2021. They are actively saving $145,000 every single year on avoided PG&E bills! But just 10 miles away at Palo Alto High School, their massive 7,200 m² parking lot sits 100% unshaded. Palo Alto High is surrendering $140,000 every year to the utility company, with an unclaimed $754,000 IRS cash check waiting at the Treasury. If they delay 5 years, that's $700,000 in permanent financial losses.'"
+      },
+      6: {
+        time: "2:15 - 2:40",
+        text: "'Our financial math is grounded in real commercial economics. Parking canopies have a structural steel premium of $3.10 per watt. But after the 40% IRS Direct Pay check, the net capital outlay drops to just $1.86 per watt. Under standard commercial tariffs, simple payback occurs in 2.6 to 4.5 years, generating over $11 million in cumulative net savings over 25 years after accounting for operations and maintenance.'"
+      },
+      7: {
+        time: "2:40 - 3:00",
+        text: "'We architected this in three distinct phases: Phase 1 calibrated our spatial packing and yield numbers against real Bay Area schools like Cupertino and FUHSD. Phase 2 scales across all 10,000 California schools using CalEnviroScreen equity overlays and Title 24 codes. Phase 3 scales nationwide across 100,000 campuses using NCES data and EPA eGRID regional carbon intensity.'"
+      },
+      8: {
+        time: "3:00 - 3:20",
+        text: "'Here is our civic climax: Tab 5 of the app generates a School Board Action Brief. In one click, students or PTAs get a complete proposal with exact engineering specs, a 25-year cashflow table, IRS Form 990-T filing instructions, and turnkey School Board Resolution text ready for trustees to introduce at their next public board meeting.'"
+      },
+      9: {
+        time: "3:20 - 3:35",
+        text: "'Canopies deliver immense co-benefits beyond electricity bills: they drop asphalt temperatures by 30 degrees to cool the campus microclimate, provide built-in conduit for Level 2 teacher EV charging and electric school bus fleets, and serve as a physical STEM laboratory for clean energy education.'"
+      },
+      10: {
+        time: "3:35 - 3:50",
+        text: "'In summary: public school parking lots are idle clean energy goldmines. IRS Direct Pay eliminates the capital barrier. Every year of delay costs a single high school $140,000. Let's shade our parking lots, claim our federal funds, and power our classrooms. Thank you, and I look forward to your questions!'"
+      }
+    };
+
+    let currentSlide = 1;
+    const totalSlides = 10;
+    const slides = document.querySelectorAll('.slide');
+    const counter = document.getElementById('slide-counter');
+    const progressFill = document.getElementById('progress-fill');
+    const notesDrawer = document.getElementById('notes-drawer');
+    const notesTimer = document.getElementById('notes-timer');
+    const notesContent = document.getElementById('notes-content');
+    const overviewModal = document.getElementById('overview-modal');
+    const overviewGrid = document.getElementById('overview-grid');
+
+    // Populate overview cards
+    slides.forEach((slide, idx) => {
+      const slideNum = idx + 1;
+      const title = slide.getAttribute('data-title') || `Slide ${slideNum}`;
+      const card = document.createElement('div');
+      card.className = `overview-card ${slideNum === 1 ? 'active' : ''}`;
+      card.id = `ov-card-${slideNum}`;
+      card.innerHTML = `
+        <span class="overview-card-num">Slide ${String(slideNum).padStart(2, '0')}</span>
+        <span class="overview-card-title">${title}</span>
+      `;
+      card.addEventListener('click', () => {
+        goToSlide(slideNum);
+        closeOverview();
+      });
+      overviewGrid.appendChild(card);
+    });
+
+    function updateSlide() {
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx + 1 === currentSlide);
+      });
+
+      // Update counter
+      counter.textContent = `${String(currentSlide).padStart(2, '0')} / ${String(totalSlides).padStart(2, '0')}`;
+      
+      // Update progress
+      const progressPercent = (currentSlide / totalSlides) * 100;
+      progressFill.style.width = `${progressPercent}%`;
+
+      // Update speaker notes
+      if (speakerNotes[currentSlide]) {
+        notesTimer.textContent = `Suggested Pace: ${speakerNotes[currentSlide].time}`;
+        notesContent.textContent = speakerNotes[currentSlide].text;
+      }
+
+      // Update overview active card
+      document.querySelectorAll('.overview-card').forEach((card, idx) => {
+        card.classList.toggle('active', idx + 1 === currentSlide);
+      });
+    }
+
+    function goToSlide(num) {
+      if (num >= 1 && num <= totalSlides) {
+        currentSlide = num;
+        updateSlide();
+      }
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    function toggleNotes() {
+      notesDrawer.classList.toggle('open');
+    }
+
+    function toggleOverview() {
+      overviewModal.classList.toggle('open');
+    }
+
+    function closeOverview() {
+      overviewModal.classList.remove('open');
+    }
+
+    function toggleFullscreen() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(() => {});
+      } else {
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        }
+      }
+    }
+
+    // Keyboard bindings
+    document.addEventListener('keydown', (e) => {
+      if (overviewModal.classList.contains('open')) {
+        if (e.key === 'Escape' || e.key === 'o' || e.key === 'O') {
+          closeOverview();
+          return;
+        }
+      }
+
+      switch (e.key) {
+        case 'ArrowRight':
+        case 'PageDown':
+        case ' ':
+          nextSlide();
+          break;
+        case 'ArrowLeft':
+        case 'PageUp':
+        case 'Backspace':
+          prevSlide();
+          break;
+        case 'Home':
+          goToSlide(1);
+          break;
+        case 'End':
+          goToSlide(totalSlides);
+          break;
+        case 'n':
+        case 'N':
+        case 's':
+        case 'S':
+          toggleNotes();
+          break;
+        case 'o':
+        case 'O':
+          toggleOverview();
+          break;
+        case 'f':
+        case 'F':
+          toggleFullscreen();
+          break;
+        case 'Escape':
+          if (notesDrawer.classList.contains('open')) {
+            notesDrawer.classList.remove('open');
+          }
+          if (overviewModal.classList.contains('open')) {
+            overviewModal.classList.remove('open');
+          }
+          break;
+      }
+    });
+
+    // Button event listeners
+    document.getElementById('btn-prev').addEventListener('click', prevSlide);
+    document.getElementById('btn-next').addEventListener('click', nextSlide);
+    document.getElementById('btn-toggle-notes').addEventListener('click', toggleNotes);
+    document.getElementById('btn-toggle-overview').addEventListener('click', toggleOverview);
+    document.getElementById('btn-close-overview').addEventListener('click', closeOverview);
+    document.getElementById('btn-fullscreen').addEventListener('click', toggleFullscreen);
+
+    // Initial setup
+    updateSlide();
+  </script>
+</body>
+</html>

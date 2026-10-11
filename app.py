@@ -367,11 +367,19 @@ with tab_map:
 
         m = folium.Map(
             location=[lot_lat, lot_lon],
-            zoom_start=17,
+            zoom_start=18,
             tiles=None
         )
-        
-        # Add high-resolution satellite imagery as default basemap
+
+        # 1. Add OpenStreetMap as alternative basemap (added first so Satellite is default)
+        folium.TileLayer(
+            tiles='OpenStreetMap',
+            name='Street Map',
+            overlay=False,
+            control=True
+        ).add_to(m)
+
+        # 2. Add high-resolution Esri World Imagery as the primary default basemap (added last so it stays on top)
         folium.TileLayer(
             tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             attr='Esri World Imagery',
@@ -380,46 +388,51 @@ with tab_map:
             control=True
         ).add_to(m)
 
-        # Add OpenStreetMap as alternative basemap
+        # 3. Add hybrid roads & places label overlay on top of satellite
         folium.TileLayer(
-            tiles='OpenStreetMap',
-            name='Street Map',
-            overlay=False,
+            tiles='https://server.arcgisonline.com/ArcGIS/rest/services/Reference/World_Boundaries_and_Places/MapServer/tile/{z}/{y}/{x}',
+            attr='Esri Labels',
+            name='Road & School Labels',
+            overlay=True,
             control=True
         ).add_to(m)
         
-        # Add canopy footprint circle centered on the surface parking lot
+        # Add canopy footprint circle centered directly on the surface parking lot
         radius_canopy = (usable_m2 / 3.14159) ** 0.5
 
         folium.Circle(
             location=[lot_lat, lot_lon],
             radius=radius_canopy,
-            color="#f59e0b",
+            color="#2563eb",
+            weight=2,
             fill=True,
-            fill_color="#fbbf24",
+            fill_color="#38bdf8",
             fill_opacity=0.45,
             tooltip=f"Proposed Solar Canopy: {system_kw:,.0f} kW DC ({usable_m2:,.0f} m²)",
-            popup=f"<b>Proposed Solar Canopy Site</b><br>Capacity: {system_kw} kW DC<br>Area: {usable_m2:,.0f} m²<br>Stalls Covered: ~{int(usable_m2/25)}"
+            popup=(
+                f"<b>{selected_school_name} — Proposed Solar Canopy Site</b><br>"
+                f"<b>Capacity:</b> {system_kw:,.0f} kW DC<br>"
+                f"<b>Catchment Area:</b> {usable_m2:,.0f} m²<br>"
+                f"<b>Shaded Parking Stalls:</b> ~{int(usable_m2/25)} stalls<br>"
+                f"<b>Annual Clean Electricity:</b> {solar_gen['annual_kwh']:,.0f} kWh"
+            )
         ).add_to(m)
 
-        # Parking Lot Canopy Site Marker
+        # Single authoritative Parking Lot Canopy Site Marker directly on the asphalt
         folium.Marker(
             location=[lot_lat, lot_lon],
-            popup=f"<b>Proposed Solar Canopy Site</b><br>{selected_school_name} Parking Lot<br>Capacity: {system_kw:,.0f} kW DC",
-            tooltip=f"Solar Canopy Site ({usable_m2:,.0f} m²)",
+            popup=(
+                f"<b>{selected_school_name}</b><br>"
+                f"<b>Parking Lot Solar Canopy Site</b><br>"
+                f"Capacity: {system_kw:,.0f} kW DC ({usable_m2:,.0f} m²)<br>"
+                f"Estimated Shaded Stalls: ~{int(usable_m2/25)} cars"
+            ),
+            tooltip=f"Solar Canopy Site ({usable_m2:,.0f} m²) — {selected_school_name}",
             icon=folium.Icon(color="orange", icon="bolt", prefix="fa")
         ).add_to(m)
 
-        # Campus Entrance Marker
-        folium.Marker(
-            location=[lat, lon],
-            popup=f"<b>{selected_school_name}</b><br>{school_info['district']}<br>Enrollment: {school_info['enrollment']:,}",
-            tooltip=f"{selected_school_name} (Campus)",
-            icon=folium.Icon(color="blue", icon="graduation-cap", prefix="fa")
-        ).add_to(m)
-
-        folium.LayerControl().add_to(m)
-        st_folium(m, height=480, width=None)
+        folium.LayerControl(collapsed=False).add_to(m)
+        st_folium(m, height=480, width=None, returned_objects=[])
 
     with map_col2:
         st.markdown("#### 📐 Spatial Geometry")
