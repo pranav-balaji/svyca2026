@@ -10,58 +10,77 @@
 
 ---
 
-## 1. Presentation Philosophy (Authentic 10th-Grade Voice)
+## 1. Presentation Philosophy (Authentic 10th-Grade Voice & Light Theme)
 
-1. **Clean, Visual Slides:**
+1. **Clean, Modern Light Theme:**
+   - Pure white/crisp off-white canvas (#F8FAFC, #FFFFFF) with deep slate typography (#0F172A).
+   - High contrast optimized for classroom projectors, sunlit auditoriums, and screen sharing.
+   - Clean color accents: Stanford Cardinal (#8C1515), Solar Blue (#0284C7), Emerald Green (#059669), Alert Red (#DC2626), and Warm Amber (#D97706).
+2. **Visual, Low-Word-Count Slides:**
    - Big, bold numbers that the judges can read from across the room.
    - Punchy 3 to 5 word bullet points.
    - Zero dense walls of text, zero AI-sounding paragraphs.
-2. **Relatable Student Voice:**
+3. **Problem-First Introduction:**
+   - Slide 1 immediately introduces the crisis being solved: 140°F asphalt, $8.0B wasted power bills, and $750K in unclaimed federal checks.
+   - Slide 2 explains the institutional roadblocks that stalled action (tax-exempt lockout and $25K consultant fees).
+4. **Relatable Student Voice:**
    - Speak from personal experience: baking parking lots, hot classrooms, cut school programs.
    - Contrast real school waste with real solutions.
    - Explain the federal "Direct Pay" grant as simple cash for schools.
-3. **Conversational Speaker Script:**
-   - Clear, energetic, confident delivery.
+5. **Conversational Speaker Script:**
+   - Clear, energetic, confident delivery under 3 minutes 45 seconds.
    - Keep the detailed technical backing ready in your mind for Q&A.
 
 ---
 
 ## 2. 10-Slide Outline & Speaker Script
 
-### Slide 1: Title & Hook
-- **Tag:** SVYCA Youth For Earth Hackathon
-- **Title:** SolarSchools USA
-- **Subtitle:** Turning School Parking Lots into Clean Energy and Classroom Cash
-- **Presenter Bio:** Pranav Balaji | 10th Grade | Silicon Valley Youth Climate Action (SVYCA)
-- **3 Visual Pillars:**
-  - 18 Local Schools Mapped (High, Middle, and Elementary)
-  - Real Solar Physics (Department of Energy PVWatts v8)
-  - 1-Click Board Brief (Instant financial summary and resolution)
+### Slide 1: Introduction - What is the Problem We Are Trying to Solve?
+- **Tag:** SOLARSCHOOLS USA | SVYCA YOUTH FOR EARTH HACKATHON
+- **Title:** The Problem: Why Are School Parking Lots Baking in the Sun While Districts Bleed Billions on Power?
+- **Subtitle:** Across the U.S., 100,000 public schools sit on unshaded blacktop asphalt, surrendering classroom funds to utility companies while millions in federal clean energy grants sit unclaimed.
+- **Presenter Bio:** Pranav Balaji | 10th Grade | Silicon Valley Youth Climate Action (SVYCA) | October 2026
+- **3 Core Problem Pillars:**
+  - **Problem 1: Extreme Heat (140°F Baking Asphalt):**
+    - Empty blacktop bakes student and staff cars
+    - Creates campus heat islands in hot months
+    - Playground asphalt gets too hot for students
+  - **Problem 2: Budget Drain ($8.0 Billion Wasted):**
+    - Electricity is schools' #2 cost after teachers
+    - Monopoly utility bills drain classroom funds
+    - Schools lose cash that should fund education
+  - **Problem 3: The Gap ($750K Grant Sitting Idle):**
+    - Federal IRA Direct Pay pays 30% to 50% in cash
+    - Over 90% of school boards don't know it exists!
+    - Private consultant studies cost $25K and take a year
 - **Spoken Script (0:00 - 0:25):**
-  > "Hi everyone, my name is Pranav Balaji, and I am a 10th grader. Every single morning when we arrive at school, our parking lots sit empty under the blazing sun. At the same time, our school districts spend millions of dollars every year on electric bills. Today I want to show you SolarSchools USA: a web platform I built so any student or school board member can map their school parking lot, calculate solar energy, and download a ready-to-use board proposal in just 10 seconds."
+  > "Hi everyone, my name is Pranav Balaji, and I am a 10th grader. I want to start with a simple question: why are our school parking lots baking under the sun, while our districts bleed billions on power? Every single morning, our cars sit on 140-degree asphalt. Meanwhile, public schools spend 8 billion dollars every year on electricity bills! And the craziest part? The federal government now offers cash checks covering up to 50% of solar canopy costs, but over 90% of school boards have never heard of it. That is the exact problem we are solving with SolarSchools USA."
 
 ---
 
-### Slide 2: The Real Problem: Hot Asphalt & Wasted Budgets
-- **Tag:** The Real Problem
-- **Title:** Our Parking Lots Are Baking. Our Schools Are Bleeding Cash.
-- **Subtitle:** Millions of square feet of black asphalt are absorbing heat and draining school budgets.
-- **3 Stat Cards:**
-  - **140°F (Blazing Asphalt):**
-    - Empty blacktop bakes student and staff cars
-    - Creates campus heat islands in hot months
-    - Playground asphalt gets too hot to use safely
-  - **$8.0B (Wasted Power Bills):**
-    - Schools spend more on electricity than supplies
-    - Money flows straight to monopoly utility companies
-    - Funds that could hire teachers are lost every year
-  - **$25K (The Consultant Wall):**
-    - Engineering feasibility studies cost thousands
+### Slide 2: Why Hasn't This Been Solved? (The Roadblocks)
+- **Tag:** The Roadblocks
+- **Title:** Why Haven't Schools Solved This Already?
+- **Subtitle:** Two major institutional barriers have kept clean energy out of public school parking lots.
+- **3 Stat & Barrier Cards:**
+  - **Barrier 1: Tax-Exempt Lockout:**
+    - Schools don't pay federal income taxes
+    - Historically locked out of traditional solar tax credits
+    - Forced into predatory third-party lease deals
+    - Left public districts waiting on the sidelines
+  - **Barrier 2: The $25,000 Consultant Wall:**
+    - Private solar studies cost $15,000 to $25,000 per school
     - Takes 6 to 12 months just to get an estimate
-    - Leaves under-resourced schools completely locked out
-- **Bottom Callout:** Every dollar our school district pays to utility companies is a dollar taken away from teachers, arts, and classrooms.
+    - Under-funded schools cannot afford upfront studies
+    - Stalls school board action indefinitely
+  - **The Cost: $140,000 Lost Every Year:**
+    - Every single year a high school waits is $140K lost
+    - That is enough to fund 2 full-time teacher salaries!
+    - Over 5 years, delay costs a school over $700,000
+    - Students lose out on classroom resources
+- **Bottom Callout:** School boards want to go green, but expensive consultants and confusing tax laws hold them back. We need a free tool that gives them answers instantly.
 - **Spoken Script (0:25 - 0:50):**
-  > "Think about what school feels like in August or September. Our parking lots are black asphalt that reaches 140 degrees. Cars turn into ovens, and playgrounds bake. Meanwhile, public schools across the country spend over 8 billion dollars every year on electric bills. Electricity is the second-largest bill a school district pays, right after teacher salaries! And when school boards try to fix this, private consultants charge up to $25,000 just to do an initial study. Most schools give up before they even start."
+  > "Why hasn't every school built solar canopies already? Two reasons. First, because public schools don't pay taxes, they historically couldn't use solar tax credits. Second, private engineering consultants charge $25,000 just to do a feasibility study! Most public school districts simply don't have that cash lying around. So they wait. But every year a typical high school delays, they lose $140,000 to the utility company. That is two full-time teacher salaries lost every single year."
 
 ---
 

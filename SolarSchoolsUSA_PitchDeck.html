@@ -6,20 +6,21 @@
   <title>SolarSchools USA - Pitch Deck | Stanford Climate Week</title>
   <style>
     :root {
-      --bg-dark: #0b0f19;
-      --bg-card: #131a2b;
-      --bg-card-hover: #1c263d;
-      --border-color: #222e4a;
-      --text-main: #f8fafc;
-      --text-muted: #a0aec0;
-      --text-subtle: #718096;
+      --bg-dark: #f8fafc;
+      --bg-card: #ffffff;
+      --bg-card-hover: #f1f5f9;
+      --border-color: #e2e8f0;
+      --text-main: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #94a3b8;
       --stanford-red: #8c1515;
       --solar-blue: #0284c7;
-      --solar-blue-light: #38bdf8;
+      --solar-blue-light: #0369a1;
       --clean-green: #059669;
-      --clean-green-light: #10b981;
-      --alert-red: #ef4444;
-      --amber: #f59e0b;
+      --clean-green-light: #047857;
+      --alert-red: #dc2626;
+      --amber: #d97706;
+      --header-bg: #ffffff;
       --font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
     }
 
@@ -43,15 +44,16 @@
 
     /* Top Status Bar */
     .header-bar {
-      height: 48px;
-      background: rgba(15, 23, 42, 0.95);
+      height: 50px;
+      background: var(--header-bg);
       border-bottom: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 28px;
       z-index: 100;
       font-size: 0.85rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .header-left {
@@ -63,7 +65,7 @@
     .badge-stanford {
       background: var(--stanford-red);
       color: #ffffff;
-      padding: 3px 10px;
+      padding: 4px 10px;
       border-radius: 4px;
       font-weight: 700;
       font-size: 0.72rem;
@@ -73,7 +75,7 @@
 
     .badge-tag {
       color: var(--text-muted);
-      font-weight: 500;
+      font-weight: 600;
     }
 
     .header-right {
@@ -81,28 +83,29 @@
       align-items: center;
       gap: 16px;
       color: var(--text-muted);
+      font-weight: 600;
     }
 
     .slide-counter {
-      font-weight: 700;
-      color: var(--solar-blue-light);
+      font-weight: 800;
+      color: var(--solar-blue);
       font-variant-numeric: tabular-nums;
     }
 
     /* Progress Track */
     .progress-track {
       position: absolute;
-      top: 47px;
+      top: 49px;
       left: 0;
       width: 100%;
       height: 3px;
-      background: rgba(255, 255, 255, 0.08);
+      background: #e2e8f0;
       z-index: 101;
     }
 
     .progress-fill {
       height: 100%;
-      background: linear-gradient(90deg, var(--stanford-red), var(--solar-blue-light), var(--clean-green-light));
+      background: linear-gradient(90deg, var(--stanford-red), var(--solar-blue), var(--clean-green));
       width: 10%;
       transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     }
@@ -115,7 +118,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 24px 40px 16px 40px;
+      padding: 24px 44px 16px 44px;
     }
 
     .slide {
@@ -124,7 +127,7 @@
       left: 0;
       width: 100%;
       height: 100%;
-      padding: 28px 44px;
+      padding: 28px 48px;
       display: flex;
       flex-direction: column;
       opacity: 0;
@@ -142,11 +145,11 @@
 
     /* Typography */
     .slide-tag {
-      font-size: 0.75rem;
+      font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      font-weight: 700;
-      color: var(--solar-blue-light);
+      font-weight: 800;
+      color: var(--solar-blue);
       margin-bottom: 4px;
     }
 
@@ -154,7 +157,7 @@
       font-size: 2.2rem;
       font-weight: 800;
       line-height: 1.2;
-      color: #ffffff;
+      color: var(--text-main);
       margin-bottom: 4px;
       letter-spacing: -0.5px;
     }
@@ -198,6 +201,7 @@
       flex-direction: column;
       position: relative;
       overflow: hidden;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
     }
 
     .card.accent-blue::before {
@@ -207,7 +211,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: var(--solar-blue-light);
+      background: var(--solar-blue);
     }
 
     .card.accent-green::before {
@@ -217,7 +221,7 @@
       left: 0;
       right: 0;
       height: 4px;
-      background: var(--clean-green-light);
+      background: var(--clean-green);
     }
 
     .card.accent-red::before {
@@ -259,17 +263,17 @@
       letter-spacing: -0.5px;
     }
 
-    .big-stat.blue { color: var(--solar-blue-light); }
-    .big-stat.green { color: var(--clean-green-light); }
+    .big-stat.blue { color: var(--solar-blue); }
+    .big-stat.green { color: var(--clean-green); }
     .big-stat.red { color: var(--alert-red); }
     .big-stat.amber { color: var(--amber); }
 
     .card-label {
       font-size: 0.8rem;
-      font-weight: 700;
+      font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      color: #ffffff;
+      color: var(--text-main);
       margin-bottom: 14px;
     }
 
@@ -292,66 +296,70 @@
       content: "•";
       position: absolute;
       left: 0;
-      color: var(--solar-blue-light);
+      color: var(--solar-blue);
       font-weight: bold;
       font-size: 1.2rem;
       line-height: 1;
     }
 
-    .bullet-list.green li::before { color: var(--clean-green-light); }
+    .bullet-list.green li::before { color: var(--clean-green); }
     .bullet-list.red li::before { color: var(--alert-red); }
 
     /* Bottom Banner Callout */
     .bottom-banner {
       margin-top: 18px;
       padding: 14px 20px;
-      background: rgba(19, 26, 43, 0.9);
+      background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: 8px;
       display: flex;
       align-items: center;
       gap: 16px;
+      box-shadow: 0 2px 6px rgba(15, 23, 42, 0.03);
     }
 
-    .bottom-banner.border-green { border-color: rgba(16, 185, 129, 0.4); }
-    .bottom-banner.border-red { border-color: rgba(239, 68, 68, 0.4); }
-    .bottom-banner.border-blue { border-color: rgba(56, 189, 248, 0.4); }
+    .bottom-banner.border-green { border-left: 4px solid var(--clean-green); }
+    .bottom-banner.border-red { border-left: 4px solid var(--alert-red); }
+    .bottom-banner.border-blue { border-left: 4px solid var(--solar-blue); }
+    .bottom-banner.border-stanford { border-left: 4px solid var(--stanford-red); }
 
     .banner-tag {
       font-size: 0.75rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 1px;
-      padding: 3px 8px;
+      padding: 4px 10px;
       border-radius: 4px;
       white-space: nowrap;
     }
 
-    .banner-tag.blue { background: rgba(56, 189, 248, 0.15); color: var(--solar-blue-light); }
-    .banner-tag.green { background: rgba(16, 185, 129, 0.15); color: var(--clean-green-light); }
-    .banner-tag.red { background: rgba(239, 68, 68, 0.15); color: var(--alert-red); }
+    .banner-tag.blue { background: rgba(2, 132, 199, 0.1); color: var(--solar-blue); }
+    .banner-tag.green { background: rgba(5, 150, 105, 0.1); color: var(--clean-green); }
+    .banner-tag.red { background: rgba(220, 38, 38, 0.1); color: var(--alert-red); }
+    .banner-tag.stanford { background: rgba(140, 21, 21, 0.1); color: var(--stanford-red); }
 
     .banner-text {
       font-size: 0.95rem;
       font-weight: 600;
-      color: #ffffff;
+      color: var(--text-main);
       line-height: 1.3;
     }
 
     /* Footer Bar */
     .footer-bar {
       height: 52px;
-      background: rgba(15, 23, 42, 0.95);
+      background: #ffffff;
       border-top: 1px solid var(--border-color);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 24px;
+      padding: 0 28px;
       z-index: 100;
+      box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.03);
     }
 
     .btn {
-      background: var(--bg-card);
+      background: #ffffff;
       border: 1px solid var(--border-color);
       color: var(--text-main);
       padding: 8px 16px;
@@ -367,18 +375,19 @@
 
     .btn:hover {
       background: var(--bg-card-hover);
-      border-color: var(--solar-blue-light);
-      color: #ffffff;
+      border-color: var(--solar-blue);
+      color: var(--solar-blue);
     }
 
     .btn-primary {
       background: var(--solar-blue);
-      border-color: var(--solar-blue-light);
+      border-color: var(--solar-blue);
       color: #ffffff;
     }
 
     .btn-primary:hover {
-      background: #0270a6;
+      background: #0369a1;
+      color: #ffffff;
     }
 
     /* Speaker Notes Drawer */
@@ -387,15 +396,15 @@
       bottom: 52px;
       left: 0;
       right: 0;
-      background: #0d1322;
-      border-top: 2px solid var(--solar-blue-light);
+      background: #ffffff;
+      border-top: 2px solid var(--solar-blue);
       padding: 20px 32px;
       max-height: 220px;
       overflow-y: auto;
       transform: translateY(105%);
       transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
       z-index: 200;
-      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.5);
+      box-shadow: 0 -10px 25px rgba(0, 0, 0, 0.1);
     }
 
     .notes-drawer.open {
@@ -406,14 +415,14 @@
       font-size: 0.78rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
-      font-weight: 700;
-      color: var(--solar-blue-light);
+      font-weight: 800;
+      color: var(--solar-blue);
       margin-bottom: 6px;
     }
 
     .notes-content {
       font-size: 1.05rem;
-      color: #e2e8f0;
+      color: var(--text-main);
       line-height: 1.6;
     }
 
@@ -421,11 +430,12 @@
     .overview-modal {
       position: fixed;
       inset: 0;
-      background: rgba(9, 13, 22, 0.95);
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(4px);
       z-index: 300;
       display: none;
       flex-direction: column;
-      padding: 32px;
+      padding: 36px;
       overflow-y: auto;
     }
 
@@ -447,36 +457,37 @@
     }
 
     .overview-thumb {
-      background: var(--bg-card);
+      background: #ffffff;
       border: 1px solid var(--border-color);
       border-radius: 8px;
-      padding: 14px;
+      padding: 16px;
       cursor: pointer;
       transition: all 0.15s ease;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     }
 
     .overview-thumb:hover {
-      border-color: var(--solar-blue-light);
+      border-color: var(--solar-blue);
       transform: translateY(-2px);
     }
 
     .overview-thumb.active {
-      border-color: var(--solar-blue-light);
-      box-shadow: 0 0 12px rgba(56, 189, 248, 0.3);
+      border-color: var(--solar-blue);
+      box-shadow: 0 0 12px rgba(2, 132, 199, 0.25);
     }
 
     .overview-num {
       font-size: 0.75rem;
-      color: var(--solar-blue-light);
-      font-weight: 700;
+      color: var(--solar-blue);
+      font-weight: 800;
       margin-bottom: 4px;
     }
 
     .overview-title {
-      font-size: 0.85rem;
+      font-size: 0.88rem;
       font-weight: 700;
-      color: #ffffff;
-      line-height: 1.2;
+      color: var(--text-main);
+      line-height: 1.25;
     }
   </style>
 </head>
@@ -502,94 +513,96 @@
   <!-- Main Slide Container -->
   <main class="deck-container">
 
-    <!-- SLIDE 1: Title -->
+    <!-- SLIDE 1: Introduction - What is the Problem We Are Solving? -->
     <section class="slide active" data-slide="1">
-      <div class="slide-tag">SVYCA Youth For Earth Hackathon</div>
-      <h1 class="slide-title" style="font-size: 2.8rem; margin-top: 4px;">SolarSchools USA</h1>
-      <p class="slide-subtitle" style="font-size: 1.25rem; color: var(--clean-green-light); font-weight: 700; margin-bottom: 8px;">
-        Turning School Parking Lots into Clean Energy & Classroom Cash
+      <div class="slide-tag">SolarSchools USA  |  SVYCA Youth For Earth Hackathon</div>
+      <h1 class="slide-title" style="font-size: 2.3rem; margin-top: 4px;">
+        The Problem: Why Are School Parking Lots Baking While Districts Bleed Billions on Power?
+      </h1>
+      <p class="slide-subtitle" style="font-size: 1.1rem; color: var(--text-muted); margin-bottom: 12px;">
+        Across America, 100,000 public schools sit on unshaded blacktop asphalt, draining education budgets on utility bills while millions in federal clean energy grants sit unclaimed.
       </p>
-      <p style="font-size: 1.0rem; color: var(--text-muted); margin-bottom: 24px;">
-        A simple platform helping students, teachers, and school boards claim federal solar funding in seconds.
-      </p>
-      <p style="font-size: 0.95rem; font-weight: 600; color: #ffffff; margin-bottom: 20px;">
+      <p style="font-size: 0.95rem; font-weight: 700; color: var(--text-main); margin-bottom: 20px;">
         Pranav Balaji  |  10th Grade  |  Silicon Valley Youth Climate Action (SVYCA)  |  October 2026
       </p>
 
       <div class="grid-3">
-        <div class="card accent-blue">
-          <div class="card-label" style="color: var(--solar-blue-light);">18 Local Campuses Mapped</div>
-          <p style="font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #ffffff;">High-Resolution Satellite Data</p>
-          <ul class="bullet-list">
-            <li>High, Middle & Elementary schools mapped</li>
-            <li>Exact parking lots ground-truthed on satellite</li>
-            <li>Zero manual measuring needed</li>
+        <div class="card accent-red">
+          <div class="card-label" style="color: var(--alert-red);">Problem 1: Extreme Heat</div>
+          <p style="font-weight: 800; font-size: 1.4rem; color: var(--alert-red); margin-bottom: 8px;">140°F Baking Asphalt</p>
+          <ul class="bullet-list red">
+            <li>Empty blacktop bakes student and staff cars</li>
+            <li>Creates campus heat islands in hot months</li>
+            <li>Playground asphalt gets too hot for students</li>
           </ul>
         </div>
 
-        <div class="card accent-green">
-          <div class="card-label" style="color: var(--clean-green-light);">Real Solar Physics</div>
-          <p style="font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #ffffff;">Department of Energy Engine</p>
-          <ul class="bullet-list green">
-            <li>Uses official PVWatts v8 solar calculations</li>
-            <li>Simulates monthly power generation accurately</li>
-            <li>Calibrated against active Silicon Valley arrays</li>
+        <div class="card accent-red">
+          <div class="card-label" style="color: var(--alert-red);">Problem 2: Budget Drain</div>
+          <p style="font-weight: 800; font-size: 1.4rem; color: var(--alert-red); margin-bottom: 8px;">$8.0 Billion Wasted</p>
+          <ul class="bullet-list red">
+            <li>Electricity is schools' #2 cost after teachers</li>
+            <li>Monopoly utility bills drain classroom funds</li>
+            <li>Schools lose cash that should fund education</li>
           </ul>
         </div>
 
-        <div class="card accent-stanford">
-          <div class="card-label" style="color: #f87171;">1-Click School Board Brief</div>
-          <p style="font-weight: 700; font-size: 1.1rem; margin-bottom: 10px; color: #ffffff;">Instant Action for Students</p>
+        <div class="card accent-amber">
+          <div class="card-label" style="color: var(--amber);">Problem 3: The Information Gap</div>
+          <p style="font-weight: 800; font-size: 1.4rem; color: var(--amber); margin-bottom: 8px;">$750K Grant Sitting Idle</p>
           <ul class="bullet-list">
-            <li>Generates 1-page financial summary</li>
-            <li>Includes ready-to-vote board resolution</li>
-            <li>Gives students the tools to speak to trustees</li>
+            <li>Federal IRA Direct Pay pays 30% to 50% in cash</li>
+            <li>Over 90% of school boards don't know it exists!</li>
+            <li>Private consultant studies cost $25K and take a year</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- SLIDE 2: Problem -->
+    <!-- SLIDE 2: Roadblocks -->
     <section class="slide" data-slide="2">
-      <div class="slide-tag">The Real Problem</div>
-      <h2 class="slide-title">Our Parking Lots Are Baking. Our Schools Are Bleeding Cash.</h2>
-      <p class="slide-subtitle">Millions of square feet of black asphalt are absorbing heat and draining school budgets.</p>
+      <div class="slide-tag">The Roadblocks</div>
+      <h2 class="slide-title">Why Haven't Schools Solved This Already?</h2>
+      <p class="slide-subtitle">Two major institutional barriers have kept clean energy out of public school parking lots.</p>
 
       <div class="grid-3">
         <div class="card accent-red">
-          <div class="big-stat red">140°F</div>
-          <div class="card-label">Blazing Asphalt</div>
+          <div class="card-label" style="color: var(--alert-red);">Barrier 1</div>
+          <p style="font-weight: 800; font-size: 1.25rem; color: var(--text-main); margin-bottom: 8px;">Tax-Exempt Lockout</p>
           <ul class="bullet-list red">
-            <li>Empty blacktop bakes student and staff cars</li>
-            <li>Creates campus heat islands in hot months</li>
-            <li>Playground asphalt gets too hot to use safely</li>
+            <li>Schools don't pay federal income taxes</li>
+            <li>Historically locked out of traditional solar tax credits</li>
+            <li>Forced into predatory third-party lease deals</li>
+            <li>Left public districts waiting on the sidelines</li>
           </ul>
         </div>
 
         <div class="card accent-red">
-          <div class="big-stat red">$8.0B</div>
-          <div class="card-label">Wasted Power Bills</div>
+          <div class="card-label" style="color: var(--alert-red);">Barrier 2</div>
+          <p style="font-weight: 800; font-size: 1.25rem; color: var(--text-main); margin-bottom: 8px;">The $25,000 Consultant Wall</p>
           <ul class="bullet-list red">
-            <li>Schools spend more on power than supplies</li>
-            <li>Money flows straight to monopoly utility companies</li>
-            <li>Funds that could hire teachers are lost every year</li>
-          </ul>
-        </div>
-
-        <div class="card accent-red">
-          <div class="big-stat red">$25K</div>
-          <div class="card-label">The Consultant Wall</div>
-          <ul class="bullet-list red">
-            <li>Engineering feasibility studies cost thousands</li>
+            <li>Private solar studies cost $15,000 to $25,000 per school</li>
             <li>Takes 6 to 12 months just to get an estimate</li>
-            <li>Leaves under-resourced schools completely locked out</li>
+            <li>Under-funded schools cannot afford upfront studies</li>
+            <li>Stalls school board action indefinitely</li>
+          </ul>
+        </div>
+
+        <div class="card accent-amber">
+          <div class="card-label" style="color: var(--amber);">The Real Cost</div>
+          <p style="font-weight: 800; font-size: 1.25rem; color: var(--amber); margin-bottom: 8px;">$140,000 Lost Every Year</p>
+          <ul class="bullet-list">
+            <li>Every single year a high school waits is $140K lost</li>
+            <li>That is enough to fund 2 full-time teacher salaries!</li>
+            <li>Over 5 years, delay costs a school over $700,000</li>
+            <li>Students lose out on classroom resources</li>
           </ul>
         </div>
       </div>
 
       <div class="bottom-banner border-red">
         <span class="banner-tag red">The Bottom Line</span>
-        <span class="banner-text">Every dollar our school district pays to utility companies is a dollar taken away from teachers, arts, and classrooms.</span>
+        <span class="banner-text">School boards want to go green, but expensive consultants and confusing tax laws hold them back. We need a free tool that gives them answers instantly.</span>
       </div>
     </section>
 
@@ -607,6 +620,7 @@
             <li>Direct cash payment from the IRS to the district</li>
             <li>Deposited straight into the school treasury</li>
             <li>No tax liability needed: public schools qualify directly!</li>
+            <li>Bypasses private tax investors and complex leases</li>
           </ul>
         </div>
 
@@ -614,9 +628,10 @@
           <div class="big-stat blue">+20%</div>
           <div class="card-label">Bonus Federal Cash</div>
           <ul class="bullet-list">
-            <li>+10% bonus for American-made steel and panels</li>
-            <li>+10% bonus for Title I low-income schools</li>
+            <li>+10% extra bonus for American-made steel and panels</li>
+            <li>+10% extra bonus for Title I low-income schools</li>
             <li>Puts the biggest grants into communities that need it most</li>
+            <li>Encourages local jobs and domestic manufacturing</li>
           </ul>
         </div>
 
@@ -627,6 +642,7 @@
             <li>Up to half the solar canopy paid by the government</li>
             <li>School districts pay only the remaining balance</li>
             <li>Yet over 90% of school boards have never heard of it!</li>
+            <li>Zero school bond tax hikes required</li>
           </ul>
         </div>
       </div>
@@ -651,6 +667,7 @@
             <li>Interactive satellite map of 18 Bay Area schools</li>
             <li>Pins directly to the physical parking lot</li>
             <li>Covers High Schools, Middle Schools & Elementary</li>
+            <li>Zero manual site measuring required</li>
           </ul>
         </div>
 
@@ -661,16 +678,18 @@
             <li>Runs Department of Energy (NREL) solar physics</li>
             <li>Calculates kilowatt capacity and monthly power</li>
             <li>Applies real local commercial electricity rates</li>
+            <li>Calculates the exact federal cash reimbursement</li>
           </ul>
         </div>
 
         <div class="card accent-stanford">
-          <div class="big-stat" style="color: #f87171;">Step 3</div>
+          <div class="big-stat" style="color: var(--stanford-red);">Step 3</div>
           <div class="card-label">Get Board Brief</div>
           <ul class="bullet-list">
             <li>Generates a 1-page financial action brief</li>
-            <li>Calculates the exact federal cash grant</li>
+            <li>Shows 25-year savings and simple payback</li>
             <li>Includes a draft resolution ready for board votes</li>
+            <li>Walk into your next school board meeting prepared</li>
           </ul>
         </div>
       </div>
@@ -695,6 +714,7 @@
             <li>Leaves 24-foot driving aisles open for traffic</li>
             <li>Keeps 14-foot vertical clearance for school buses</li>
             <li>Preserves ADA accessible pathways and fire lanes</li>
+            <li>Ensures parking remains convenient and functional</li>
           </ul>
         </div>
 
@@ -705,6 +725,7 @@
             <li>Models high-efficiency commercial solar canopies</li>
             <li>Accounts for summer heat and dust loss</li>
             <li>Calibrated against active school arrays in Cupertino</li>
+            <li>Uses industry-standard tier-1 monocrystalline panels</li>
           </ul>
         </div>
 
@@ -715,6 +736,7 @@
             <li>Queries live satellite solar data for exact GPS coords</li>
             <li>Models local weather, sun angles, and seasons</li>
             <li>Includes instant smart backup so it never crashes</li>
+            <li>Matches professional engineering precision</li>
           </ul>
         </div>
       </div>
@@ -733,7 +755,7 @@
 
       <div class="grid-2">
         <div class="card accent-green">
-          <div class="card-label" style="color: var(--clean-green-light);">Monta Vista High (Cupertino) - Active Leader</div>
+          <div class="card-label" style="color: var(--clean-green);">Monta Vista High (Cupertino) - Active Leader</div>
           <div class="big-stat green">+$145,000 / yr</div>
           <ul class="bullet-list green">
             <li>Completed 550 kW solar carports across student parking</li>
@@ -741,7 +763,7 @@
             <li>Our model predicted $145K savings; actual published bills show $139K!</li>
             <li>Empirical accuracy within 4.17% of actual utility bills</li>
           </ul>
-          <div style="margin-top: 14px; font-weight: 700; color: var(--clean-green-light); font-size: 0.9rem;">
+          <div style="margin-top: 14px; font-weight: 800; color: var(--clean-green); font-size: 0.95rem;">
             VALIDATION PROOF: The software matches real-world utility bills.
           </div>
         </div>
@@ -755,7 +777,7 @@
             <li>Leaves an unclaimed $754,000 federal cash grant on the table</li>
             <li>Cost of waiting 5 years: Over $700,000 lost from classrooms!</li>
           </ul>
-          <div style="margin-top: 14px; font-weight: 700; color: var(--amber); font-size: 0.95rem;">
+          <div style="margin-top: 14px; font-weight: 800; color: var(--amber); font-size: 0.95rem;">
             That $140,000 lost each year is enough to pay for 2 full-time teachers!
           </div>
         </div>
@@ -776,6 +798,7 @@
             <li>Pays back in under 4 years</li>
             <li>Drops from 6+ years with Direct Pay</li>
             <li>Faster than school bond projects</li>
+            <li>Delivers net positive cashflow</li>
           </ul>
         </div>
 
@@ -786,6 +809,7 @@
             <li>Direct cash grant from the IRS</li>
             <li>Covers 30% to 50% of total cost</li>
             <li>Paid to district treasury</li>
+            <li>No bond measure required</li>
           </ul>
         </div>
 
@@ -796,6 +820,7 @@
             <li>Avoided retail power bills</li>
             <li>Protects against rising PG&E rates</li>
             <li>Savings start in Month 1</li>
+            <li>Funds instructional resources</li>
           </ul>
         </div>
 
@@ -806,6 +831,7 @@
             <li>Cumulative net savings</li>
             <li>Accounts for maintenance</li>
             <li>Permanent classroom cash</li>
+            <li>Zero school bond tax hikes</li>
           </ul>
         </div>
       </div>
@@ -924,6 +950,7 @@
             <li>Open SolarSchools USA on any laptop or phone</li>
             <li>Type your school's name to view your parking lot</li>
             <li>See your school's exact savings in 5 seconds</li>
+            <li>Completely free for students, parents & staff</li>
           </ul>
         </div>
 
@@ -934,22 +961,24 @@
             <li>Download our automated 1-page Action Brief</li>
             <li>Shows the exact federal cash grant for your district</li>
             <li>Share it with your principal, teachers, and council</li>
+            <li>Backed by real Department of Energy calculations</li>
           </ul>
         </div>
 
         <div class="card accent-stanford">
-          <div class="big-stat" style="color: #f87171;">Step 3</div>
+          <div class="big-stat" style="color: var(--stanford-red);">Step 3</div>
           <div class="card-label">Speak to Trustees</div>
           <ul class="bullet-list">
             <li>Use our ready-to-vote School Board Resolution</li>
             <li>Show trustees how to claim federal cash now</li>
             <li>Turn student climate advocacy into real infrastructure</li>
+            <li>Leave the microphone with a concrete proposal</li>
           </ul>
         </div>
       </div>
 
-      <div class="bottom-banner border-blue">
-        <span class="banner-tag blue">The Time Is Now</span>
+      <div class="bottom-banner border-stanford">
+        <span class="banner-tag stanford">The Time Is Now</span>
         <span class="banner-text">Our schools have the sunshine. The federal government has the cash. Let's shade our parking lots and power our classrooms!</span>
       </div>
     </section>
@@ -990,21 +1019,21 @@
 
   <script>
     const speakerNotes = {
-      1: "[0:00 - 0:25] 'Hi everyone, my name is Pranav Balaji, and I am a 10th grader. Every single morning when we arrive at school, our parking lots sit empty under the blazing sun. At the same time, our school districts spend millions of dollars every year on electric bills. Today I want to show you SolarSchools USA: a web platform I built so any student or school board member can map their school parking lot, calculate solar energy, and download a ready-to-use board proposal in just 10 seconds.'",
-      2: "[0:25 - 0:50] 'Think about what school feels like in August or September. Our parking lots are black asphalt that reaches 140 degrees. Cars turn into ovens, and playgrounds bake. Meanwhile, public schools across the country spend over 8 billion dollars every year on electric bills. Electricity is the second-largest bill a school district pays, right after teacher salaries! And when school boards try to fix this, private consultants charge up to $25,000 just to do an initial study. Most schools give up before they even start.'",
-      3: "[0:50 - 1:15] 'Here is the exciting part that almost nobody knows. In 2022, a new federal law called Direct Pay was passed. Historically, public schools couldn't get solar tax credits because schools don't pay taxes. Now, under Section 6417, the IRS will literally write an actual CASH check directly to public school districts! They pay a 30% base grant, plus an extra 10% for American steel and 10% for Title I schools. That means the federal government can cover up to 50% of the entire solar canopy! The problem? Over 90% of school boards have no idea this money exists.'",
-      4: "[1:15 - 1:40] 'So I decided to build a solution: SolarSchools USA. It is a web application designed so any high school student or parent can use it. Step 1: you select your school from our database of 18 Bay Area campuses. It zooms right onto the parking lot. Step 2: in real time, it connects to the Department of Energy's solar engine and calculates how many panels fit, how much electricity they generate, and how much money the school saves. Step 3: with one click, you download a complete School Board Action Brief with the exact financial breakdown and a template resolution ready to present to school board trustees.'",
-      5: "[1:40 - 2:05] 'We made sure the numbers are rock-solid. We don't assume the entire parking lot is covered in solar. We use an empirical 65% coverage factor, which reserves 24-foot driving aisles, ADA handicap spots, and a full 14-foot vertical clearance for yellow school buses. Then, we connect directly to the Department of Energy's NREL database to pull exact satellite sunshine numbers for the school's precise coordinates, accounting for summer heat, dust, and winter sun angles. It's the same math that professional engineering firms use, but packaged so anyone can run it in seconds.'",
-      6: "[2:05 - 2:35] 'Let's look at real-world proof right here in Silicon Valley. At Monta Vista High in Cupertino, they installed 550 kW of solar carports in 2021. Our software modeled that they would save $145,000 a year. When we checked the district's actual published utility bills, they saved $139,200. That's a 4% match with real life! Now look just 10 miles away at Palo Alto High. They have a massive parking lot baking in the sun, paying $140,000 a year to the power company that they don't need to pay. And there is a $754,000 cash grant from the federal government waiting for them. That $140,000 every year could pay for two full-time teachers or hundreds of laptops!'",
-      7: "[2:35 - 3:00] 'When you look at the financials, it's an absolute no-brainer. Normally, a solar canopy might take 6 to 7 years to pay back. With the federal Direct Pay check covering up to 40% or 50% upfront, the payback period drops to just 3.7 years! After year four, all that electricity is pure profit for the school district. Over the 25-year lifespan of the panels, even after paying for washing and maintenance, a single high school generates nearly 10 million dollars in net savings. That's permanent money for science labs, clubs, and teachers without raising local property taxes.'",
+      1: "[0:00 - 0:25] 'Hi everyone, my name is Pranav Balaji, and I am a 10th grader. I want to start with a simple question: why are our school parking lots baking under the sun, while our districts bleed billions on power? Every single morning, our cars sit on 140-degree asphalt. Meanwhile, public schools spend 8 billion dollars every year on electricity bills! And the craziest part? The federal government now offers cash checks covering up to 50% of solar canopy costs, but over 90% of school boards have never heard of it. That is the exact problem we are solving with SolarSchools USA.'",
+      2: "[0:25 - 0:50] 'Why hasn't every school built solar canopies already? Two reasons. First, because public schools don't pay taxes, they historically couldn't use solar tax credits. Second, private engineering consultants charge $25,000 just to do a feasibility study! Most public school districts simply don't have that cash lying around. So they wait. But every year a typical high school delays, they lose $140,000 to the utility company. That is two full-time teacher salaries lost every single year.'",
+      3: "[0:50 - 1:15] 'Here is the breakthrough. In 2022, Congress passed a new law called Direct Pay under Section 6417. For the first time in history, the IRS writes an actual, uncapped CASH reimbursement check directly to public schools! They pay a 30% base grant, plus an extra 10% for American steel and 10% for Title I schools. That means the federal government covers up to 50% of the entire project! All the district has to do is claim it. But almost no school board knows how.'",
+      4: "[1:15 - 1:40] 'So I built SolarSchools USA to democratize this data. Step 1: choose any campus from our 18 Bay Area pilot schools. It zooms right onto the parking lot. Step 2: it runs live Department of Energy solar physics in real time to calculate panel count, kilowatt capacity, and power output. Step 3: click one button, and you get an executive action brief with a 25-year cashflow schedule and a draft board resolution. Any student can hand this directly to their school board trustees.'",
+      5: "[1:40 - 2:05] 'We made sure the numbers are rock-solid. We don't assume the entire parking lot is covered in solar. We apply an empirical 65% packing factor, which reserves driving lanes, ADA spots, and a 14-foot vertical clearance for yellow school buses. Then, we query the Department of Energy's satellite database to calculate exact sunshine, temperature derates, and seasonal loss. It's the same math that engineering firms use, but packaged so anyone can run it in seconds.'",
+      6: "[2:05 - 2:35] 'Look at real proof right here in Silicon Valley. At Monta Vista High in Cupertino, they installed solar carports in 2021. Our software modeled $145,000 in annual savings. Their actual published bills showed $139,200—within 4%! Now look 10 miles away at Palo Alto High. They have a massive unshaded parking lot losing $140,000 every year. And there is a $754,000 check from the federal government sitting on the table unclaimed. That $140,000 lost every single year could hire two full-time teachers!'",
+      7: "[2:35 - 3:00] 'When you look at the economics, it is an absolute no-brainer. With the federal Direct Pay check covering up to 40% or 50% upfront, the payback period drops to just 3.7 years! After year four, all that electricity is pure savings for the school district. Over the 25-year lifespan of the panels, a single high school generates nearly 10 million dollars in net savings. That is permanent money for teachers, science labs, and student mental health counselors.'",
       8: "[3:00 - 3:20] 'Beyond the money, this transforms what our campuses feel like every day. Parking lots go from boiling asphalt into shaded community assets. Cars stay 40 degrees cooler, and teachers get free Level 2 EV charging powered directly by the sun. Elementary school kids get shaded play areas so blacktop doesn't burn their knees. And in emergencies or wildfire blackouts, these systems can keep emergency shelters and food refrigeration powered. It turns our schools into true clean energy hubs.'",
       9: "[3:20 - 3:35] 'Here is where we are heading. Phase 1 is done and live today: 18 schools right here in our backyard. Phase 2 scales across California to 10,000 schools, prioritizing hot Central Valley districts and Title I schools. And Phase 3 scales nationwide to 100,000 schools across all 50 states. In places like the Midwest, power grids still rely on dirty coal, so a solar panel installed on an Ohio school cuts two and a half times more carbon than the same panel in California! If just 10% of US schools build solar canopies, we save education budgets 800 million dollars every single year.'",
       10: "[3:35 - 3:50] 'To wrap up: students shouldn't have to wait 10 years for school boards to hire expensive consultants. With SolarSchools USA, any student can look up their campus in five seconds, print out a professional brief, and walk up to the microphone at their school board meeting this Tuesday. Our schools have the sunshine. The federal government has the cash. Let's shade our parking lots and power our classrooms. Thank you so much, and I welcome any questions!'"
     };
 
     const slideTitles = [
-      "Title & Mission",
-      "Hot Asphalt & Wasted Budgets",
+      "Introduction: The Problem",
+      "Why Haven't Schools Solved This?",
       "Federal Direct Pay Cash",
       "SolarSchools USA Platform",
       "Real Science & Solar Physics",
