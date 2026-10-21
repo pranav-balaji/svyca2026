@@ -145,5 +145,5 @@ SolarSchools USA is an educational and civic modeling platform developed to help
 
 This project is licensed under the **MIT License**. See the [`LICENSE`](./LICENSE) file for complete details.
 
-Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors.
+Copyright (c) 2026 Pranav Balaji.
 

@@ -101,7 +101,7 @@ Always ground-truth parking lot coordinates using satellite imagery (e.g., Googl
 * **SPDX Headers:** Include the standard copyright and SPDX license identifier header in all new Python source files:
   ```python
   # SolarSchools USA
-  # Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors
+  # Copyright (c) 2026 Pranav Balaji
   # SPDX-License-Identifier: MIT
   ```
 

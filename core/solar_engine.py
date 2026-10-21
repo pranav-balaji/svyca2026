@@ -1,5 +1,5 @@
 # SolarSchools USA
-# Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors
+# Copyright (c) 2026 Pranav Balaji
 # SPDX-License-Identifier: MIT
 """
 core/solar_engine.py

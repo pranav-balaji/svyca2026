@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 # SolarSchools USA
-# Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors
+# Copyright (c) 2026 Pranav Balaji
 # SPDX-License-Identifier: MIT
 """
 generate_docx.py
