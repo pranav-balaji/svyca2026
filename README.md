@@ -1,5 +1,10 @@
 # SolarSchools USA: Automated Solar Canopy Feasibility & Federal IRA Direct Pay Modeling
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
+[![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
+[![Testing: Passing](https://img.shields.io/badge/Test%20Suite-Passing-success.svg)](./test_pipeline.py)
+
 **SVYCA Youth For Earth (Y4E) Hackathon @ Stanford Climate Week**  
 **Showcase Date:** October 25, 2026 @ Stanford University  
 **Author:** Pranav Balaji  
@@ -112,3 +117,33 @@ This is a working draft outline for the 3-minute hackathon presentation:
 * **Minute 0:45 – 2:00: Interactive Tool Walkthrough** — Walk through the interactive interface using representative school campuses. Demonstrate how parking lot area is measured, connect to solar irradiance calculations, and show estimated annual electricity savings, payback timelines, and the contrast between schools saving money and schools losing money.
 * **Minute 2:00 – 2:40: Phased Architecture & Action Brief** — Discuss the project's phased progression, starting from Bay Area school districts (calibrated against local installations in Cupertino and Fremont Union) toward broader state and national modeling. Show the downloadable 1-page Action Brief designed for school board presentations.
 * **Minute 2:40 – 3:00: Summary & Discussion** — Wrap up with key takeaways on making clean energy finance accessible to student climate advocates, and open the floor for judge Q&A.
+
+---
+
+## Open Source Governance & Community
+
+SolarSchools USA is an open-source civic technology initiative. We welcome contributions from high school student clubs, parent-teacher associations, teachers, municipal leaders, and software engineers.
+
+* **Contributing Guide:** Review [`CONTRIBUTING.md`](./CONTRIBUTING.md) for local development setup, how to submit new campuses, and pull request procedures.
+* **Code of Conduct:** We adhere to the [Contributor Covenant v2.1](./CODE_OF_CONDUCT.md) to foster an inclusive and respectful community.
+* **Security Policy:** To report security vulnerabilities responsibly, please review [`SECURITY.md`](./SECURITY.md).
+* **Academic Citation:** If you cite or build upon this project in academic research or policy analysis, refer to [`CITATION.cff`](./CITATION.cff).
+
+---
+
+## Disclaimer & Regulatory Notice
+
+SolarSchools USA is an educational and civic modeling platform developed to help students and community advocates estimate solar canopy potential and federal clean energy incentives. 
+
+* The calculations produced by this tool are engineering simulations based on U.S. Department of Energy (NLR PVWatts v8) models, standard commercial tariffs, and statutory Inflation Reduction Act formulas.
+* This tool does not constitute certified architectural, structural engineering, legal, or tax advisory services. 
+* Actual project costs, solar generation, and utility interconnection terms will vary based on geotechnical soil samples, local utility interconnection tariffs, DSA (Division of the State Architect) structural approvals, and specific EPC contractor bids. School districts should engage licensed professional engineers (PE) and certified solar contractors prior to procurement.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**. See the [`LICENSE`](./LICENSE) file for complete details.
+
+Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors.
+

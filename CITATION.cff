@@ -1,0 +1,21 @@
+cff-version: 1.2.0
+message: "If you use or reference SolarSchools USA in your research, civic projects, or software, please cite it as below."
+authors:
+  - family-names: "Balaji"
+    given-names: "Pranav"
+    affiliation: "Silicon Valley Youth Climate Action (SVYCA)"
+title: "SolarSchools USA: Automated Solar Canopy Feasibility & Federal IRA Direct Pay Modeling"
+version: 1.0.0
+date-released: 2026-10-25
+url: "https://github.com/pranav-balaji/svyca2026"
+license: MIT
+keywords:
+  - "clean energy"
+  - "solar energy"
+  - "photovoltaics"
+  - "inflation reduction act"
+  - "elective pay"
+  - "direct pay"
+  - "k-12 schools"
+  - "geospatial analysis"
+  - "climate finance"

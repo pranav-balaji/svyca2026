@@ -1,3 +1,6 @@
+# SolarSchools USA
+# Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors
+# SPDX-License-Identifier: MIT
 """
 core/data_ingest.py
 Handles school directory lookups across Phase 1 (Bay Area), Phase 2 (California),

@@ -1,3 +1,6 @@
+# SolarSchools USA
+# Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors
+# SPDX-License-Identifier: MIT
 """
 core/financial_model.py
 Models Inflation Reduction Act (IRA) Section 6417 Elective Pay (Direct Pay),

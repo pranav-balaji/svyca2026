@@ -1,3 +1,6 @@
+# SolarSchools USA
+# Copyright (c) 2026 Pranav Balaji and SolarSchools USA Contributors
+# SPDX-License-Identifier: MIT
 """
 SolarSchools USA: Core Computational Modules
 """
