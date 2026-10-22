@@ -1,6 +1,6 @@
 # SolarSchools USA
 # Copyright (c) 2026 Pranav Balaji
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """
 generate_pitch_deck.py
 Generates a crisp, high-contrast, modern LIGHT-THEME 16:9 widescreen PowerPoint deck

@@ -1,6 +1,6 @@
 # SolarSchools USA
 # Copyright (c) 2026 Pranav Balaji
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """
 app.py
 SolarSchools USA: Phased Geospatial Decision Platform for K-12 Parking Canopy Solar

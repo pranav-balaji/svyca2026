@@ -1,6 +1,6 @@
 # SolarSchools USA: Automated Solar Canopy Feasibility & Federal IRA Direct Pay Modeling
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![Python: 3.10+](https://img.shields.io/badge/Python-3.10%2B-brightgreen.svg)](https://www.python.org/)
 [![Code of Conduct](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](./CODE_OF_CONDUCT.md)
 [![Testing: Passing](https://img.shields.io/badge/Test%20Suite-Passing-success.svg)](./test_pipeline.py)
@@ -143,7 +143,7 @@ SolarSchools USA is an educational and civic modeling platform developed to help
 
 ## License
 
-This project is licensed under the **MIT License**. See the [`LICENSE`](./LICENSE) file for complete details.
+This project is licensed under the **Apache License 2.0**. See the [`LICENSE`](./LICENSE) file for complete details.
 
 Copyright (c) 2026 Pranav Balaji.
 

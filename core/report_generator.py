@@ -1,6 +1,6 @@
 # SolarSchools USA
 # Copyright (c) 2026 Pranav Balaji
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """
 core/report_generator.py
 Generates an executive-ready 1-Page School Board Action Brief summarizing

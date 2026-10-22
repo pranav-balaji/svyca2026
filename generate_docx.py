@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # SolarSchools USA
 # Copyright (c) 2026 Pranav Balaji
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """
 generate_docx.py
 Converts DetailedDesignDocument.md into a beautifully styled Microsoft Word (.docx) document

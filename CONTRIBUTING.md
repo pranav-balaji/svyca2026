@@ -102,7 +102,7 @@ Always ground-truth parking lot coordinates using satellite imagery (e.g., Googl
   ```python
   # SolarSchools USA
   # Copyright (c) 2026 Pranav Balaji
-  # SPDX-License-Identifier: MIT
+  # SPDX-License-Identifier: Apache-2.0
   ```
 
 ---

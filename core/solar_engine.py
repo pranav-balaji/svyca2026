@@ -1,6 +1,6 @@
 # SolarSchools USA
 # Copyright (c) 2026 Pranav Balaji
-# SPDX-License-Identifier: MIT
+# SPDX-License-Identifier: Apache-2.0
 """
 core/solar_engine.py
 Integrates with the U.S. Department of Energy / National Laboratory of the Rockies (NLR)
