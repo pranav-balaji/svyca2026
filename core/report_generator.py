@@ -52,7 +52,7 @@ def generate_action_brief_markdown(
 
     if "Implemented" in solar_status:
         status_narrative = f"""
-> ** BENCHMARK LEADER STATUS:** This campus deployed solar canopies in {installed_yr}. 
+> **BENCHMARK LEADER STATUS:** This campus deployed solar canopies in {installed_yr}. 
 > **Real-World Validation:** {deployment_details}
 > Actively validates our engineering and financial models by saving approximately **${annual_savings:,.2f} per year** in avoided utility expenses.
 """
@@ -60,7 +60,7 @@ def generate_action_brief_markdown(
         inaction_3yr = annual_savings * 3
         inaction_5yr = annual_savings * 5
         status_narrative = f"""
-> ** OPPORTUNITY STATUS — THE COST OF INACTION:** This campus currently has unshaded asphalt baking in the sun.
+> **OPPORTUNITY STATUS — THE COST OF INACTION:** This campus currently has unshaded asphalt baking in the sun.
 > **Current Fiscal Drain:** {deployment_details}
 > * **1-Year Inaction Cost:** ${annual_savings:,.2f} surrendered to the utility company.
 > * **3-Year Delay Penalty:** ${inaction_3yr:,.2f} in forfeited classroom capital.

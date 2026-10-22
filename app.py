@@ -3,9 +3,9 @@
 # SPDX-License-Identifier: Apache-2.0
 """
 app.py
-SolarSchools USA: Phased Geospatial Decision Platform for K-12 Parking Canopy Solar
-& Federal IRA Section 6417 Elective Pay Modeling.
-Developed for the SVYCA Youth For Earth (Y4E) Hackathon @ Stanford Climate Week.
+SolarSchools USA: Geospatial Decision Platform for K-12 Parking Canopy Solar
+and Federal Inflation Reduction Act (IRA) Section 6417 Elective Pay Modeling.
+Developed by Pranav Balaji for the SVYCA Youth For Earth Hackathon @ Stanford Climate Week.
 """
 import streamlit as st
 import folium
@@ -19,17 +19,13 @@ from core.solar_engine import query_pvwatts_generation, calculate_ev_charging_sy
 from core.financial_model import calculate_ira_financials
 from core.report_generator import generate_action_brief_markdown
 
-# -----------------------------------------------------------------------------
-# 1. PAGE CONFIGURATION & STYLING
-# -----------------------------------------------------------------------------
+# Page configuration & custom styling
 st.set_page_config(
-    page_title="SolarSchools USA — K-12 Canopy & IRA Direct Pay Engine",
-    page_icon="☀️",
+    page_title="SolarSchools USA — K-12 Solar Feasibility & Direct Pay Engine",
     layout="wide",
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for executive cards and clean visual hierarchy
 st.markdown("""
 <style>
     .metric-card {
@@ -86,24 +82,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# -----------------------------------------------------------------------------
-# 2. SIDEBAR FILTERS & CONTROLS
-# -----------------------------------------------------------------------------
+# Sidebar navigation & filters
 st.sidebar.image("https://img.icons8.com/color/96/solar-panel.png", width=64)
-st.sidebar.title("☀️ SolarSchools USA")
+st.sidebar.title("SolarSchools USA")
 st.sidebar.markdown("**Decision Platform for K-12 Solar Canopies & IRA Direct Pay**")
 st.sidebar.markdown("---")
 
-# Phase, Grade Level & Solar Status Filters
 col_fil1, col_fil2 = st.sidebar.columns(2)
 with col_fil1:
-    phase_options = [
-        "Phase 1: Bay Area",
-        # "All Phases",
-        # "Phase 2: California Statewide",
-        # "Phase 3: Nationwide USA"
-    ]
-    selected_phase = st.selectbox("🎯 Phase:", phase_options, index=0)
+    phase_options = ["Phase 1: Bay Area"]
+    selected_phase = st.selectbox("Geographic Phase:", phase_options, index=0)
 
 with col_fil2:
     level_options = [
@@ -112,43 +100,38 @@ with col_fil2:
         "Middle School",
         "Elementary School"
     ]
-    selected_level = st.selectbox("🎓 Grade Level:", level_options, index=0)
+    selected_level = st.selectbox("Grade Level:", level_options, index=0)
 
 status_options = [
     "All Statuses",
     "Implemented (Active Savings)",
     "Unshaded (Losing Money)"
 ]
-selected_status = st.sidebar.selectbox("⚡ Solar Deployment Status:", status_options, index=0)
+selected_status = st.sidebar.selectbox("Solar Deployment Status:", status_options, index=0)
 
-# Filtered Schools
+# Filtered school selection
 filtered_schools = get_school_directory(selected_phase, selected_level, selected_status)
 if not filtered_schools:
     st.sidebar.warning("No campuses match all 3 filters. Showing matching phase schools.")
     filtered_schools = get_school_directory(selected_phase, "All Levels", "All Statuses")
 
 school_names = list(filtered_schools.keys())
-selected_school_name = st.sidebar.selectbox("🏫 Select K-12 Campus:", school_names, index=0)
+selected_school_name = st.sidebar.selectbox("Select Campus:", school_names, index=0)
 school_info = filtered_schools[selected_school_name]
 
-# Level badge icon
 lvl = school_info.get("level", "School")
-lvl_icon = "🏫" if lvl == "High School" else ("🎒" if lvl == "Middle School" else "🖍️")
-
-# Solar status icon
 s_status = school_info.get("solar_status", "Unshaded (Losing Money)")
-status_icon = "⚡" if "Implemented" in s_status else "🔥"
 
-st.sidebar.markdown(f"**Campus Level:** {lvl_icon} {lvl}")
-st.sidebar.markdown(f"**Solar Status:** {status_icon} **{s_status}**")
+st.sidebar.markdown(f"**Campus Level:** {lvl}")
+st.sidebar.markdown(f"**Solar Status:** **{s_status}**")
 st.sidebar.markdown(f"**District:** {school_info['district']}")
 st.sidebar.markdown(f"**Location:** {school_info['county']} County, {school_info['state']}")
 st.sidebar.markdown(f"**Utility:** {school_info['utility']}")
 st.sidebar.markdown(f"**Enrollment:** {school_info['enrollment']:,} students")
 st.sidebar.markdown("---")
 
-# Interactive Sliders & Parameters
-st.sidebar.subheader("⚙️ System Configuration")
+# Interactive system parameters
+st.sidebar.subheader("System Configuration")
 coverage_pct = st.sidebar.slider(
     "Parking Lot Canopy Coverage (%)",
     min_value=20,
@@ -167,7 +150,6 @@ num_ev_chargers = st.sidebar.slider(
     help="Dual-port smart EV chargers for faculty vehicles and electric school buses."
 )
 
-# Tariff Override
 default_tariff = school_info.get("commercial_tariff", 0.28)
 tariff_override = st.sidebar.number_input(
     f"Commercial Tariff ($/kWh) [{school_info['utility'].split('(')[0].strip()}]",
@@ -179,7 +161,7 @@ tariff_override = st.sidebar.number_input(
     help="Commercial retail electricity rate avoided through on-site generation."
 )
 
-st.sidebar.subheader("🏛️ IRA Section 6417 Bonus Credits")
+st.sidebar.subheader("IRA Section 6417 Bonus Credits")
 col_bon1, col_bon2 = st.sidebar.columns(2)
 with col_bon1:
     is_energy_community = st.checkbox("Energy Community (+10%)", value=school_info.get("energy_community", False))
@@ -196,32 +178,25 @@ cost_per_watt = st.sidebar.slider(
     help="Turnkey commercial canopy cost including structural steel and foundations."
 )
 
-# -----------------------------------------------------------------------------
-# 3. COMPUTATIONAL PIPELINE
-# -----------------------------------------------------------------------------
-# 1. Spatial footprint calculation
+# Computational pipeline
 footprint = get_school_parking_footprint(school_info)
 gross_m2 = footprint["gross_area_m2"]
 usable_m2 = round(gross_m2 * (coverage_pct / 100.0) * 0.65, 1)
 footprint["usable_canopy_m2"] = usable_m2
 
-# 2. Solar capacity calculation (200 W/m2 high-efficiency commercial panels)
 system_kw = round(usable_m2 * 0.20, 1)
 
-# 3. NLR PVWatts v8 solar generation
 solar_gen = query_pvwatts_generation(
     lat=school_info["lat"],
     lon=school_info["lon"],
     capacity_kw=system_kw
 )
 
-# 4. EV synergy
 ev_synergy = calculate_ev_charging_synergy(
     annual_kwh=solar_gen["annual_kwh"],
     num_level2_chargers=num_ev_chargers
 )
 
-# 5. Financial & IRA Direct Pay model
 finances = calculate_ira_financials(
     system_capacity_kw=system_kw,
     annual_kwh=solar_gen["annual_kwh"],
@@ -234,13 +209,11 @@ finances = calculate_ira_financials(
     cost_per_watt=cost_per_watt
 )
 
-# -----------------------------------------------------------------------------
-# 4. MAIN DASHBOARD HEADER & KPI METRICS
-# -----------------------------------------------------------------------------
+# Dashboard header & KPI metrics
 col_h1, col_h2 = st.columns([3, 1])
 with col_h1:
-    st.title("🇺🇸 SolarSchools USA: K-12 Solar Canopy & IRA Direct Pay Engine")
-    st.markdown("**SVYCA Youth For Earth Hackathon @ Stanford Climate Week** | *Turning School Asphalt into Clean Power & Classroom Capital*")
+    st.title("SolarSchools USA")
+    st.markdown("**K-12 Solar Canopy & Federal IRA Direct Pay Decision Platform** | *SVYCA Youth For Earth Hackathon @ Stanford Climate Week*")
 with col_h2:
     phase_str = school_info.get("phase", "Phase 1")
     if "Phase 1" in phase_str:
@@ -252,36 +225,34 @@ with col_h2:
     st.markdown(badge_html, unsafe_allow_html=True)
     st.caption(f"Campus: **{selected_school_name}**")
 
-# High-School Student & Judge Explainer Expander
-with st.expander("💡 **How SolarSchools USA Works in 4 Simple Steps** (Click to view student explainer)", expanded=False):
+with st.expander("How SolarSchools USA Works (Methodology Overview)", expanded=False):
     st.markdown("""
-    1. **Measure the Asphalt:** We look up the school's parking lot using OpenStreetMap satellite data. We plan canopies over 65% of the lot so cars still have wide driving lanes and shaded parking spots.
-    2. **Calculate Solar Energy:** We plug the campus GPS coordinates into the **Department of Energy / NLR PVWatts v8 solar engine** to simulate how much sunshine the panels absorb across all 12 months.
-    3. **The Federal Direct Pay Check:** Because public schools don't pay federal income taxes, **Section 6417 of the Inflation Reduction Act** sends the school district an **actual cash reimbursement check covering 30% to 50% of the cost**.
-    4. **Classroom Dividends:** The school stops buying expensive power from the utility company, saving tens of thousands of dollars each year that go straight back into classroom supplies, field trips, and teacher salaries!
+    1. **Measure the Asphalt:** We look up the school's parking lot using OpenStreetMap satellite data. We plan canopies over 65% of the lot so cars still have wide driving lanes, ADA routes, and bus clearances.
+    2. **Calculate Solar Energy:** We plug the campus GPS coordinates into the **Department of Energy / NLR PVWatts v8 solar engine** to simulate monthly solar irradiance and AC kilowatt-hours.
+    3. **The Federal Direct Pay Check:** Because public schools don't pay federal income taxes, **Section 6417 of the Inflation Reduction Act** sends the school district an **actual cash reimbursement check covering 30% to 50% of the project cost**.
+    4. **Classroom Dividends:** The school stops paying monopoly utility bills, saving tens of thousands of dollars each year that go straight back into classroom supplies, field trips, and teacher salaries.
     """)
 
-# Dynamic Solar Status & "Cost of Inaction" Banner
 if "Implemented" in s_status:
     inst_yr = school_info.get("installed_year", 2022)
     st.success(
-        f"✅ **VERIFIED LEADER CAMPUS (Solar Deployed in {inst_yr}):** "
+        f"**Verified Leader Campus (Solar Deployed in {inst_yr}):** "
         f"{school_info.get('deployment_details', '')} "
-        f"This campus proves our engineering and financial model with real utility bill savings of **${finances['annual_utility_savings']:,.0f}/year**!"
+        f"This campus validates our engineering and financial model with actual utility bill savings of **${finances['annual_utility_savings']:,.0f}/year**."
     )
 else:
     inaction_5yr = finances['annual_utility_savings'] * 5
     inaction_10yr = finances['annual_utility_savings'] * 10
-    st.error(
-        f"🔥 **CLEAN ENERGY OPPORTUNITY (Currently Losing Money to Utility):** "
+    st.warning(
+        f"**Unshaded Campus Opportunity:** "
         f"{school_info.get('deployment_details', '')}\n\n"
-        f"**⏳ The Cost of Inaction:** If the School Board delays solar installation, the district will forfeit **${inaction_5yr:,.0f} over 5 years** "
-        f"(or **${inaction_10yr:,.0f} over a decade**) in avoidable electric bills, while leaving an upfront **${finances['irs_direct_cash_check']:,.0f} IRS Direct Pay cash check** unclaimed!"
+        f"**The Cost of Inaction:** If the School Board delays solar installation, the district forfeits approximately **${inaction_5yr:,.0f} over 5 years** "
+        f"(or **${inaction_10yr:,.0f} over a decade**) in avoidable electric bills, while leaving an upfront **${finances['irs_direct_cash_check']:,.0f} IRS Direct Pay cash check** unclaimed."
     )
 
 st.markdown("---")
 
-# Top KPI Metric Row (6 Cards) with relatable high-school analogies
+# KPI Summary Row
 kpi1, kpi2, kpi3, kpi4, kpi5, kpi6 = st.columns(6)
 
 stalls_covered = int(usable_m2 / 25)
@@ -343,20 +314,16 @@ with kpi6:
     </div>
     """, unsafe_allow_html=True)
 
-# -----------------------------------------------------------------------------
-# 5. TABBED INTERACTIVE SECTIONS
-# -----------------------------------------------------------------------------
+# Tabbed sections
 tab_map, tab_physics, tab_finance, tab_equity, tab_brief = st.tabs([
-    "🛰️ Campus Satellite & Canopy Map",
-    "⚡ Solar Physics & Seasonal Generation",
-    "💰 25-Year Lifecycle Cashflow & IRA ROI",
-    "🌿 Environmental Justice & Heat Island",
-    "📄 School Board Action Brief"
+    "Campus Satellite & Canopy Map",
+    "Monthly Solar Generation (PVWatts)",
+    "25-Year Lifecycle Cashflow & ROI",
+    "Environmental Benefits & Heat Island",
+    "School Board Action Brief"
 ])
 
-# -----------------------------------------------------------------------------
-# TAB 1: GEOSPATIAL FOLIUM MAP
-# -----------------------------------------------------------------------------
+# Tab 1: Map
 with tab_map:
     st.subheader(f"Campus Geospatial Footprint — {selected_school_name}")
     st.caption("Visualizing unshaded surface asphalt parking lots and proposed photovoltaic canopy coverage footprint.")
@@ -371,7 +338,6 @@ with tab_map:
             tiles="OpenStreetMap"
         )
         
-        # Add satellite imagery tile layer
         folium.TileLayer(
             tiles='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
             attr='Esri Satellite',
@@ -380,8 +346,6 @@ with tab_map:
             control=True
         ).add_to(m)
         
-        # Add canopy footprint circle approximation
-        # Area = pi * r^2  =>  r = sqrt(Area / pi)
         radius_canopy = (usable_m2 / 3.14159) ** 0.5
 
         folium.Circle(
@@ -395,7 +359,6 @@ with tab_map:
             popup=f"<b>Proposed Solar Canopy</b><br>Capacity: {system_kw} kW DC<br>Area: {usable_m2:,.0f} m²<br>Stalls Covered: ~{int(usable_m2/25)}"
         ).add_to(m)
 
-        # Campus Centroid Marker
         folium.Marker(
             location=[lat, lon],
             popup=f"<b>{selected_school_name}</b><br>{school_info['district']}<br>Enrollment: {school_info['enrollment']:,}",
@@ -407,7 +370,7 @@ with tab_map:
         st_folium(m, height=480, width=None)
 
     with map_col2:
-        st.markdown("#### 📐 Spatial Geometry")
+        st.markdown("#### Spatial Geometry")
         st.write(f"- **Gross Surface Lot Area:** {gross_m2:,.0f} m²")
         st.write(f"- **Canopy Packing Factor:** 65.0%")
         st.write(f"- **Active Solar Catchment:** {usable_m2:,.0f} m²")
@@ -415,15 +378,13 @@ with tab_map:
         st.write(f"- **Canopy-Covered Stalls:** ~{int(usable_m2 / 25)} stalls")
         st.write(f"- **EV Charging Ports:** {num_ev_chargers} ports")
         st.markdown("---")
-        st.markdown("#### 🔍 Campus Characteristics")
+        st.markdown("#### Campus Characteristics")
         st.info(school_info.get("notes", "Representative K-12 public school campus."))
 
-# -----------------------------------------------------------------------------
-# TAB 2: SOLAR PHYSICS & GENERATION PROFILE
-# -----------------------------------------------------------------------------
+# Tab 2: Physics
 with tab_physics:
     st.subheader("Monthly Solar Physics Simulation (PVWatts v8 / NSRDB)")
-    st.caption("Modeled using the U.S. Department of Energy / National Laboratory of the Rockies (NLR) active REST API.")
+    st.caption("Modeled using the U.S. Department of Energy / National Laboratory of the Rockies (NLR) REST API.")
 
     fig_gen = go.Figure()
     fig_gen.add_trace(go.Bar(
@@ -434,7 +395,6 @@ with tab_physics:
         hovertemplate="%{x}: <b>%{y:,.0f} kWh</b><extra></extra>"
     ))
 
-    # Add monthly EV charging demand if EV chargers enabled
     if num_ev_chargers > 0:
         monthly_ev_kwh = ev_synergy["total_ev_demand_kwh"] / 12.0
         fig_gen.add_trace(go.Scatter(
@@ -468,9 +428,7 @@ with tab_physics:
         st.metric("Level 2 EV Synergy", f"{ev_synergy['passenger_ev_miles_equivalent']:,.0f} mi/yr", f"{ev_synergy['ev_solar_coverage_pct']}% EV demand covered")
         st.caption(f"Or ~{ev_synergy['school_bus_miles_equivalent']:,.0f} miles/yr for Type-C electric school buses.")
 
-# -----------------------------------------------------------------------------
-# TAB 3: 25-YEAR LIFECYCLE CASHFLOW & IRA ROI
-# -----------------------------------------------------------------------------
+# Tab 3: Finance
 with tab_finance:
     st.subheader("25-Year Lifecycle Financial Cashflow & Direct Pay Economics")
     st.caption("Demonstrating how IRA Section 6417 eliminates capital barriers and creates an ongoing classroom dividend.")
@@ -478,12 +436,10 @@ with tab_finance:
     col_f1, col_f2 = st.columns([3, 2])
 
     with col_f1:
-        # Cashflow Line Chart
         df_cf = pd.DataFrame(finances["cashflow_schedule"])
         if not df_cf.empty:
             fig_cf = go.Figure()
             
-            # Cumulative Net Benefit
             fig_cf.add_trace(go.Scatter(
                 x=df_cf["year"],
                 y=df_cf["cumulative_net_usd"],
@@ -494,7 +450,6 @@ with tab_finance:
                 hovertemplate="Year %{x}: <b>$%{y:,.0f}</b><extra></extra>"
             ))
 
-            # Break-even zero line
             fig_cf.add_hline(y=0, line_dash="dot", line_color="#ef4444", annotation_text="Break-Even Point")
 
             fig_cf.update_layout(
@@ -508,7 +463,6 @@ with tab_finance:
             st.plotly_chart(fig_cf, use_container_width=True)
 
     with col_f2:
-        # Project Cost Breakdown Donut Chart
         labels = ["IRS Direct Pay Cash Check", "Net District Investment"]
         values = [finances["irs_direct_cash_check"], finances["net_district_investment"]]
         colors = ["#10b981", "#3b82f6"]
@@ -530,8 +484,7 @@ with tab_finance:
         )
         st.plotly_chart(fig_pie, use_container_width=True)
 
-    # 25-Year Cashflow Data Table
-    with st.expander("📋 View Full 25-Year Operating Pro Forma Table"):
+    with st.expander("View Full 25-Year Operating Pro Forma Table"):
         if not df_cf.empty:
             st.dataframe(
                 df_cf.rename(columns={
@@ -553,12 +506,10 @@ with tab_finance:
                 use_container_width=True
             )
 
-# -----------------------------------------------------------------------------
-# TAB 4: ENVIRONMENTAL JUSTICE & HEAT ISLAND
-# -----------------------------------------------------------------------------
+# Tab 4: Equity & Environmental Impact
 with tab_equity:
-    st.subheader("🌿 Environmental Justice, Heat Island Mitigation & Scope 2 Abatement")
-    st.caption("Quantifying the non-energy co-benefits of parking lot solar canopies for K-12 school communities.")
+    st.subheader("Environmental Justice, Heat Island Mitigation & Emissions Abatement")
+    st.caption("Quantifying the non-energy benefits of parking lot solar canopies for K-12 school communities.")
 
     col_e1, col_e2, col_e3 = st.columns(3)
     with col_e1:
@@ -572,25 +523,22 @@ with tab_equity:
         st.caption("Equivalent acres of U.S. forest carbon absorption.")
 
     st.markdown("---")
-    st.markdown("#### 🌡️ Urban Heat Island & Campus Resilience Benefits")
+    st.markdown("#### Urban Heat Island & Campus Resilience Benefits")
     st.write(
-        f"School surface parking lots are high-emissivity thermal sponges. Converting **{usable_m2:,.0f} m² ({usable_m2 * 10.7639:,.0f} sq. ft.)** "
+        f"School surface parking lots absorb and radiate extreme thermal energy. Converting **{usable_m2:,.0f} m² ({usable_m2 * 10.7639:,.0f} sq. ft.)** "
         "of asphalt into a shaded solar canopy drops ambient ground temperatures by **30°F to 45°F** during summer and autumn heat waves."
     )
     st.write(
-        "- **Air Quality & Respiratory Protection:** Shaded vehicles experience 80% lower volatile organic compound (VOC) cabin outgassing.\n"
-        "- **Clean Air Centers (CARB AB 836):** With the addition of battery energy storage, this canopy allows the campus gymnasium to operate as an emergency clean air and cooling shelter during wildfire smoke events.\n"
+        "- **Air Quality & Respiratory Protection:** Shaded vehicles experience up to 80% lower volatile organic compound (VOC) cabin outgassing.\n"
+        "- **Clean Air Centers (CARB AB 836):** With the addition of battery energy storage, this canopy allows campus facilities to operate as emergency clean air and cooling shelters during wildfire smoke events.\n"
         "- **Title I Community Equity:** If designated Title I or in a CalEnviroScreen / DOE Energy Community tract, this installation captures maximum federal Direct Pay subsidies to lower public school tax burdens."
     )
 
-# -----------------------------------------------------------------------------
-# TAB 5: SCHOOL BOARD ACTION BRIEF
-# -----------------------------------------------------------------------------
+# Tab 5: Action Brief
 with tab_brief:
-    st.subheader("📄 1-Page School Board Action Brief & Direct Export")
+    st.subheader("School Board Action Brief & Direct Export")
     st.caption("Ready for student climate advocates and district facilities directors to present at official Board of Education hearings.")
 
-    # Generate Action Brief Markdown
     action_brief_md = generate_action_brief_markdown(
         school_name=selected_school_name,
         school_info=school_info,
@@ -601,12 +549,11 @@ with tab_brief:
         num_ev_chargers=num_ev_chargers
     )
 
-    # Download Button with clean CamelCase filename
     school_base = selected_school_name.split('(')[0].strip()
     clean_camel = ''.join(word.capitalize() for word in school_base.split() if word.isalnum())
     clean_filename = f"{clean_camel}ActionBrief.md"
     st.download_button(
-        label="📥 Download Executive Action Brief (Markdown)",
+        label="Download Executive Action Brief (Markdown)",
         data=action_brief_md,
         file_name=clean_filename,
         mime="text/markdown",
@@ -614,16 +561,13 @@ with tab_brief:
     )
 
     st.markdown("---")
-    # Live Preview Container
     with st.container():
         st.markdown(action_brief_md)
 
-# -----------------------------------------------------------------------------
-# FOOTER & LEGAL CITATIONS
-# -----------------------------------------------------------------------------
+# Footer
 st.markdown("---")
 st.caption(
-    "**SolarSchools USA** | Developed for the SVYCA Youth For Earth Hackathon @ Stanford Climate Week 2026. "
+    "**SolarSchools USA** | Developed by Pranav Balaji for the SVYCA Youth For Earth Hackathon @ Stanford Climate Week 2026. "
     "Calculations modeled in accordance with 26 U.S.C. § 6417, IRS TD 9988, NREL/NLR PVWatts v8, and EPA eGRID 2024. "
     "All datasets are open-access and verified."
 )
