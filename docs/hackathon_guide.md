@@ -26,9 +26,9 @@
 >  
 > *(Step 1 - Show a Leader Campus)*: *Let's first look at an implemented leader—**Monta Vista High School** in Cupertino. They partnered with ENGIE to build 550 kW of solar canopies over their student and staff lots. You can see the green status banner: they are **actively saving $145,000 every single year** on their electric bills. Their real-world utility bills prove our physics and financial model works!*  
 >  
-> *(Step 2 - Show an Unshaded Campus Losing Money)*: *Now, look just 10 miles away at **Palo Alto High School**. Their massive 7,200 m² parking lot is 100% unshaded asphalt. You can see the red alert banner: **this campus is surrendering $140,000 every year directly to the utility company in avoidable power bills!** If the school board delays action by just 5 years, that's a **$700,000 penalty of inaction**—and an unclaimed **$750,000 IRS cash check** left behind at the U.S. Treasury.*  
+> *(Step 2 - Show an Unshaded Campus Losing Money)*: *Now, look just 10 miles away at **Palo Alto High School**. Their massive 7,200 m² parking lot is 100% unshaded asphalt. You can see the alert banner: **this campus is surrendering $140,000 every year directly to the utility company in avoidable power bills!** If the school board delays action by just 5 years, that's a **$700,000 penalty of inaction**—and an unclaimed **$754,000 IRS cash check** left behind at the U.S. Treasury.*  
 >  
-> *(Step 3 - Nationwide Scale)*: *And this isn't just a California story. Let's switch to Phase 3 and look at **Westlake High School in Austin, Texas**. Under the Texas sun, their unshaded lot is losing $145,000/year to utility bills while leaving an astonishing **$1.52 million IRS Direct Pay check** unclaimed!"*
+> *(Step 3 - Scaling Across the Country)*: *Our pilot begins with 18 ground-truthed Bay Area campuses across high schools, middle schools, and elementary schools. But the architecture connects to the federal NCES database of 100,000 public schools nationwide. In coal-heavy grids like the Midwest, replacing utility power avoids over twice as much carbon per kilowatt-hour as in California!*"*
 
 ### [2:15 - 2:45] Phased Roadmap & The Civic Climax
 *(Click on Tab 5: School Board Action Brief).*
@@ -36,7 +36,7 @@
 > - **Phase 1: Bay Area**—ground-truthed against real solar carports at Monta Vista, Cupertino High, and CUSD's 25 elementary and middle schools.  
 > - **Phase 2: California Statewide**—incorporating CalEnviroScreen equity overlays and Title 24 building codes.  
 > - **Phase 3: Nationwide USA**—scaling across all 50 states using federal NCES data and state utility rates.  
-> But the most important feature is right here: **Tab 5**. Any student environmental club or PTA can click **'Download School Board Action Brief'**. In one second, it generates a complete, professional proposal calculating the cost of delay, exact engineering specs, IRS citations, and sample school board resolution text that students can take to their next school board meeting."*
+> But the most important feature is right here: **Tab 5**. Any student environmental club or PTA can click **'Download Executive Action Brief'**. In one second, it generates a complete, professional proposal calculating the cost of delay, exact engineering specs, IRS citations, and sample school board resolution text that students can take to their next school board meeting."*
 
 ### [2:45 - 3:00] Closing Statement
 > *"SolarSchools USA democratizes climate finance, turning idle asphalt into clean power and classroom money. Thank you, and I'd love to answer any questions!"*
@@ -108,8 +108,8 @@ If a judge asks you to explain any concept, use these simple mental models:
 Before you walk up to present to the judges:
 - [ ] Connect your laptop to Wi-Fi.
 - [ ] In terminal, run: `streamlit run app.py` and make sure `http://localhost:8501` is open.
-- [ ] Select **"Phase 1: Bay Area"** and show **Palo Alto High School** or **Monta Vista High School** (local ground truth).
-- [ ] Switch to **"Phase 3: Nationwide USA"** and pick **Westlake High School (Austin, Texas)** to prove national scalability.
+- [ ] Open the app and select **Monta Vista High School** (local ground truth: 550 kW canopy, $145K/yr savings).
+- [ ] Contrast with **Palo Alto High School** (unshaded opportunity: 7,200 m² lot, $140K/yr loss, $754K unclaimed IRS check).
 - [ ] Point to the top KPI cards: Canopy Capacity $\rightarrow$ Annual Power $\rightarrow$ IRS Direct Pay Check $\rightarrow$ Annual Savings $\rightarrow$ Payback Years.
 - [ ] Click **Tab 5 ("School Board Action Brief")** and show the **"Download Executive Action Brief"** button.
 - [ ] Smile, take a deep breath, and remember: **You know this data and this tool better than anyone in the room!**

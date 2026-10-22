@@ -18,9 +18,7 @@ def test_core_pipeline():
     print(f"Total schools: {len(schools)}")
 
     phases = [
-        "Phase 1: Bay Area",
-        # "Phase 2: California Statewide",
-        # "Phase 3: Nationwide USA"
+        "Phase 1: Bay Area"
     ]
     for phase in phases:
         filtered = di.get_school_directory(phase)
@@ -31,8 +29,7 @@ def test_core_pipeline():
         "Palo Alto High School (Palo Alto, CA)",
         "Monta Vista High School (Cupertino, CA)",
         "John F. Kennedy Middle School (Cupertino, CA)",
-        "Stevens Creek Elementary School (Cupertino, CA)",
-        # "Westlake High School (Austin, Texas)"
+        "Stevens Creek Elementary School (Cupertino, CA)"
     ]
 
     for sname in test_cases:

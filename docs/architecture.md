@@ -71,23 +71,22 @@ $$\text{CapEx}_{\text{total}} = (P_{\text{DC}} \times C_{\text{watt}} \times 100
 
 Where:
 * $C_{\text{watt}} = \$3.10/\text{W}$ (commercial steel canopy benchmark).
-* $C_{\text{EV}} = \$6,500$ per dual-port Level 2 commercial EV charging station.
+* $C_{\text{EV}} = \$6,000$ per dual-port Level 2 commercial EV charging station.
 
 #### Federal IRA Section 6417 Elective Pay ("Direct Pay")
 Under the Inflation Reduction Act of 2022 (26 U.S.C. § 6417), tax-exempt public school districts receive direct cash refunds from the U.S. Treasury:
 
 $$R_{\text{IRA}} = \text{Base Rate } (30\%) + \text{Domestic Steel Bonus } (10\%) + \text{Title I Low-Income / Energy Community Bonus } (10\%)$$
 
-$$\text{IRS Cash Check} = \text{CapEx}_{\text{solar}} \times R_{\text{IRA}}$$
+$$\text{IRS Cash Check} = \text{CapEx}_{\text{total}} \times R_{\text{IRA}}$$
 
 $$\text{Net District Outlay} = \text{CapEx}_{\text{total}} - \text{IRS Cash Check}$$
 
 #### 25-Year Lifecycle Pro Forma
 * **First-Year Savings:** $S_1 = E_{\text{annual}} \times T_{\text{utility}}$
-* **Utility Tariff Escalation:** 3.0% per year ($e = 0.03$).
+* **Utility Tariff Escalation:** 2.5% per year ($e = 0.025$).
 * **Panel Degradation:** 0.5% annual efficiency loss ($d = 0.005$).
 * **Operations & Maintenance:** $\$15.00/\text{kW-yr}$ escalating at 2.0% annual inflation.
-* **Inverter Replacement:** $\$0.15/\text{W}$ reserve allocated in Year 12.
 
 $$\text{Net Savings (Year } t) = \left[ E_{\text{annual}} (1 - d)^{t-1} \times T_{\text{utility}} (1 + e)^{t-1} \right] - \text{O&M}_t$$
 
